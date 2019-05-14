@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>immagini/allenamento.svg</file>
+        <file>immagini/atleti.svg</file>
+        <file>immagini/ricerca.svg</file>
+    </qresource>
+</RCC>
