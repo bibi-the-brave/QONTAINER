@@ -1,5 +1,4 @@
 /*
- * 05/12/2018
  * Andrea Favero: andrea.favero.8@studenti.unipd.it
  *
  * Classe Contenitore.

@@ -9,21 +9,21 @@ FinestraPrincipale::FinestraPrincipale(QWidget *parent)
 
     bInserAtleta = new QPushButton(/*"nuovo atleta"*/);
     bInserAtleta->setIcon(QIcon(QPixmap(":/immagini/atleti.svg")));
-    bInserAtleta->setIconSize(QSize(340,340));
+    bInserAtleta->setIconSize(QSize(260,300));
     bInserAtleta->setToolTip("Creazione di un nuovo atleta");
-    bInserAtleta->setFixedSize(QSize(350,350));
+    bInserAtleta->setFixedSize(QSize(270,270));
 
     bInserAllenamento = new QPushButton(/*"nuovo allenamento"*/);
     bInserAllenamento->setIcon(QIcon( ":/immagini/allenamento.svg"));
-    bInserAllenamento->setIconSize(QSize(325,325));
+    bInserAllenamento->setIconSize(QSize(250,250));
     bInserAllenamento->setToolTip("Inserirmento di un nuovo allenamento");
-    bInserAllenamento->setFixedSize(QSize(350,350));
+    bInserAllenamento->setFixedSize(QSize(270,270));
 
     bRicerca = new QPushButton(/*"ricerca"*/);
     bRicerca->setIcon(QIcon(":/immagini/ricerca.svg"));
-    bRicerca->setIconSize(QSize(325,325));
+    bRicerca->setIconSize(QSize(250,250));
     bRicerca->setToolTip("Ricerca allenamenti relativi ad uno sport o ad un atleta");
-    bRicerca->setFixedSize(QSize(350,350));
+    bRicerca->setFixedSize(QSize(270,270));
 
 
     layout->addWidget(bInserAtleta);
@@ -35,6 +35,7 @@ FinestraPrincipale::FinestraPrincipale(QWidget *parent)
 
     setCentralWidget(centrale);
 }
+
 /*
  * Inserimento Atleta
  * Inserimento allenamento

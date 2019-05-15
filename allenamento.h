@@ -9,7 +9,7 @@
 #include "persona.h"
 
 class Allenamento {
-    Persona atleta;
+    Persona atleta; /*Vedere se metterlo come puntatore un atleta*/
     unsigned int durata; //>0
     double mgMagnesioAssunti; //prima o durante l'allenamento
 public:

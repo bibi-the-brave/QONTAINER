@@ -23,6 +23,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 CONFIG += c++11
+QMAKE_CXXFLAGS += -std=c++0x
 
 SOURCES += \
         main.cpp \
@@ -36,7 +37,8 @@ SOURCES += \
     pallavolo.cpp \
     triathlon.cpp \
     persona.cpp \
-    menuview.cpp
+    menuview.cpp \
+    finestrasceltasport.cpp
 
 HEADERS += \
     contenitore.h \
@@ -52,7 +54,8 @@ HEADERS += \
     triathlon.h \
     persona.h \
     deepptr.h \
-    menuview.h
+    menuview.h \
+    finestrasceltasport.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
