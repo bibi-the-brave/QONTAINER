@@ -1,6 +1,7 @@
 #include "finestraprincipale.h"
 #include <QIcon>
 #include <QPixmap>
+#include "finestrasceltasport.h"
 
 FinestraPrincipale::FinestraPrincipale(QWidget *parent)
     : QMainWindow(parent)
@@ -37,6 +38,10 @@ FinestraPrincipale::FinestraPrincipale(QWidget *parent)
     centrale->setLayout(layout);
 
     setCentralWidget(centrale);
+    //this->setFixedSize(QSize(this->width(),this->height()));
+    FinestraSceltaSport* f = new FinestraSceltaSport(); //va deletato, non ha parent settato
+    f->show();
+    hide();
 }
 
 /*

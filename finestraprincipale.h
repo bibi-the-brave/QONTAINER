@@ -14,6 +14,8 @@ private:
 public:
     FinestraPrincipale(QWidget *parent = nullptr);
     ~FinestraPrincipale();
+//private slots:
+
 };
 
 #endif // FINESTRAPRINCIPALE_H

@@ -13,7 +13,7 @@ FinestraSceltaSport::FinestraSceltaSport(QWidget *parent) : QWidget(parent) {
 
     layoutSport = new QGridLayout();
     QStringList sport;
-    sport << "calcio" << "ciclismo" << "corsa" << "nuoto"  << "thriatlon" << "palestra"
+    sport << "calcio" << "ciclismo" << "corsa" << "nuoto"  << "triathlon" << "palestra"
               << "pallavolo";
     for(int i = 0; i < sport.size(); i++) {
         int colonna = i % 3;//il layout ha 3 colonne //vedere se colonne o righe partono da 0 o da 1
@@ -23,6 +23,8 @@ FinestraSceltaSport::FinestraSceltaSport(QWidget *parent) : QWidget(parent) {
 
     layoutFinestra->addLayout(layoutSport);
     setLayout(layoutFinestra);
+
+    layout()->setSizeConstraint( QLayout::SetFixedSize );
 }
 
 FinestraSceltaSport::~FinestraSceltaSport() {
@@ -36,7 +38,7 @@ QPushButton* FinestraSceltaSport::creaBottoneSport(const QString& nomeSport) con
     sport->setIcon(QIcon(":/immagini/" + nomeSport + ".svg"));
     sport->setIconSize(QSize(75,75));
     sport->setToolTip(nomeSport);
-    connect(sport, SIGNAL(clicked()), this, SIGNAL(sportSelezionato(QString)));
+    //connect(sport, SIGNAL(clicked()), this, SIGNAL(sportSelezionato(QString)));
     return sport;
 }
 
