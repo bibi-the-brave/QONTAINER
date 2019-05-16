@@ -15,22 +15,39 @@ FinestraSceltaSport::FinestraSceltaSport(QWidget *parent) : QWidget(parent) {
     QStringList sport;
     sport << "calcio" << "ciclismo" << "corsa" << "nuoto"  << "thriatlon" << "palestra"
               << "pallavolo";
-    for(int i = 0; i < sport.size(); i++)
-        layoutSport->addWidget(creaBottoneSport(sport[i]));
+    for(int i = 0; i < sport.size(); i++) {
+        int colonna = i % 3;//il layout ha 3 colonne //vedere se colonne o righe partono da 0 o da 1
+        int riga = i / 3;
+        layoutSport->addWidget(creaBottoneSport(sport[i]), riga, colonna);
+    }
 
     layoutFinestra->addLayout(layoutSport);
     setLayout(layoutFinestra);
 }
 
 FinestraSceltaSport::~FinestraSceltaSport() {
+    if(inserimentoSport)
+        delete inserimentoSport;
     delete layoutFinestra;
 }
-
 
 QPushButton* FinestraSceltaSport::creaBottoneSport(const QString& nomeSport) const {
     QPushButton *sport = new QPushButton();
     sport->setIcon(QIcon(":/immagini/" + nomeSport + ".svg"));
     sport->setIconSize(QSize(75,75));
-    //connect(sport, SIGNAL(clicked()), this, member);
+    sport->setToolTip(nomeSport);
+    connect(sport, SIGNAL(clicked()), this, SIGNAL(sportSelezionato(QString)));
     return sport;
+}
+
+/*
+ * Crea un'oggetto che ha come tipo dinamico quello della view di inserimento dati
+ * relatica allo sport selezionato
+ */
+void FinestraSceltaSport::creaOggettoInserimentoSport(QString sport) {
+    if( sport == "" ) {
+       //inserimentoSport = new
+    } else if( sport == "" ) {
+        //inserimentoSport = new
+    }//...
 }

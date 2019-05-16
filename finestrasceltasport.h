@@ -20,6 +20,12 @@ private:
 public:
     FinestraSceltaSport(QWidget* = nullptr);
     ~FinestraSceltaSport();
+
+signals:
+    void sportSelezionato(QString);
+
+private slots:
+    void creaOggettoInserimentoSport(QString);
 };
 
 #endif // FINESTRASCELTASPORT_H
