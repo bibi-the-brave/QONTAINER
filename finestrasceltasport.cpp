@@ -38,7 +38,9 @@ QPushButton* FinestraSceltaSport::creaBottoneSport(const QString& nomeSport) con
     sport->setIcon(QIcon(":/immagini/" + nomeSport + ".svg"));
     sport->setIconSize(QSize(75,75));
     sport->setToolTip(nomeSport);
-    //connect(sport, SIGNAL(clicked()), this, SIGNAL(sportSelezionato(QString)));
+    /*connect(sport, &QPushButton::clicked, [this]() {
+        this->creaOggettoInserimentoSport(nomeSport);
+    });*/
     return sport;
 }
 

@@ -1,6 +1,13 @@
 #include "inserimentosportview.h"
 
-InserimentoSportView::InserimentoSportView(QWidget* parent) : QWidget(parent)
+InserimentoSportView::InserimentoSportView(const QString& sport, QWidget* parent)
+    : QWidget(parent)
 {
+    setWindowTitle(sport);
+}
+
+/*
+void InserimentoSportView::setNomeAllenamento() {
 
 }
+*/
