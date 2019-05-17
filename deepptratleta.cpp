@@ -12,8 +12,9 @@ DeepPtrAtleta::~DeepPtrAtleta() {
 
 }
 
-DeepPtrAtleta& DeepPtrAtleta::operator++(const DeepPtrAtleta&){
-
+bool DeepPtrAtleta::operator==(const DeepPtrAtleta& dptr){
+    return atleta->getNome() == dptr.atleta->getNome() &&
+           atleta->getCognome() == dptr.atleta->getCognome();
 }
 
 DeepPtrAtleta* DeepPtrAtleta::operator->() const {

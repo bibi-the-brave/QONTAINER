@@ -29,3 +29,12 @@ void Persona::setCognome(std::string c) {
         throw ErrPersona();
     cognome = c;
 }
+
+Persona::Persona(const Persona& persona) {
+    nome = persona.nome;
+    cognome = persona.cognome;
+}
+
+Persona* Persona::clone() const {
+    return new Persona(*this);
+}

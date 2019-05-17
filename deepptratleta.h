@@ -11,7 +11,7 @@ public:
     DeepPtrAtleta(Persona*);
     DeepPtrAtleta(const DeepPtrAtleta&);
     ~DeepPtrAtleta();
-    DeepPtrAtleta& operator++(const DeepPtrAtleta&);
+    bool operator==(const DeepPtrAtleta&);
     DeepPtrAtleta* operator->() const;
     DeepPtrAtleta& operator*() const;
 };
