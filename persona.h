@@ -8,6 +8,8 @@ class Persona {
 public:
     Persona(std::string, std::string);
     Persona(const Persona&);
+    Persona& operator=(const Persona&);
+    bool operator==(const Persona&) const;
     std::string getNome() const;
     std::string getCognome() const;
     void setNome(std::string);

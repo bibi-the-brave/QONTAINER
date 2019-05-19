@@ -1,26 +1,39 @@
 #include "deepptratleta.h"
+#include "errori.h"
 
-DeepPtrAtleta::DeepPtrAtleta(Persona*) {
-
+DeepPtrAtleta::DeepPtrAtleta(Persona* a)
+try : atleta(a->clone()) {
+} catch (...) {
+    throw ErrPersona();
 }
 
-DeepPtrAtleta::DeepPtrAtleta(const DeepPtrAtleta&) {
-
+DeepPtrAtleta::DeepPtrAtleta(const DeepPtrAtleta& dpt)
+try : atleta(dpt.atleta->clone()) {
+} catch (...) {
+    throw ErrPersona();
 }
 
 DeepPtrAtleta::~DeepPtrAtleta() {
-
+    delete atleta;
 }
 
-bool DeepPtrAtleta::operator==(const DeepPtrAtleta& dptr){
-    return atleta->getNome() == dptr.atleta->getNome() &&
-           atleta->getCognome() == dptr.atleta->getCognome();
+DeepPtrAtleta& DeepPtrAtleta::operator=(const DeepPtrAtleta& a) {
+    if(this != &a) {
+        delete atleta;
+        if(a.atleta)
+            atleta = a.atleta->clone();
+    }
+    return *this;
 }
 
-DeepPtrAtleta* DeepPtrAtleta::operator->() const {
-
+bool DeepPtrAtleta::operator==(const DeepPtrAtleta& dptr) const{
+    return atleta == dptr.atleta;
 }
 
-DeepPtrAtleta& DeepPtrAtleta::operator*() const {
+Persona* DeepPtrAtleta::operator->() const {
+    return atleta;
+}
 
+Persona& DeepPtrAtleta::operator*() const {
+    return *atleta;
 }
