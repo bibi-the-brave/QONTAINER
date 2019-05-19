@@ -1,25 +1,35 @@
-    #ifndef DEEPPTR_H
+#ifndef DEEPPTR_H
 #define DEEPPTR_H
-
-#include "allenamento.h"
+//cancellare deeppratleta
+//https://www.codeproject.com/Articles/15351/Implementing-a-simple-smart-pointer-in-c
+#include <exception>
 
 template <typename T>
 class DeepPtr {
-    Allenamento* ptr;
+    T* ptr;
 public:
-    DeepPtr(Allenamento*);
+    DeepPtr(T*);
     DeepPtr(const DeepPtr&);
     ~DeepPtr();
-    DeepPtr& operator==(const DeepPtr&);
-    Allenamento* operator->() const;
-    Allenamento& operator*() const;
+    DeepPtr& operator=(const DeepPtr&);
+    bool operator==(const DeepPtr&);
+    T* operator->() const;
+    T& operator*() const;
 };
 
 template <typename T>
-DeepPtr<T>::DeepPtr(Allenamento* p): ptr(p->clone()) {}
+DeepPtr<T>::DeepPtr(T* p)
+try : ptr(p->clone()) {
+} catch( std::exception& e ) {
+    throw e;
+}
 
 template <typename T>
-DeepPtr<T>::DeepPtr(const DeepPtr& dptr): ptr(dptr.ptr.clone()) {}
+DeepPtr<T>::DeepPtr(const DeepPtr& dptr)
+try : ptr(dptr.ptr.clone()) {
+} catch( std::exception& e ) {
+    throw e;
+}
 
 template <typename T>
 DeepPtr<T>::~DeepPtr() {
@@ -27,7 +37,7 @@ DeepPtr<T>::~DeepPtr() {
 }
 
 template <typename T>
-DeepPtr<T>& DeepPtr<T>::operator==(const DeepPtr<T>& dptr) {
+DeepPtr<T>& DeepPtr<T>::operator=(const DeepPtr<T>& dptr) {
     if(this != &dptr) {
         delete ptr;
         ptr = dptr.ptr.clone();
@@ -35,15 +45,19 @@ DeepPtr<T>& DeepPtr<T>::operator==(const DeepPtr<T>& dptr) {
     return *this;
 }
 
+template <typename T>
+bool DeepPtr<T>::operator==(const DeepPtr& dptr) {
+    return ptr == dptr.ptr;
+}
 
 template <typename T>
-Allenamento* DeepPtr<T>::operator->() const {
+T* DeepPtr<T>::operator->() const {
     return ptr;
 }
 
 
 template <typename T>
-Allenamento& DeepPtr<T>::operator*() const {
+T& DeepPtr<T>::operator*() const {
     return *ptr;
 }
 
