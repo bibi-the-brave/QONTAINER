@@ -6,7 +6,14 @@
 
 template <typename T>
 class DeepPtr {
+    class RefCount {
+    public:
+        unsigned int cont;
+        void dec();
+        void inc();
+    };
     T* ptr;
+    RefCount *ref;
 public:
     DeepPtr(T*);
     DeepPtr(const DeepPtr&);
@@ -16,6 +23,17 @@ public:
     T* operator->() const;
     T& operator*() const;
 };
+
+template <typename T>
+void  DeepPtr<T>::RefCount::inc() {
+    if(cont > 0)
+        ++cont;
+}
+
+template <typename T>
+void  DeepPtr<T>::RefCount::dec() {
+    --cont;
+}
 
 template <typename T>
 DeepPtr<T>::DeepPtr(T* p)
