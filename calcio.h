@@ -11,7 +11,7 @@ class Calcio : public Allenamento {
     unsigned int rimesseDalFondo;
     unsigned int tiriPorta;
 public:
-    Calcio(std::string, std::string, unsigned int, double,
+    Calcio(std::shared_ptr<Persona>, unsigned int, double,
              unsigned int, unsigned int = 0, unsigned int = 0,
              unsigned int = 0, unsigned int = 0, unsigned int = 0);
     Calcio* clone() const override;

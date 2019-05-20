@@ -2,11 +2,12 @@
 #define CICLISMO_H
 
 #include "allenamento.h"
+#include <memory>
 
 class Ciclismo : virtual public Allenamento {
     unsigned int kmSalita, kmDiscesa, kmPianura;
 public:
-    Ciclismo(std::string, std::string, unsigned int, double,
+    Ciclismo(std::shared_ptr<Persona>, unsigned int, double,
              unsigned int, unsigned int, unsigned int);
     Ciclismo* clone() const override;
     unsigned int calorie() const override;

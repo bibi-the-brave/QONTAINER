@@ -24,7 +24,7 @@ Persona& Persona::operator=(const Persona& p) {
 }
 
 bool Persona::operator==(const Persona& p) const {
-    return nome == p.nome & cognome == p.cognome;
+    return nome == p.nome && cognome == p.cognome;
 }
 
 std::string Persona::getNome() const{
@@ -45,6 +45,10 @@ void Persona::setCognome(std::string c) {
     if(!(c.find_first_not_of(' ') != std::string::npos))
         throw ErrPersona();
     cognome = c;
+}
+
+Persona Persona::getPersona() const {
+    return Persona(*this);
 }
 
 Persona* Persona::clone() const {

@@ -2,11 +2,12 @@
 #define PALESTRA_H
 
 #include "allenamento.h"
+#include <memory>
 
 class Palestra : public Allenamento {
     unsigned int addominali, flessioni, numeroPesi, kgPesi;
 public:
-    Palestra(std::string, std::string, unsigned int, double,
+    Palestra(std::shared_ptr<Persona>, unsigned int, double,
              unsigned int, unsigned int, unsigned int, unsigned int);
     Palestra* clone() const override;
     unsigned int calorie() const override;

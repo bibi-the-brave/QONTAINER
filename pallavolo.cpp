@@ -1,10 +1,10 @@
 #include "pallavolo.h"
 #include "errori.h"
 
-Pallavolo::Pallavolo(std::string nome, std::string cognome, unsigned int durata,
+Pallavolo::Pallavolo(std::shared_ptr<Persona> atleta, unsigned int durata,
                      double magnesio, unsigned int schiacc, unsigned int batt,
                      unsigned int bagh)
-try: Allenamento(nome, cognome, durata, magnesio), schiacciate(schiacc),
+try: Allenamento(atleta, durata, magnesio), schiacciate(schiacc),
     battute(batt), bagher(bagh)
 {
     /* TODO: vedere se lasciare così e toglierlo, magari in allenamento

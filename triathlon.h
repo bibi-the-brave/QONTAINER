@@ -4,11 +4,12 @@
 #include "nuoto.h"
 #include "ciclismo.h"
 #include "corsa.h"
+#include <memory>
 
 class Triathlon : public Nuoto, Ciclismo, Corsa {
     unsigned int durataNuoto, durataCiclismo, durataCorsa;
 public:
-    Triathlon(std::string, std::string, double, unsigned int,
+    Triathlon(std::shared_ptr<Persona>, double, unsigned int,
               unsigned int, unsigned int, unsigned int, unsigned int,
               unsigned int, unsigned int, unsigned int, unsigned int,
               unsigned int, unsigned int);

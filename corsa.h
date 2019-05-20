@@ -2,13 +2,14 @@
 #define CORSA_H
 
 #include "allenamento.h"
+#include <memory>
 
 class Corsa : virtual public Allenamento {
     // INV-istanza: kmSterrato >= 0 & kmStrada >=0 & (kmStrada + kmSterrato) > 0
     unsigned int kmSterrato;
     unsigned int kmStrada;
 public:
-    Corsa(std::string, std::string, unsigned int, double, unsigned int, unsigned int);
+    Corsa(std::shared_ptr<Persona>, unsigned int, double, unsigned int, unsigned int);
     Corsa* clone() const override;
     unsigned int calorie() const override;
     virtual unsigned int massaMuscolare() const override;

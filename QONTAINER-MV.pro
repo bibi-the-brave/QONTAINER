@@ -39,8 +39,7 @@ SOURCES += \
     persona.cpp \
     menuview.cpp \
     finestrasceltasport.cpp \
-    inserimentosportview.cpp \
-    deepptratleta.cpp
+    inserimentosportview.cpp
 
 HEADERS += \
     contenitore.h \
@@ -58,8 +57,7 @@ HEADERS += \
     deepptr.h \
     menuview.h \
     finestrasceltasport.h \
-    inserimentosportview.h \
-    deepptratleta.h
+    inserimentosportview.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -6,7 +6,7 @@
 class Pallavolo : public Allenamento {
     unsigned int schiacciate, battute, bagher;
 public:
-    Pallavolo(std::string, std::string, unsigned int, double,
+    Pallavolo(std::shared_ptr<Persona>, unsigned int, double,
               unsigned int, unsigned int, unsigned int);
     Pallavolo* clone() const override;
     unsigned int calorie() const override;

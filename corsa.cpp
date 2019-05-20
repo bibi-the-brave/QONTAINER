@@ -1,9 +1,9 @@
 #include "corsa.h"
 #include "errori.h"
 
-Corsa::Corsa(std::string nome, std::string cognome, unsigned int durata,
+Corsa::Corsa(std::shared_ptr<Persona> atleta, unsigned int durata,
              double mgMagnesio, unsigned int sterrato, unsigned int strada)
-try: Allenamento (nome, cognome, durata, mgMagnesio), kmSterrato(sterrato),
+try: Allenamento (atleta, durata, mgMagnesio), kmSterrato(sterrato),
     kmStrada(strada)
 {
     //if(kmStrada + kmSterrato == 0)

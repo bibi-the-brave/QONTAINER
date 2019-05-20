@@ -1,19 +1,19 @@
 #include "triathlon.h"
 #include "errori.h"
 
-Triathlon::Triathlon(std::string nome, std::string cognome, double mgMagnesio,
+Triathlon::Triathlon(std::shared_ptr<Persona> atleta, double mgMagnesio,
                      unsigned int durCorsa,
                      unsigned int durNuoto, unsigned int durCiclismo,
                      unsigned int vascheLibero, unsigned int vascheRana,
                      unsigned int vascheDorso, unsigned int kmSterrato,
                      unsigned int kmStrada, unsigned int kmSalita,
                      unsigned int kmPianura, unsigned int kmDiscesa)
-try: Allenamento(nome, cognome, durCorsa+durNuoto+durCiclismo, mgMagnesio),
-    Nuoto(nome, cognome, durCorsa+durNuoto+durCiclismo, mgMagnesio,
+try: Allenamento(atleta, durCorsa+durNuoto+durCiclismo, mgMagnesio),
+    Nuoto(atleta, durCorsa+durNuoto+durCiclismo, mgMagnesio,
           vascheLibero, vascheRana, vascheDorso),
-    Ciclismo(nome, cognome, durCorsa+durNuoto+durCiclismo, mgMagnesio,
+    Ciclismo(atleta, durCorsa+durNuoto+durCiclismo, mgMagnesio,
           kmSalita, kmPianura, kmDiscesa),
-    Corsa(nome, cognome, durCorsa+durNuoto+durCiclismo, mgMagnesio,
+    Corsa(atleta, durCorsa+durNuoto+durCiclismo, mgMagnesio,
           kmSterrato, kmStrada),
     durataNuoto(durNuoto), durataCiclismo(durCiclismo), durataCorsa(durCorsa)
 {

@@ -1,10 +1,10 @@
 #include "ciclismo.h"
 #include "errori.h"
 
-Ciclismo::Ciclismo(std::string nome, std::string cognome, unsigned int durata,
+Ciclismo::Ciclismo(std::shared_ptr<Persona> atleta, unsigned int durata,
                    double mgMagnesio, unsigned int salita,
                    unsigned int discesa, unsigned int pianura)
-try: Allenamento(nome, cognome, durata, mgMagnesio), kmSalita(salita),
+try: Allenamento(atleta, durata, mgMagnesio), kmSalita(salita),
     kmDiscesa(discesa), kmPianura(pianura)
 {
     //if(kmSalita + kmPianura + kmDiscesa == 0)

@@ -4,11 +4,12 @@
 #include <string>
 
 #include "allenamento.h"
+#include <memory>
 
 class Nuoto : virtual public Allenamento {
     unsigned int vascheStileLibero, vascheRana, vascheDorso;
 public:
-    Nuoto(std::string , std::string, unsigned int, double,
+    Nuoto(std::shared_ptr<Persona>, unsigned int, double,
           unsigned int, unsigned int, unsigned int);
     Nuoto* clone() const override;
     unsigned int calorie() const override;

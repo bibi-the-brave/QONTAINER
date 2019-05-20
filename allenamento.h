@@ -7,13 +7,14 @@
 #define ALLENAMENTO_H
 
 #include "persona.h"
+#include <memory>
 
 class Allenamento {
-    Persona atleta; /*Vedere se metterlo come puntatore un atleta*/
+    std::shared_ptr<Persona> atleta; /*Vedere se metterlo come puntatore un atleta*/
     unsigned int durata; //>0
     double mgMagnesioAssunti; //prima o durante l'allenamento
 public:
-    Allenamento(std::string, std::string, unsigned int, double = 0.0);
+    Allenamento(std::shared_ptr<Persona>, unsigned int, double = 0.0);
     virtual ~Allenamento() = default;
     virtual Allenamento* clone() const = 0;
     virtual unsigned int calorie() const = 0; //#calorie consumate

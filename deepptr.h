@@ -1,19 +1,21 @@
+/*
+ * DeepPtr<T> implementa una gestione automatica della memoria “profonda” e polimorfa di
+ * puntatori a T richiedendo che T si un tipo che supporti la clonazione e la distruziona
+ * polimorfa
+ *
+ * Simile ad unique_ptr della stl
+ *
+ * PRECONDIZIONE: T* ptr non deve essere inizializzato ad un puntatore nullo
+ */
+
 #ifndef DEEPPTR_H
 #define DEEPPTR_H
-//cancellare deeppratleta
 //https://www.codeproject.com/Articles/15351/Implementing-a-simple-smart-pointer-in-c
 #include <exception>
 
 template <typename T>
 class DeepPtr {
-    class RefCount {
-    public:
-        unsigned int cont;
-        void dec();
-        void inc();
-    };
     T* ptr;
-    RefCount *ref;
 public:
     DeepPtr(T*);
     DeepPtr(const DeepPtr&);
@@ -25,28 +27,13 @@ public:
 };
 
 template <typename T>
-void  DeepPtr<T>::RefCount::inc() {
-    if(cont > 0)
-        ++cont;
+DeepPtr<T>::DeepPtr(T* p) {
+    ptr = p->clone();
 }
 
 template <typename T>
-void  DeepPtr<T>::RefCount::dec() {
-    --cont;
-}
-
-template <typename T>
-DeepPtr<T>::DeepPtr(T* p)
-try : ptr(p->clone()) {
-} catch( std::exception& e ) {
-    throw e;
-}
-
-template <typename T>
-DeepPtr<T>::DeepPtr(const DeepPtr& dptr)
-try : ptr(dptr.ptr.clone()) {
-} catch( std::exception& e ) {
-    throw e;
+DeepPtr<T>::DeepPtr(const DeepPtr& dptr) {
+    ptr = dptr.ptr.clone();
 }
 
 template <typename T>

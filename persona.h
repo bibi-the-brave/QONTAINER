@@ -14,6 +14,7 @@ public:
     std::string getCognome() const;
     void setNome(std::string);
     void setCognome(std::string);
+    Persona getPersona() const;
     Persona* clone() const;
 };
 

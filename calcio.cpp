@@ -1,11 +1,12 @@
 #include "calcio.h"
 #include "errori.h"
+#include <memory>
 
-Calcio::Calcio(std::string nome, std::string cognome,
+Calcio::Calcio(std::shared_ptr<Persona> atleta,
                unsigned int durata, double magnesio,
                unsigned int km, unsigned int filtranti, unsigned int collo,
                unsigned int laterali, unsigned int fondo, unsigned int tPorta)
-try: Allenamento (nome, cognome, durata, magnesio), kmPercorsi(km),
+try: Allenamento (atleta, durata, magnesio), kmPercorsi(km),
     passaggiFiltranti(filtranti), passaggiDiCollo(collo),
     rimesseLaterali(laterali), rimesseDalFondo(fondo), tiriPorta(tPorta)
 {

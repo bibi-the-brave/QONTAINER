@@ -2,10 +2,10 @@
 #include "errori.h"
 #include <string>
 
-Nuoto::Nuoto(std::string nome, std::string cognome, unsigned int durata,
+Nuoto::Nuoto(std::shared_ptr<Persona> atleta, unsigned int durata,
              double mgMagnesio, unsigned int sLibero, unsigned int sRana,
              unsigned int sDorso)
-try: Allenamento (nome, cognome, durata, mgMagnesio), vascheStileLibero(sLibero),
+try: Allenamento (atleta, durata, mgMagnesio), vascheStileLibero(sLibero),
     vascheRana(sRana), vascheDorso(sDorso)
 {
     if(vascheStileLibero + vascheRana + vascheDorso == 0)

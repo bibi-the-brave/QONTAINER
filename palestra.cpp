@@ -1,10 +1,10 @@
 #include "palestra.h"
 #include "errori.h"
 
-Palestra::Palestra(std::string nome, std::string cognome, unsigned int durata,
+Palestra::Palestra(std::shared_ptr<Persona> atleta, unsigned int durata,
                    double magnesio, unsigned int addom, unsigned int flex,
                    unsigned int pesi, unsigned int kPesi)
-try: Allenamento(nome, cognome, durata, magnesio), addominali(addom),
+try: Allenamento(atleta, durata, magnesio), addominali(addom),
     flessioni(flex), numeroPesi(pesi), kgPesi(kPesi)
 {
     if(addominali + flessioni + numeroPesi + kgPesi == 0)
