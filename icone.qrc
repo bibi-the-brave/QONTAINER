@@ -10,5 +10,6 @@
         <file>immagini/palestra.svg</file>
         <file>immagini/pallavolo.svg</file>
         <file>immagini/triathlon.svg</file>
+        <file>immagini/icona.svg</file>
     </qresource>
 </RCC>
