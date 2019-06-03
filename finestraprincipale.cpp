@@ -2,6 +2,8 @@
 #include <QIcon>
 #include <QPixmap>
 #include "finestrasceltasport.h"
+#include "finestraatleti.h"
+#include "dialoginserimentoatleta.h"
 
 FinestraPrincipale::FinestraPrincipale(QWidget *parent)
     : QMainWindow(parent)
@@ -42,6 +44,12 @@ FinestraPrincipale::FinestraPrincipale(QWidget *parent)
     FinestraSceltaSport* f = new FinestraSceltaSport(); //va deletato, non ha parent settato
     f->show();
     hide();
+
+    FinestraAtleti* fa = new FinestraAtleti(); //va deletato, non ha parent settato
+    fa->show();
+
+    DialogInserimentoAtleta* da = new DialogInserimentoAtleta();
+    da->show();
 }
 
 /*
