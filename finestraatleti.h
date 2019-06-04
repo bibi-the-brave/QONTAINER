@@ -12,15 +12,14 @@ class FinestraAtleti : public QWidget {
 public:
     explicit FinestraAtleti(QWidget *parent = nullptr);
 
-signals:
-
-public slots:
-
 private:
     QVBoxLayout layout;
     QPushButton btnNuovoAtleta;
     QLabel lblTitolo;
     QTableView tabAtleti;
+
+public slots:
+    void avviaDialogInserimento(bool);
 };
 
 #endif // FINESTRAATLETI_H

@@ -7,7 +7,7 @@ Allenamento::Allenamento(std::shared_ptr<Persona> atl,
                          double mgMagnesio)
 try: atleta(atl), durata(dur), mgMagnesioAssunti(mgMagnesio)
 {
-   if( mgMagnesio < 0 || durata == 0)
+   if(mgMagnesio < 0 || durata == 0)
        throw ErrAllenamento();
 } catch(ErrPersona) {
     throw;

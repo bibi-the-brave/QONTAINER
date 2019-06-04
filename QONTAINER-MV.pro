@@ -29,7 +29,8 @@ SOURCES += \
     dialoginserimentoatleta.cpp \
     finestraatleti.cpp \
         main.cpp \
-    finestraprincipale.cpp \ 
+    finestraprincipale.cpp \
+    modeltabellaatleti.cpp \
     allenamento.cpp \
     nuoto.cpp \
     palestra.cpp \
@@ -48,7 +49,8 @@ HEADERS += \
     dialoginserimentoatleta.h \
     errori.h \
     finestraatleti.h \
-    finestraprincipale.h \ 
+    finestraprincipale.h \
+    modeltabellaatleti.h \
     allenamento.h \
     nuoto.h \
     palestra.h \

@@ -22,7 +22,7 @@ DialogInserimentoAtleta::DialogInserimentoAtleta(QWidget* parent) : QDialog(pare
     layoutPrincipale.addLayout(&layoutBottoniConferma);
     setLayout(&layoutPrincipale);
 
-    connect(&bInserisci, SIGNAL(clicked(bool)), this, SLOT(inserimento(bool)));
+    connect(&bInserisci, SIGNAL(clicked(bool)), this, SLOT(inserimentoAtleta(bool)));
     connect(&bAzzera, SIGNAL(clicked(bool)), this, SLOT(azzeramentoForm(bool)));
 }
 

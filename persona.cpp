@@ -1,7 +1,7 @@
 #include "persona.h"
 #include "errori.h"
 
-Persona::Persona(std::string n, std::string c) : nome(n), cognome(c)
+Persona::Persona(std::string n, std::string c, bool s) : nome(n), cognome(c), sesso(s)
 {
     if( !(nome.find_first_not_of(' ') != std::string::npos) ||
         !(cognome.find_first_not_of(' ') != std::string::npos) )
@@ -13,18 +13,20 @@ Persona::Persona(std::string n, std::string c) : nome(n), cognome(c)
 Persona::Persona(const Persona& persona) {
     nome = persona.nome;
     cognome = persona.cognome;
+    sesso = persona.sesso;
 }
 
 Persona& Persona::operator=(const Persona& p) {
     if(this != &p) {
         nome = p.nome;
         cognome = p.cognome;
+        sesso = p.sesso;
     }
     return *this;
 }
 
 bool Persona::operator==(const Persona& p) const {
-    return nome == p.nome && cognome == p.cognome;
+    return nome == p.nome && cognome == p.cognome && sesso == p.sesso;
 }
 
 std::string Persona::getNome() const{
@@ -33,6 +35,10 @@ std::string Persona::getNome() const{
 
 std::string Persona::getCognome() const {
     return cognome;
+}
+
+bool Persona::getSesso() const {
+    return sesso;
 }
 
 void Persona::setNome(std::string n) {
@@ -47,6 +53,10 @@ void Persona::setCognome(std::string c) {
     cognome = c;
 }
 
+void Persona::setSesso(bool s) {
+    sesso = s;
+}
+
 Persona Persona::getPersona() const {
     return Persona(*this);
 }
@@ -54,3 +64,4 @@ Persona Persona::getPersona() const {
 Persona* Persona::clone() const {
     return new Persona(*this);
 }
+

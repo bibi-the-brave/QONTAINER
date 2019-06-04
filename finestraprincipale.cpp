@@ -1,9 +1,11 @@
 #include "finestraprincipale.h"
 #include <QIcon>
 #include <QPixmap>
+#include <QtGlobal>
+#include <QEventLoop>
 #include "finestrasceltasport.h"
 #include "finestraatleti.h"
-#include "dialoginserimentoatleta.h"
+
 
 FinestraPrincipale::FinestraPrincipale(QWidget *parent)
     : QMainWindow(parent)
@@ -40,16 +42,14 @@ FinestraPrincipale::FinestraPrincipale(QWidget *parent)
     centrale->setLayout(layout);
 
     setCentralWidget(centrale);
+
+    connect(bInserAtleta, SIGNAL(clicked(bool)), this, SLOT(aperturaAtleta(bool)));
+
     //this->setFixedSize(QSize(this->width(),this->height()));
-    FinestraSceltaSport* f = new FinestraSceltaSport(); //va deletato, non ha parent settato
+    /*FinestraSceltaSport* f = new FinestraSceltaSport(); //va deletato, non ha parent settato
     f->show();
-    hide();
+    hide();*/
 
-    FinestraAtleti* fa = new FinestraAtleti(); //va deletato, non ha parent settato
-    fa->show();
-
-    DialogInserimentoAtleta* da = new DialogInserimentoAtleta();
-    da->show();
 }
 
 /*
@@ -61,4 +61,16 @@ FinestraPrincipale::FinestraPrincipale(QWidget *parent)
 FinestraPrincipale::~FinestraPrincipale()
 {
     delete centrale;
+}
+
+void FinestraPrincipale::aperturaAtleta(bool cliccato) {
+    Q_UNUSED(cliccato);
+    FinestraAtleti fa;
+    fa.setAttribute(Qt::WA_DeleteOnClose);
+    fa.show();
+
+    // Ciclo che "blocca" FinestraPrincipale finchè fa non viene distrutta
+    QEventLoop loop;
+    connect(this, SIGNAL(destroyed()), &loop, SLOT(quit()));
+    loop.exec();
 }

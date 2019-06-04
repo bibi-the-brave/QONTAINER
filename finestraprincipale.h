@@ -14,8 +14,8 @@ private:
 public:
     FinestraPrincipale(QWidget *parent = nullptr);
     ~FinestraPrincipale();
-//private slots:
-
+private slots:
+    void aperturaAtleta(bool);
 };
 
 #endif // FINESTRAPRINCIPALE_H

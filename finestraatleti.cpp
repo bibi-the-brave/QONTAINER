@@ -1,6 +1,7 @@
 #include "finestraatleti.h"
 
 #include <QStringList>
+#include "dialoginserimentoatleta.h"
 
 FinestraAtleti::FinestraAtleti(QWidget *parent) : QWidget(parent)
 {
@@ -18,4 +19,12 @@ FinestraAtleti::FinestraAtleti(QWidget *parent) : QWidget(parent)
     layout.setAlignment(&btnNuovoAtleta, Qt::AlignHCenter);
 
     setLayout(&layout);
+
+    connect(&btnNuovoAtleta, SIGNAL(clicked(bool)), this, SLOT(avviaDialogInserimento(bool)));
+}
+
+
+void FinestraAtleti::avviaDialogInserimento(bool cliccato) {
+    DialogInserimentoAtleta da;
+    da.exec();
 }
