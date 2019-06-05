@@ -7,8 +7,8 @@
 #include "finestraatleti.h"
 
 
-FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento *>>& a,
-                                       Contenitore<std::shared_ptr<Persona *>>& p,
+FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento*>>& a,
+                                       Contenitore<std::shared_ptr<Persona>>& p,
                                        QWidget *parent)
     : QMainWindow(parent), ca(a), cp(p)
 {
@@ -60,18 +60,17 @@ FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento *>>& a,
  * ??? Classifica allenamenti ???
  * Ricerca
  */
-FinestraPrincipale::~FinestraPrincipale()
-{
+FinestraPrincipale::~FinestraPrincipale() {
     delete centrale;
 }
 
 void FinestraPrincipale::aperturaAtleta(bool cliccato) {
     Q_UNUSED(cliccato);
-    FinestraAtleti fa;
+    FinestraAtleti fa(cp, this);
     fa.setAttribute(Qt::WA_DeleteOnClose);
     fa.show();
 
-    // Ciclo che "blocca" FinestraPrincipale finchè fa non viene distrutta
+    // Ciclo che "blocca" 'FinestraPrincipale' finchè 'fa' non viene distrutta
     QEventLoop loop;
     connect(this, SIGNAL(destroyed()), &loop, SLOT(quit()));
     loop.exec();

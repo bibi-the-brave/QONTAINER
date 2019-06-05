@@ -2,7 +2,7 @@
 #include <QtGlobal>
 #include <QString>
 
-ModelTabellaAtleti::ModelTabellaAtleti(Contenitore<std::shared_ptr<Persona*>>& c, QObject *parent) :
+ModelTabellaAtleti::ModelTabellaAtleti(Contenitore<std::shared_ptr<Persona>>& c, QObject *parent) :
     QAbstractTableModel(parent), dati(c)
 {}
 

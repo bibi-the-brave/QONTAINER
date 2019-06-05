@@ -13,7 +13,7 @@
 int main(int argc, char *argv[])
 {
     Contenitore<DeepPtr<Allenamento*>> ca;
-    Contenitore<std::shared_ptr<Persona*>> cp;
+    Contenitore<std::shared_ptr<Persona>> cp;
 
     QApplication a(argc, argv);
     a.setWindowIcon(QIcon(":/immagini/logo.svg"));

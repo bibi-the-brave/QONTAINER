@@ -20,10 +20,10 @@ private:
     QPushButton *bInserAtleta, *bInserAllenamento, *bRicerca;
 
     Contenitore<DeepPtr<Allenamento*>>& ca;
-    Contenitore<std::shared_ptr<Persona*>>& cp;
+    Contenitore<std::shared_ptr<Persona>>& cp;
 public:
     FinestraPrincipale(Contenitore<DeepPtr<Allenamento*>>&,
-                       Contenitore<std::shared_ptr<Persona*>>&,
+                       Contenitore<std::shared_ptr<Persona>>&,
                        QWidget *parent = nullptr);
     ~FinestraPrincipale();
 private slots:

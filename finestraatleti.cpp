@@ -5,7 +5,7 @@
 #include "dialoginserimentoatleta.h"
 #include "modeltabellaatleti.h"
 
-FinestraAtleti::FinestraAtleti(Contenitore<std::shared_ptr<Persona*>>& a, QWidget *parent)
+FinestraAtleti::FinestraAtleti(Contenitore<std::shared_ptr<Persona>>& a, QWidget *parent)
                                : QWidget(parent), cp(a)
 {
     QStringList header;
