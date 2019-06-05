@@ -7,8 +7,10 @@
 #include "finestraatleti.h"
 
 
-FinestraPrincipale::FinestraPrincipale(QWidget *parent)
-    : QMainWindow(parent)
+FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento *>>& a,
+                                       Contenitore<std::shared_ptr<Persona *>>& p,
+                                       QWidget *parent)
+    : QMainWindow(parent), ca(a), cp(p)
 {
     layout = new QHBoxLayout();
 

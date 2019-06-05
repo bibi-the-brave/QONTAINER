@@ -46,6 +46,8 @@ public:
     void pushBack(const T&);
     void pushFront(const T&);
     void insertAt(const T&, unsigned int);
+    const T& At(unsigned int) const;
+    const T& At(int) const;
     void popFront();
     void popBack();
     void remove(const T&);
@@ -266,6 +268,36 @@ void Contenitore<T>::insertAt(const T& el, unsigned int pos) {
           new typename Contenitore<T>::Nodo(el, daInserire->sx, daInserire->dx);
         size++;
     }
+}
+
+template <typename T>
+const T& Contenitore<T>::At(unsigned int pos) const {
+    typename Contenitore<T>::Nodo *scorre = primo;
+    unsigned int cont = 0;
+    while (scorre && cont < pos) {
+        scorre = scorre->dx;
+        cont++;
+    }
+
+    if(cont < pos)  //caso in cui pos < 0 o maggiore del #elementi
+        throw ErrContenitore();
+
+    return scorre->elemento;
+}
+
+template <typename T>
+const T& Contenitore<T>::At(int pos) const {
+    typename Contenitore<T>::Nodo *scorre = primo;
+    int cont = 0;
+    while (scorre && cont < pos) {
+        scorre = scorre->dx;
+        cont++;
+    }
+
+    if(cont < pos)
+        throw ErrContenitore();
+
+    return scorre->elemento;
 }
 
 template <typename T>

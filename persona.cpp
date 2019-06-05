@@ -1,5 +1,6 @@
 #include "persona.h"
 #include "errori.h"
+#include <string>
 
 Persona::Persona(std::string n, std::string c, bool s) : nome(n), cognome(c), sesso(s)
 {
@@ -39,6 +40,12 @@ std::string Persona::getCognome() const {
 
 bool Persona::getSesso() const {
     return sesso;
+}
+
+std::string Persona::getSessoStr() const {
+    if(!sesso)
+        return std::string("Uomo");
+    return std::string("Donna");
 }
 
 void Persona::setNome(std::string n) {
