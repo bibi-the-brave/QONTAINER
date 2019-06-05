@@ -61,14 +61,14 @@ FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento*>>& a,
  * Ricerca
  */
 FinestraPrincipale::~FinestraPrincipale() {
-    delete centrale;
+    //delete centrale;
 }
 
 void FinestraPrincipale::aperturaAtleta(bool cliccato) {
     Q_UNUSED(cliccato);
-    FinestraAtleti fa(cp, this);
-    fa.setAttribute(Qt::WA_DeleteOnClose);
-    fa.show();
+    FinestraAtleti* fa = new FinestraAtleti(cp, this);
+    fa->setAttribute(Qt::WA_DeleteOnClose);
+    fa->show();
 
     // Ciclo che "blocca" 'FinestraPrincipale' finchè 'fa' non viene distrutta
     QEventLoop loop;
