@@ -12,6 +12,7 @@
 #include "persona.h"
 #include "allenamento.h"
 #include "deepptr.h"
+#include "modeltabellaatleti.h"
 
 class FinestraAtleti : public QWidget {
     Q_OBJECT
@@ -24,7 +25,9 @@ private:
     QLabel lblTitolo;
     QTableView tabAtleti;
 
-    Contenitore<std::shared_ptr<Persona>> cp;
+    Contenitore<std::shared_ptr<Persona>> atleti;
+    ModelTabellaAtleti modello;
+
 public slots:
     void avviaDialogInserimento(bool);
 };

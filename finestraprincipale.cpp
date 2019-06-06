@@ -54,19 +54,13 @@ FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento*>>& a,
 
 }
 
-/*
- * Inserimento Atleta
- * Inserimento allenamento
- * ??? Classifica allenamenti ???
- * Ricerca
- */
 FinestraPrincipale::~FinestraPrincipale() {
-    //delete centrale;
+    delete centrale;
 }
 
 void FinestraPrincipale::aperturaAtleta(bool cliccato) {
     Q_UNUSED(cliccato);
-    FinestraAtleti* fa = new FinestraAtleti(cp, this);
+    FinestraAtleti* fa = new FinestraAtleti(cp);
     fa->setAttribute(Qt::WA_DeleteOnClose);
     fa->show();
 
@@ -74,4 +68,5 @@ void FinestraPrincipale::aperturaAtleta(bool cliccato) {
     QEventLoop loop;
     connect(this, SIGNAL(destroyed()), &loop, SLOT(quit()));
     loop.exec();
+    delete fa;
 }

@@ -5,10 +5,10 @@
 #include <QtGlobal>
 
 #include "dialoginserimentoatleta.h"
-#include "modeltabellaatleti.h"
+#include <QHeaderView>
 
 FinestraAtleti::FinestraAtleti(Contenitore<std::shared_ptr<Persona>>& a, QWidget *parent)
-                               : QWidget(parent), cp(a)
+                               : QWidget(parent), atleti(a), modello(atleti)
 {
     lblTitolo.setText("ATLETI");
     btnNuovoAtleta.setText("Nuovo Atleta");
@@ -23,19 +23,15 @@ FinestraAtleti::FinestraAtleti(Contenitore<std::shared_ptr<Persona>>& a, QWidget
 
     connect(&btnNuovoAtleta, SIGNAL(clicked(bool)), this, SLOT(avviaDialogInserimento(bool)));
 
-    /*QStandardItemModel modello(this);
-    modello.setHeaderData(0, Qt::Horizontal, QObject::tr("Nome"));
-    modello.setHeaderData(1, Qt::Horizontal, QObject::tr("Cognome"));
-    modello.setHeaderData(2, Qt::Horizontal, QObject::tr("Sesso"));*/
-
-    ModelTabellaAtleti modello(cp,this);
-
     tabAtleti.setModel(&modello);
-}
+    // "stira" le colonne per occupare tutta la larghezza della tabella
+    tabAtleti.horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
+}
 
 void FinestraAtleti::avviaDialogInserimento(bool cliccato) {
     Q_UNUSED(cliccato);
-    DialogInserimentoAtleta da;
+    DialogInserimentoAtleta da(atleti);
+    connect(&da, SIGNAL(reset()), &modello, SLOT(inserimentoNuovoAtletaEsterno()));
     da.exec();
 }

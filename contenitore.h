@@ -71,6 +71,7 @@ public:
         iterator& operator--();
         iterator& operator--(int);
         T* operator->() const;
+        T& operator*() const;
     };
 
     class const_iterator {
@@ -85,6 +86,7 @@ public:
         const_iterator& operator--() const;
         const_iterator& operator--(int) const;
         const T* operator->() const;
+        const T& operator*() const;
     };
 
     iterator begin() const;
@@ -501,6 +503,12 @@ T* Contenitore<T>::iterator::operator->() const {
     return &(punt->info);
 }
 
+template <typename T>
+T& Contenitore<T>::iterator::operator*() const {
+    return punt->elemento;
+}
+
+
 //////////////////////////////////////////////////////////////////////////////
 /// const_iterator
 //////////////////////////////////////////////////////////////////////////////
@@ -562,6 +570,11 @@ const T* Contenitore<T>::const_iterator::operator->() const {
     return &(punt->info);
 }
 
+template <typename T>
+const T& Contenitore<T>::const_iterator::operator*() const {
+    return punt->elemento;
+}
+
 //////////////////////////////////////////////////////////////////////////////
 /// metodi di Contenitore che utilizzano iteratori
 //////////////////////////////////////////////////////////////////////////////
@@ -620,30 +633,3 @@ typename Contenitore<T>::iterator Contenitore<T>::find(const T& k) const {
 }
 
 #endif // CONTENITORE_H
-/*
-    while(scorre) {
-        if( scorre->elemento == el ) {
-            typename Contenitore<T>::Nodo *daEliminare = scorre;
-            if( scorre == primo ) {
-                scorre = scorre->dx;
-                scorre->sx = 0;
-                if( !scorre )
-                    primo = ultimo = 0;
-                else
-                    primo = scorre;
-                daEliminare->dx = 0;
-            } else if(scorre == ultimo) {
-                ultimo = scorre->sx;
-                ultimo->dx = 0;
-            } else {
-                scorre->sx = daEliminare->sx;
-                daEliminare->sx->dx = scorre;
-                daEliminare->dx = 0;
-            }
-
-            delete daEliminare;
-            size--;
-        } else
-            scorre = scorre->dx;
-    }
-*/

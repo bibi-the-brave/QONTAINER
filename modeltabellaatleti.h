@@ -14,6 +14,10 @@ public:
     int columnCount(const QModelIndex& = QModelIndex()) const override;
     QVariant data(const QModelIndex&, int = Qt::DisplayRole) const override;
     QVariant headerData(int, Qt::Orientation, int) const override;
+    bool removeRows(int, int, const QModelIndex &) override;
+    bool insertRows(int, int, const QModelIndex &) override;
+public slots:
+    void inserimentoNuovoAtletaEsterno();
 private:
     Contenitore<std::shared_ptr<Persona>>& dati;
 };

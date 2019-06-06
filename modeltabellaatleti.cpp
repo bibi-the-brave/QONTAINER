@@ -2,9 +2,14 @@
 #include <QtGlobal>
 #include <QString>
 
-ModelTabellaAtleti::ModelTabellaAtleti(Contenitore<std::shared_ptr<Persona>>& c, QObject *parent) :
-    QAbstractTableModel(parent), dati(c)
-{}
+#include <QDebug>
+ModelTabellaAtleti::ModelTabellaAtleti(Contenitore<std::shared_ptr<Persona>>& c, QObject *parent)
+    : QAbstractTableModel(parent), dati(c)
+{
+    Contenitore<std::shared_ptr<Persona>>::iterator it = dati.begin();
+    for(; it != dati.end(); it++)
+        qDebug() << QString::fromStdString((*it)->getNome());
+}
 
 int ModelTabellaAtleti::rowCount(const QModelIndex &parent) const {
     Q_UNUSED(parent);
@@ -15,7 +20,6 @@ int ModelTabellaAtleti::columnCount(const QModelIndex &parent) const {
     Q_UNUSED(parent);
     return 3;   //nome, cognome, sesso
 }
-
 
 QVariant ModelTabellaAtleti::data(const QModelIndex &index, int role) const {
     int riga = index.row();
@@ -48,4 +52,29 @@ QVariant ModelTabellaAtleti::headerData(int section, Qt::Orientation orientation
         }
     }
     return QVariant();
+}
+
+bool ModelTabellaAtleti::removeRows(int position, int rows, const QModelIndex &parent)
+{
+    Q_UNUSED(parent);
+    beginRemoveRows(QModelIndex(), position, position+rows-1);
+    // elimina righe dai dati sottostanti
+    endRemoveRows();
+    return true;
+}
+
+bool ModelTabellaAtleti::insertRows(int position, int rows, const QModelIndex &parent)
+{
+    Q_UNUSED(parent);
+    beginInsertRows(QModelIndex(), position, position+rows-1);
+    // inserisce nuove righe nei dati sottostanti
+    endInsertRows();
+    return true;
+}
+
+/*Da chiamare quando viene aggiunto un nuovo atleta*/
+void ModelTabellaAtleti::inserimentoNuovoAtletaEsterno() {
+    beginResetModel();
+        insertRow(rowCount());
+    endResetModel();
 }
