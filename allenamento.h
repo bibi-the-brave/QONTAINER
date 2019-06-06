@@ -31,6 +31,7 @@ public:
     Persona getAtleta() const;
     double getMgMagnesioAssunti() const;
     unsigned int getDurata() const;
+    //mettere override di operator==
 };
 
 #endif // ALLENAMENTO_H

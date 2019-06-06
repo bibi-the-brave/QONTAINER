@@ -21,12 +21,13 @@ FinestraAtleti::FinestraAtleti(Contenitore<std::shared_ptr<Persona>>& a, QWidget
 
     setLayout(&layout);
 
-    connect(&btnNuovoAtleta, SIGNAL(clicked(bool)), this, SLOT(avviaDialogInserimento(bool)));
-
     tabAtleti.setModel(&modello);
     // "stira" le colonne per occupare tutta la larghezza della tabella
     tabAtleti.horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
+    setWindowModality(Qt::ApplicationModal); //le altre finestre non sono usabili
+
+    connect(&btnNuovoAtleta, SIGNAL(clicked(bool)), this, SLOT(avviaDialogInserimento(bool)));
 }
 
 void FinestraAtleti::avviaDialogInserimento(bool cliccato) {

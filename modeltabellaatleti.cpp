@@ -5,11 +5,7 @@
 #include <QDebug>
 ModelTabellaAtleti::ModelTabellaAtleti(Contenitore<std::shared_ptr<Persona>>& c, QObject *parent)
     : QAbstractTableModel(parent), dati(c)
-{
-    Contenitore<std::shared_ptr<Persona>>::iterator it = dati.begin();
-    for(; it != dati.end(); it++)
-        qDebug() << QString::fromStdString((*it)->getNome());
-}
+{}
 
 int ModelTabellaAtleti::rowCount(const QModelIndex &parent) const {
     Q_UNUSED(parent);
@@ -63,8 +59,7 @@ bool ModelTabellaAtleti::removeRows(int position, int rows, const QModelIndex &p
     return true;
 }
 
-bool ModelTabellaAtleti::insertRows(int position, int rows, const QModelIndex &parent)
-{
+bool ModelTabellaAtleti::insertRows(int position, int rows, const QModelIndex &parent) {
     Q_UNUSED(parent);
     beginInsertRows(QModelIndex(), position, position+rows-1);
     // inserisce nuove righe nei dati sottostanti

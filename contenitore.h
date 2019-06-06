@@ -412,9 +412,11 @@ unsigned int Contenitore<T>::count(const T& k) const {
 
     typename Contenitore<T>::Nodo *scorre = primo;
     unsigned int cont = 0;
-    while(scorre)
+    while(scorre) {
         if(scorre->elemento == k)
             ++cont;
+        scorre = scorre->dx;
+    }
     return cont;
 }
 

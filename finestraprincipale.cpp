@@ -6,7 +6,6 @@
 #include "finestrasceltasport.h"
 #include "finestraatleti.h"
 
-
 FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento*>>& a,
                                        Contenitore<std::shared_ptr<Persona>>& p,
                                        QWidget *parent)
@@ -35,7 +34,6 @@ FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento*>>& a,
     bRicerca->setToolTip("Ricerca allenamenti relativi ad uno sport o ad un atleta");
     bRicerca->setIconSize(grandezzaBottone);
 
-
     layout->addWidget(bInserAtleta);
     layout->addWidget(bInserAllenamento);
     layout->addWidget(bRicerca);
@@ -47,11 +45,9 @@ FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento*>>& a,
 
     connect(bInserAtleta, SIGNAL(clicked(bool)), this, SLOT(aperturaAtleta(bool)));
 
-    //this->setFixedSize(QSize(this->width(),this->height()));
     /*FinestraSceltaSport* f = new FinestraSceltaSport(); //va deletato, non ha parent settato
     f->show();
     hide();*/
-
 }
 
 FinestraPrincipale::~FinestraPrincipale() {

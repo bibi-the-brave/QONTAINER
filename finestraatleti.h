@@ -25,7 +25,7 @@ private:
     QLabel lblTitolo;
     QTableView tabAtleti;
 
-    Contenitore<std::shared_ptr<Persona>> atleti;
+    Contenitore<std::shared_ptr<Persona>>& atleti;
     ModelTabellaAtleti modello;
 
 public slots:

@@ -23,9 +23,9 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
     a.setWindowIcon(QIcon(":/immagini/logo.svg"));
-    FinestraPrincipale w(ca,cp);
-    w.setAttribute(Qt::WA_DeleteOnClose);
-    /*w.setGeometry(
+    FinestraPrincipale p(ca,cp);
+    p.setAttribute(Qt::WA_DeleteOnClose);
+    /*.setGeometry(
         QStyle::alignedRect(
             Qt::LeftToRight,
             Qt::AlignCenter,
@@ -33,6 +33,12 @@ int main(int argc, char *argv[])
             qApp->desktop()->availableGeometry()
         )
     );*/
-    w.show();
+    p.show();
     return a.exec();
 }
+
+/*
+    Contenitore<std::shared_ptr<Persona>>::iterator it = atleti.begin();
+    for(; it != atleti.end(); it++)
+        qDebug() << QString::fromStdString((*it)->getNome());
+*/

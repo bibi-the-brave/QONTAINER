@@ -26,6 +26,7 @@ CONFIG += c++11
 QMAKE_CXXFLAGS += -std=c++0x
 
 SOURCES += \
+    delegateatleti.cpp \
     dialoginserimentoatleta.cpp \
     finestraatleti.cpp \
         main.cpp \
@@ -46,6 +47,7 @@ SOURCES += \
 
 HEADERS += \
     contenitore.h \
+    delegateatleti.h \
     dialoginserimentoatleta.h \
     errori.h \
     finestraatleti.h \

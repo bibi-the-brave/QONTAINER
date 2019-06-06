@@ -5,7 +5,7 @@
 #include <memory>
 #include "persona.h"
 #include "modeltabellaatleti.h"
-#include <QDebug>
+#include <QMessageBox>
 
 DialogInserimentoAtleta::DialogInserimentoAtleta(Contenitore<std::shared_ptr<Persona>>& a, QWidget* parent)
     : QDialog(parent), atleti(a)
@@ -43,25 +43,43 @@ DialogInserimentoAtleta::DialogInserimentoAtleta(Contenitore<std::shared_ptr<Per
     layoutPrincipale.addLayout(&layoutBottoniConferma);
     setLayout(&layoutPrincipale);
 
+    //this->setFixedSize(QSize(this->width(),this->height()));
+
     connect(&bInserisci, SIGNAL(clicked(bool)), this, SLOT(inserimentoAtleta(bool)));
     connect(&bAzzera, SIGNAL(clicked(bool)), this, SLOT(azzeramentoForm(bool)));
 }
 
 void DialogInserimentoAtleta::inserimentoAtleta(bool cliccato) {
     Q_UNUSED(cliccato);
-    std::string nome = leNome.text().toStdString(), cognome = leCognome.text().toStdString();
+    std::string nome = leNome.text().toStdString();
+    std::string cognome = leCognome.text().toStdString();
     bool sesso;
     if(rbUomo.isChecked())
         sesso = 0;
     else
         sesso = 1;
-    auto persona = std::make_shared<Persona>(nome, cognome, sesso);
-    atleti.pushBack(persona);
 
+    // controlla che l'atleta non sia già presente nel contenitore
+    auto persona = std::make_shared<Persona>(nome, cognome, sesso);
+    bool doppione = false;
     Contenitore<std::shared_ptr<Persona>>::iterator it = atleti.begin();
-    for(; it != atleti.end(); it++)
-        qDebug() << QString::fromStdString((*it)->getNome());
-    emit reset();
+    for(; it != atleti.end() && !doppione; it++) {
+        if( *it == persona )
+            doppione = true;
+    }
+
+    if(doppione) {
+        QMessageBox mes;
+        mes.setIcon(QMessageBox::Information);
+        mes.setText("Errore!");
+        mes.setInformativeText("Impossibile inserire l'atleta perché già presente.");
+        mes.setStandardButtons(QMessageBox::Yes);
+        mes.exec();
+    } else {
+        atleti.pushBack(persona);
+        emit reset();
+    }
+
     this->close();
 }
 
