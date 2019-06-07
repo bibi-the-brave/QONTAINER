@@ -2,7 +2,8 @@
 #include "errori.h"
 #include <string>
 
-Persona::Persona(std::string n, std::string c, bool s) : nome(n), cognome(c), sesso(s)
+Persona::Persona(std::string n, std::string c, bool s)
+    : nome(n), cognome(c), sesso(s)
 {
     if( !(nome.find_first_not_of(' ') != std::string::npos) ||
         !(cognome.find_first_not_of(' ') != std::string::npos) )

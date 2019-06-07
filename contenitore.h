@@ -502,7 +502,7 @@ typename Contenitore<T>::iterator& Contenitore<T>::iterator::operator--(int) {
 
 template <typename T>
 T* Contenitore<T>::iterator::operator->() const {
-    return &(punt->info);
+    return &(punt->elemento);
 }
 
 template <typename T>
@@ -569,7 +569,7 @@ Contenitore<T>::const_iterator::operator--(int) const{
 
 template <typename T>
 const T* Contenitore<T>::const_iterator::operator->() const {
-    return &(punt->info);
+    return &(punt->elemento);
 }
 
 template <typename T>

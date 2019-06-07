@@ -6,6 +6,7 @@
 #include "persona.h"
 #include "modeltabellaatleti.h"
 #include <QMessageBox>
+#include <QDebug>
 
 DialogInserimentoAtleta::DialogInserimentoAtleta(Contenitore<std::shared_ptr<Persona>>& a, QWidget* parent)
     : QDialog(parent), atleti(a)
@@ -54,6 +55,7 @@ void DialogInserimentoAtleta::inserimentoAtleta(bool cliccato) {
     std::string nome = leNome.text().toStdString();
     std::string cognome = leCognome.text().toStdString();
     bool sesso;
+
     if(rbUomo.isChecked())
         sesso = 0;
     else
@@ -64,7 +66,7 @@ void DialogInserimentoAtleta::inserimentoAtleta(bool cliccato) {
     bool doppione = false;
     Contenitore<std::shared_ptr<Persona>>::iterator it = atleti.begin();
     for(; it != atleti.end() && !doppione; it++) {
-        if( *it == persona )
+        if( *(it->get()) == *(persona.get()) )
             doppione = true;
     }
 
@@ -73,14 +75,13 @@ void DialogInserimentoAtleta::inserimentoAtleta(bool cliccato) {
         mes.setIcon(QMessageBox::Information);
         mes.setText("Errore!");
         mes.setInformativeText("Impossibile inserire l'atleta perché già presente.");
-        mes.setStandardButtons(QMessageBox::Yes);
+        mes.setStandardButtons(QMessageBox::Ok);
         mes.exec();
     } else {
         atleti.pushBack(persona);
         emit reset();
+        this->close();
     }
-
-    this->close();
 }
 
 void DialogInserimentoAtleta::azzeramentoForm(bool cliccato) {
