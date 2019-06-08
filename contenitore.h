@@ -144,9 +144,9 @@ Contenitore<T>::getUltimo(typename Contenitore<T>::Nodo* p) {
 
 /*
  * PRE-CONDIZIONE: primo, ultimo e attuale devono essere dei puntatori NON nulli.
- * POST-CONDIZIONE: il nodo puntato da attuale viene cancellato dalla lista,
+ * POST-CONDIZIONE: attuale ounta ad un'are indefinita di memoria,
  * primo e ultimo puntano rispettivamente al primo ed all'ultimo elemento della
- * lista.
+ * lista. La size del contenitore non è diminuita, è necessario farlo a mano.
  */
 template <typename T>
 void Contenitore<T>::eliminaNodo(typename Contenitore<T>::Nodo*& primo,
@@ -364,7 +364,7 @@ void Contenitore<T>::removeAt(unsigned int pos) {
 
     if(pos == 0)
         popFront();
-    else if(pos == size -1)
+    else if(pos == size - 1)
         popBack();
     else {
         typename Contenitore<T>::Nodo *daEliminare = primo;

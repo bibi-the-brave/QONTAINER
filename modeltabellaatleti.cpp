@@ -77,6 +77,12 @@ void ModelTabellaAtleti::inserimentoNuovoAtletaEsterno() {
 }
 
 void ModelTabellaAtleti::eliminazioneAtleta(int riga) {
-    if(riga > 0 && riga < columnCount())
-        removeRow(riga);
+    if(riga > 0 && riga < columnCount()) {
+        dati.removeAt(static_cast<unsigned int>(riga));
+        Contenitore<std::shared_ptr<Persona>>::iterator it = dati.begin();
+        for(; it != dati.end() ; it++) {
+            qDebug() << "" << QString::fromStdString(it->get()->getNome());
+        }
+        //removeRow(riga);
+    }
 }
