@@ -64,19 +64,7 @@ bool DelegateAtleti::editorEvent(QEvent *event, QAbstractItemModel *model,
 
 void DelegateAtleti::slotEliminazione(int riga) {
     //rimuove un elemento corrispondente all'ultimo indice di riga da btnEl
-    getIndice(1);
     btnEl.remove(btnEl.key(btnEl.last()));
     //emette un segnale per far eliminare la riga dalla tabella
     emit eliminaRiga(riga);
-}
-#include <QDebug>
-QModelIndex DelegateAtleti::getIndice(int riga) const {
-    Q_UNUSED(riga);
-    QMapIterator<QModelIndex, QStyleOptionButton*> i(btnEl);
-    while (i.hasNext()) {
-        i.next();
-        qDebug() << i.key().row() << " " << i.key().column();
-    }
-    qDebug() << "_____________________________________" ;
-    QModelIndex();
 }

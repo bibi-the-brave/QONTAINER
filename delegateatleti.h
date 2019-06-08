@@ -7,12 +7,7 @@
 #include <QModelIndex>
 #include <QStyleOptionViewItem>
 #include <QList>
-/*
-struct Coppia {
-    QModelIndex i;
-    QStyleOptionButton* b;
-};
-*/
+
 class DelegateAtleti : public QItemDelegate
 {
     Q_OBJECT
@@ -21,14 +16,11 @@ public:
     void paint(QPainter*, const QStyleOptionViewItem&, const QModelIndex&) const override;
     bool editorEvent(QEvent*, QAbstractItemModel*,
                      const QStyleOptionViewItem &, const QModelIndex &) override;
-
 private:
     void visualizzaMessaggio(const QString&);
 
     typedef QMap<QModelIndex, QStyleOptionButton*> bottoniEliminazione; // per risparmiare anni di vita
     bottoniEliminazione btnEl;
-
-    QModelIndex getIndice(int) const;
 signals:
     void avvisoEliminazione(int); // serve per avvisare che l'utente vuole eliminare una riga
     void eliminaRiga(int); // serve per far sapere al modello collegato che deve eliminare una riga
