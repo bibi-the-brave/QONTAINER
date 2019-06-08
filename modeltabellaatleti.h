@@ -18,6 +18,7 @@ public:
     bool insertRows(int, int, const QModelIndex &) override;
 public slots:
     void inserimentoNuovoAtletaEsterno();
+    void eliminazioneAtleta(int);
 private:
     Contenitore<std::shared_ptr<Persona>>& dati;
 };

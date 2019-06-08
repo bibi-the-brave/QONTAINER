@@ -35,7 +35,7 @@ FinestraAtleti::FinestraAtleti(Contenitore<std::shared_ptr<Persona>>& a, QWidget
     // se l'utente conferma l'eliminazione viene avertito il delegate
     connect(this, SIGNAL(rimuovereRiga(int)), &delegato, SLOT(slotEliminazione(int)));
     // il delegate avverte il model di rimuovere la riga desiderata
-    //
+    connect(&delegato, SIGNAL(eliminaRiga(int)), &modello, SLOT(eliminazioneAtleta(int)));
 }
 
 void FinestraAtleti::avviaDialogInserimento(bool cliccato) {
@@ -43,15 +43,17 @@ void FinestraAtleti::avviaDialogInserimento(bool cliccato) {
     DialogInserimentoAtleta da(atleti);
     connect(&da, SIGNAL(reset()), &modello, SLOT(inserimentoNuovoAtletaEsterno()));
     da.exec();
+    da.disconnect();
 }
 
 void FinestraAtleti::ricevutaNotificaEliminazioneRiga(int riga) {
     QMessageBox boxConfermaEliminazione;
-    boxConfermaEliminazione.setIcon(QMessageBox::Information);
+    boxConfermaEliminazione.setIcon(QMessageBox::Question);
     boxConfermaEliminazione.setText("ATTENZIONE:");
     boxConfermaEliminazione.setInformativeText("Vuoi davvero eliminare l'atleta? L'operazione è definitiva");
-    boxConfermaEliminazione.setStandardButtons(QMessageBox::Ok);
-    boxConfermaEliminazione.exec();
-
-    emit rimuovereRiga(riga);
+    boxConfermaEliminazione.addButton("No", QMessageBox::NoRole);
+    boxConfermaEliminazione.addButton("Sì", QMessageBox::YesRole);
+    int scelta = boxConfermaEliminazione.exec();
+    if(scelta)
+        emit rimuovereRiga(riga);
 }

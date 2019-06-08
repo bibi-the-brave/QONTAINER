@@ -75,3 +75,8 @@ void ModelTabellaAtleti::inserimentoNuovoAtletaEsterno() {
         insertRow(rowCount());
     endResetModel();
 }
+
+void ModelTabellaAtleti::eliminazioneAtleta(int riga) {
+    if(riga > 0 && riga < columnCount())
+        removeRow(riga);
+}
