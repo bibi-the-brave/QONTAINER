@@ -237,7 +237,7 @@ void Contenitore<T>::pushBack(const T& el) {
     if( !primo )
         primo = ultimo = new typename Contenitore<T>::Nodo(el);
     else {
-        ultimo->dx = new typename Contenitore<T>::Nodo(el, ultimo->sx);
+        ultimo->dx = new typename Contenitore<T>::Nodo(el, ultimo);
         ultimo = ultimo->dx;
     }
     size++;
