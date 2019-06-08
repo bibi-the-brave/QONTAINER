@@ -8,11 +8,11 @@
 #include <QStyleOptionViewItem>
 #include <QList>
 
-class DelegateAtleti : public QItemDelegate
+class DelegateEliminazione : public QItemDelegate
 {
     Q_OBJECT
 public:
-    DelegateAtleti(QObject *parent = nullptr);
+    DelegateEliminazione(QObject *parent = nullptr);
     void paint(QPainter*, const QStyleOptionViewItem&, const QModelIndex&) const override;
     bool editorEvent(QEvent*, QAbstractItemModel*,
                      const QStyleOptionViewItem &, const QModelIndex &) override;

@@ -13,7 +13,7 @@
 #include "allenamento.h"
 #include "deepptr.h"
 #include "modeltabellaatleti.h"
-#include "delegateatleti.h"
+#include "delegateeliminazione.h"
 
 class FinestraAtleti : public QWidget {
     Q_OBJECT
@@ -28,7 +28,7 @@ private:
 
     Contenitore<std::shared_ptr<Persona>>& atleti;
     ModelTabellaAtleti modello;
-    DelegateAtleti delegato;
+    DelegateEliminazione delegato;
 public slots:
     void avviaDialogInserimento(bool);
     void ricevutaNotificaEliminazioneRiga(int);

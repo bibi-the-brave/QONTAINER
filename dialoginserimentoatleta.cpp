@@ -1,12 +1,13 @@
 #include "dialoginserimentoatleta.h"
 #include <QtGlobal>
 #include <QRegExp>
+#include <QRegExpValidator>
 #include <QHBoxLayout>
 #include <memory>
-#include "persona.h"
-#include "modeltabellaatleti.h"
 #include <QMessageBox>
-#include <QDebug>
+
+#include "modeltabellaatleti.h"
+#include "persona.h"
 
 DialogInserimentoAtleta::DialogInserimentoAtleta(Contenitore<std::shared_ptr<Persona>>& a, QWidget* parent)
     : QDialog(parent), atleti(a)

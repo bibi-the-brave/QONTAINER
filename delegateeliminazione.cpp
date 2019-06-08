@@ -1,4 +1,4 @@
-#include "delegateatleti.h"
+#include "delegateeliminazione.h"
 #include <QtGlobal>
 #include <QDialog>
 #include <QApplication>
@@ -9,9 +9,9 @@
 #include <QMouseEvent>
 #include <QPainter>
 
-DelegateAtleti::DelegateAtleti(QObject *parent) : QItemDelegate (parent) {}
+DelegateEliminazione::DelegateEliminazione(QObject *parent) : QItemDelegate (parent) {}
 
-void DelegateAtleti::paint(QPainter *painter, const QStyleOptionViewItem &option,
+void DelegateEliminazione::paint(QPainter *painter, const QStyleOptionViewItem &option,
                            const QModelIndex &index) const
 {
     QStyleOptionButton* bottone = btnEl.value(index);
@@ -19,7 +19,7 @@ void DelegateAtleti::paint(QPainter *painter, const QStyleOptionViewItem &option
         bottone = new QStyleOptionButton();
         bottone->text = "Elimina";
         bottone->state |= QStyle::State_Enabled;
-        (const_cast<DelegateAtleti *>(this))->btnEl.insert(index, bottone);
+        (const_cast<DelegateEliminazione *>(this))->btnEl.insert(index, bottone);
     }
 
     bottone->rect = option.rect.adjusted(4, 4, -(option.rect.width() / 2 + 4) , -4);
@@ -33,7 +33,7 @@ void DelegateAtleti::paint(QPainter *painter, const QStyleOptionViewItem &option
     QApplication::style()->drawControl(QStyle::CE_PushButton, bottone, painter);
 }
 
-bool DelegateAtleti::editorEvent(QEvent *event, QAbstractItemModel *model,
+bool DelegateEliminazione::editorEvent(QEvent *event, QAbstractItemModel *model,
                                  const QStyleOptionViewItem &option, const QModelIndex &index)
 {
     Q_UNUSED(option);
@@ -62,7 +62,7 @@ bool DelegateAtleti::editorEvent(QEvent *event, QAbstractItemModel *model,
     return true;
 }
 
-void DelegateAtleti::slotEliminazione(int riga) {
+void DelegateEliminazione::slotEliminazione(int riga) {
     //rimuove un elemento corrispondente all'ultimo indice di riga da btnEl
     btnEl.remove(btnEl.key(btnEl.last()));
     //emette un segnale per far eliminare la riga dalla tabella
