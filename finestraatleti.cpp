@@ -3,9 +3,10 @@
 #include <QStringList>
 #include <QStandardItemModel>
 #include <QtGlobal>
+#include <QHeaderView>
+#include <QMessageBox>
 
 #include "dialoginserimentoatleta.h"
-#include <QHeaderView>
 
 FinestraAtleti::FinestraAtleti(Contenitore<std::shared_ptr<Persona>>& a, QWidget *parent)
                                : QWidget(parent), atleti(a), modello(atleti)
@@ -22,12 +23,19 @@ FinestraAtleti::FinestraAtleti(Contenitore<std::shared_ptr<Persona>>& a, QWidget
     setLayout(&layout);
 
     tabAtleti.setModel(&modello);
+    tabAtleti.setItemDelegateForColumn(3,&delegato);
     // "stira" le colonne per occupare tutta la larghezza della tabella
     tabAtleti.horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     setWindowModality(Qt::ApplicationModal); //le altre finestre non sono usabili
 
     connect(&btnNuovoAtleta, SIGNAL(clicked(bool)), this, SLOT(avviaDialogInserimento(bool)));
+    // il delegate avverte che l'utente ha cliccato un bottone e vuole eliminare una riga
+    connect(&delegato, SIGNAL(avvisoEliminazione(int)), this, SLOT(ricevutaNotificaEliminazioneRiga(int)));
+    // se l'utente conferma l'eliminazione viene avertito il delegate
+    connect(this, SIGNAL(rimuovereRiga(int)), &delegato, SLOT(slotEliminazione(int)));
+    // il delegate avverte il model di rimuovere la riga desiderata
+    //
 }
 
 void FinestraAtleti::avviaDialogInserimento(bool cliccato) {
@@ -35,4 +43,15 @@ void FinestraAtleti::avviaDialogInserimento(bool cliccato) {
     DialogInserimentoAtleta da(atleti);
     connect(&da, SIGNAL(reset()), &modello, SLOT(inserimentoNuovoAtletaEsterno()));
     da.exec();
+}
+
+void FinestraAtleti::ricevutaNotificaEliminazioneRiga(int riga) {
+    QMessageBox boxConfermaEliminazione;
+    boxConfermaEliminazione.setIcon(QMessageBox::Information);
+    boxConfermaEliminazione.setText("ATTENZIONE:");
+    boxConfermaEliminazione.setInformativeText("Vuoi davvero eliminare l'atleta? L'operazione è definitiva");
+    boxConfermaEliminazione.setStandardButtons(QMessageBox::Ok);
+    boxConfermaEliminazione.exec();
+
+    emit rimuovereRiga(riga);
 }

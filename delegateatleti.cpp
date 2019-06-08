@@ -7,55 +7,60 @@
 #include <QModelIndex>
 #include <QStyleOptionViewItem>
 #include <QMouseEvent>
+#include <QPainter>
 
-// https://stackoverflow.com/questions/11777637/adding-button-to-qtableview
-DelegateAtleti::DelegateAtleti(QObject *parent) : QItemDelegate (parent)
-{
-}
+DelegateAtleti::DelegateAtleti(QObject *parent) : QItemDelegate (parent) {}
 
 void DelegateAtleti::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    Q_UNUSED(index);
-    QStyleOptionButton bottone;
-    QRect r = option.rect;//getting the rect of the cell
-    int x,y,w,h;
-    x = r.left() + r.width() - 30;//the X coordinate
-    y = r.top();//the Y coordinate
-    w = 30;//width del bottone
-    h = 30;//height del bottone
-    bottone.rect = QRect(x,y,w,h);
-    bottone.text = "Elimina";
-    bottone.state = QStyle::State_Enabled;
+    QStyleOptionButton* bottone = btnEl.value(index);
+    if (!bottone) {
+        bottone = new QStyleOptionButton();
+        bottone->text = "Elimina";
+        bottone->state |= QStyle::State_Enabled;
+        (const_cast<DelegateAtleti *>(this))->btnEl.insert(index, bottone);
+    }
 
-    QApplication::style()->drawControl( QStyle::CE_PushButton, &bottone, painter);
+    bottone->rect = option.rect.adjusted(4, 4, -(option.rect.width() / 2 + 4) , -4);
+    painter->save();
+
+    if (option.state & QStyle::State_Selected) {
+        painter->fillRect(option.rect, option.palette.highlight());
+    }
+
+    painter->restore();
+    QApplication::style()->drawControl(QStyle::CE_PushButton, bottone, painter);
 }
 
 bool DelegateAtleti::editorEvent(QEvent *event, QAbstractItemModel *model,
                                  const QStyleOptionViewItem &option, const QModelIndex &index)
 {
-    Q_UNUSED(index);
+    Q_UNUSED(option);
     Q_UNUSED(model);
-
-    if( event->type() == QEvent::MouseButtonRelease ) {
-        QMouseEvent * e = static_cast<QMouseEvent *>(event);
-        int clickX = e->x();
-        int clickY = e->y();
-
-        QRect r = option.rect;//getting the rect of the cell
-        int x,y,w,h;
-        x = r.left() + r.width() - 30;//the X coordinate
-        y = r.top();//the Y coordinate
-        w = 30;//button width
-        h = 30;//button height
-
-        if( clickX > x && clickX < x + w ) {
-            if( clickY > y && clickY < y + h ) {
-                QDialog * d = new QDialog();
-                d->setGeometry(0,0,100,100);
-                d->show();
+    if(event->type() == QEvent::MouseButtonPress) {
+        QMouseEvent* e = static_cast<QMouseEvent*>(event);
+        if(btnEl.contains(index)) {
+            QStyleOptionButton* btns = btnEl.value(index);
+            if (btns->rect.contains(e->x(), e->y())) {
+                btns->state |= QStyle::State_Sunken;
             }
         }
     }
 
+    if (event->type() == QEvent::MouseButtonRelease) {
+        QMouseEvent* e = static_cast<QMouseEvent*>(event);
+        if (btnEl.contains(index)) {
+            QStyleOptionButton* btns = btnEl.value(index);
+            if (btns->rect.contains(e->x(), e->y())) {
+                btns->state &= (~QStyle::State_Sunken);
+                // avvisa che l'utente vuole eliminare la riga index.row()
+                emit avvisoEliminazione(index.row());
+            }
+        }
+    }
     return true;
+}
+
+void DelegateAtleti::slotEliminazione(int) {
+
 }
