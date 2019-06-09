@@ -19,8 +19,6 @@ private:
     QPushButton* creaBottoneSport(const QString&) const;
 public:
     FinestraSceltaSport(QWidget* = nullptr);
-    ~FinestraSceltaSport();
-
 signals:
     void sportSelezionato(QString);
 

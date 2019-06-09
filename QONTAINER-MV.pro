@@ -28,9 +28,9 @@ QMAKE_CXXFLAGS += -std=c++0x
 SOURCES += \
     delegateeliminazione.cpp \
     dialoginserimentoatleta.cpp \
-    finestraatleti.cpp \
         main.cpp \
     finestraprincipale.cpp \
+    modeltabellaallenamenti.cpp \
     modeltabellaatleti.cpp \
     allenamento.cpp \
     nuoto.cpp \
@@ -43,15 +43,18 @@ SOURCES += \
     persona.cpp \
     menuview.cpp \
     finestrasceltasport.cpp \
-    inserimentosportview.cpp
+    inserimentosportview.cpp \
+    widgetallenamenti.cpp \
+    widgetatleti.cpp \
+    widgetricerca.cpp
 
 HEADERS += \
     contenitore.h \
     delegateeliminazione.h \
     dialoginserimentoatleta.h \
     errori.h \
-    finestraatleti.h \
     finestraprincipale.h \
+    modeltabellaallenamenti.h \
     modeltabellaatleti.h \
     allenamento.h \
     nuoto.h \
@@ -65,7 +68,10 @@ HEADERS += \
     deepptr.h \
     menuview.h \
     finestrasceltasport.h \
-    inserimentosportview.h
+    inserimentosportview.h \
+    widgetallenamenti.h \
+    widgetatleti.h \
+    widgetricerca.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -16,6 +16,7 @@ public:
     void paint(QPainter*, const QStyleOptionViewItem&, const QModelIndex&) const override;
     bool editorEvent(QEvent*, QAbstractItemModel*,
                      const QStyleOptionViewItem &, const QModelIndex &) override;
+    ~DelegateEliminazione() override;
 private:
     void visualizzaMessaggio(const QString&);
 

@@ -1,68 +1,31 @@
 #include "finestraprincipale.h"
-#include <QIcon>
-#include <QPixmap>
 #include <QtGlobal>
-#include <QEventLoop>
+#include <QDesktopWidget>
 #include "finestrasceltasport.h"
-#include "finestraatleti.h"
+#include "widgetatleti.h"
+#include "widgetallenamenti.h"
 
 FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento*>>& a,
                                        Contenitore<std::shared_ptr<Persona>>& p,
                                        QWidget *parent)
     : QMainWindow(parent), ca(a), cp(p)
 {
-    layout = new QHBoxLayout();
+    tabFunzionalita = new QTabWidget();
 
-    QSize grandezzaIcona(172,172);
-    QSize grandezzaBottone(175,175);
-
-    bInserAtleta = new QPushButton(/*"nuovo atleta"*/);
-    bInserAtleta->setIcon(QIcon(QPixmap(":/immagini/atleti.svg")));
-    bInserAtleta->setIconSize(grandezzaIcona);
-    bInserAtleta->setToolTip("Creazione di un nuovo atleta");
-    bInserAtleta->setIconSize(grandezzaBottone);
-
-    bInserAllenamento = new QPushButton(/*"nuovo allenamento"*/);
-    bInserAllenamento->setIcon(QIcon( ":/immagini/allenamento.svg"));
-    bInserAllenamento->setIconSize(grandezzaIcona);
-    bInserAllenamento->setToolTip("Inserirmento di un nuovo allenamento");
-    bInserAllenamento->setIconSize(grandezzaBottone);
-
-    bRicerca = new QPushButton(/*"ricerca"*/);
-    bRicerca->setIcon(QIcon(":/immagini/ricerca.svg"));
-    bRicerca->setIconSize(grandezzaIcona);
-    bRicerca->setToolTip("Ricerca allenamenti relativi ad uno sport o ad un atleta");
-    bRicerca->setIconSize(grandezzaBottone);
-
-    layout->addWidget(bInserAtleta);
-    layout->addWidget(bInserAllenamento);
-    layout->addWidget(bRicerca);
-
-    centrale = new QWidget(this);
-    centrale->setLayout(layout);
-
-    setCentralWidget(centrale);
-
-    connect(bInserAtleta, SIGNAL(clicked(bool)), this, SLOT(aperturaAtleta(bool)));
-
-    /*FinestraSceltaSport* f = new FinestraSceltaSport(); //va deletato, non ha parent settato
-    f->show();
-    hide();*/
-}
-
-FinestraPrincipale::~FinestraPrincipale() {
-    delete centrale;
-}
-
-void FinestraPrincipale::aperturaAtleta(bool cliccato) {
-    Q_UNUSED(cliccato);
-    FinestraAtleti* fa = new FinestraAtleti(cp);
-    fa->setAttribute(Qt::WA_DeleteOnClose);
+    fa = new WidgetAtleti(cp);
+    tabFunzionalita->addTab(fa, "Atleti");
     fa->show();
 
-    // Ciclo che "blocca" 'FinestraPrincipale' finchè 'fa' non viene distrutta
-    QEventLoop loop;
-    connect(this, SIGNAL(destroyed()), &loop, SLOT(quit()));
-    loop.exec();
-    delete fa;
+    wa = new WidgetAllenamenti(ca);
+    tabFunzionalita->addTab(wa, "Allenamenti");
+    wa->show();
+
+    wr = new WidgetRIcerca(ca);
+    tabFunzionalita->addTab(wr, "Ricerca");
+    wr->show();
+
+    setCentralWidget(tabFunzionalita);
+
+    //largezza iniziale finestra 60% schermo
+    resize(QDesktopWidget().availableGeometry(this).size() * 0.6);
 }

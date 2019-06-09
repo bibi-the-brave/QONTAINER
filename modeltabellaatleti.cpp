@@ -24,14 +24,13 @@ QVariant ModelTabellaAtleti::data(const QModelIndex &index, int role) const {
     case Qt::DisplayRole:
         switch (colonna) {
         case 0:
-            return QString::fromStdString( (dati.At(riga))->getNome() );
+            return QString::fromStdString( dati.At(riga)->getNome() );
         case 1:
             return QString::fromStdString( dati.At(riga)->getCognome() );
         case 2:
             return QString::fromStdString( dati.At(riga)->getSessoStr() );
         }
     }
-
     return QVariant();
 }
 

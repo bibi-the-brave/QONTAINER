@@ -68,3 +68,11 @@ void DelegateEliminazione::slotEliminazione(int riga) {
     //emette un segnale per far eliminare la riga dalla tabella
     emit eliminaRiga(riga);
 }
+
+DelegateEliminazione::~DelegateEliminazione() {
+    QMapIterator<QModelIndex, QStyleOptionButton*> i(btnEl);
+    while (i.hasNext()) {
+        i.next();
+        delete i.value();
+    }
+}

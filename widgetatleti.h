@@ -11,14 +11,13 @@
 #include "contenitore.h"
 #include "persona.h"
 #include "allenamento.h"
-#include "deepptr.h"
 #include "modeltabellaatleti.h"
 #include "delegateeliminazione.h"
 
-class FinestraAtleti : public QWidget {
+class WidgetAtleti : public QWidget {
     Q_OBJECT
 public:
-    explicit FinestraAtleti(Contenitore<std::shared_ptr<Persona>>&,QWidget *parent = nullptr);
+    explicit WidgetAtleti(Contenitore<std::shared_ptr<Persona>>&,QWidget* = nullptr);
 
 private:
     QVBoxLayout layout;

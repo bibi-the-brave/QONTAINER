@@ -45,6 +45,12 @@ DialogInserimentoAtleta::DialogInserimentoAtleta(Contenitore<std::shared_ptr<Per
     layoutPrincipale.addLayout(&layoutBottoniConferma);
     setLayout(&layoutPrincipale);
 
+    QRegExp rx("^\\S+(\\s\\S+)+$");
+    QValidator *validator = new QRegExpValidator(rx, this);
+
+    leNome.setValidator(validator);
+    leCognome.setValidator(validator);
+
     //this->setFixedSize(QSize(this->width(),this->height()));
 
     connect(&bInserisci, SIGNAL(clicked(bool)), this, SLOT(inserimentoAtleta(bool)));
@@ -53,14 +59,26 @@ DialogInserimentoAtleta::DialogInserimentoAtleta(Contenitore<std::shared_ptr<Per
 
 void DialogInserimentoAtleta::inserimentoAtleta(bool cliccato) {
     Q_UNUSED(cliccato);
-    std::string nome = leNome.text().toStdString();
-    std::string cognome = leCognome.text().toStdString();
+    std::string nome = leNome.text().simplified().toStdString();
+    std::string cognome = leCognome.text().simplified().toStdString();
+
+    if(nome == "" || cognome == "") {
+        QMessageBox mes;
+        mes.setIcon(QMessageBox::Information);
+        mes.setText("Errore!");
+        mes.setInformativeText("Compilare tutti i campi.");
+        mes.setStandardButtons(QMessageBox::Ok);
+        mes.exec();
+        return;
+    }
+
     bool sesso;
 
     if(rbUomo.isChecked())
         sesso = 0;
     else
         sesso = 1;
+
 
     // controlla che l'atleta non sia già presente nel contenitore
     auto persona = std::make_shared<Persona>(nome, cognome, sesso);

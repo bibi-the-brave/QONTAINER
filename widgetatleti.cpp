@@ -1,4 +1,4 @@
-#include "finestraatleti.h"
+#include "widgetatleti.h"
 
 #include <QStringList>
 #include <QStandardItemModel>
@@ -8,7 +8,7 @@
 
 #include "dialoginserimentoatleta.h"
 
-FinestraAtleti::FinestraAtleti(Contenitore<std::shared_ptr<Persona>>& a, QWidget *parent)
+WidgetAtleti::WidgetAtleti(Contenitore<std::shared_ptr<Persona>>& a, QWidget *parent)
                                : QWidget(parent), atleti(a), modello(atleti)
 {
     lblTitolo.setText("ATLETI");
@@ -38,7 +38,7 @@ FinestraAtleti::FinestraAtleti(Contenitore<std::shared_ptr<Persona>>& a, QWidget
     connect(&delegato, SIGNAL(eliminaRiga(int)), &modello, SLOT(eliminazioneAtleta(int)));
 }
 
-void FinestraAtleti::avviaDialogInserimento(bool cliccato) {
+void WidgetAtleti::avviaDialogInserimento(bool cliccato) {
     Q_UNUSED(cliccato);
     DialogInserimentoAtleta da(atleti);
     connect(&da, SIGNAL(reset()), &modello, SLOT(inserimentoNuovoAtletaEsterno()));
@@ -46,7 +46,7 @@ void FinestraAtleti::avviaDialogInserimento(bool cliccato) {
     da.disconnect();
 }
 
-void FinestraAtleti::ricevutaNotificaEliminazioneRiga(int riga) {
+void WidgetAtleti::ricevutaNotificaEliminazioneRiga(int riga) {
     QMessageBox boxConfermaEliminazione;
     boxConfermaEliminazione.setIcon(QMessageBox::Question);
     boxConfermaEliminazione.setText("ATTENZIONE:");

@@ -26,12 +26,12 @@ FinestraSceltaSport::FinestraSceltaSport(QWidget *parent) : QWidget(parent) {
 
     layout()->setSizeConstraint( QLayout::SetFixedSize );
 }
-
+/*
 FinestraSceltaSport::~FinestraSceltaSport() {
     if(inserimentoSport)
         delete inserimentoSport;
     delete layoutFinestra;
-}
+}*/
 
 QPushButton* FinestraSceltaSport::creaBottoneSport(const QString& nomeSport) const {
     QPushButton *sport = new QPushButton();

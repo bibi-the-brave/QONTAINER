@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QHBoxLayout>
+#include <QTabWidget>
 #include <QPushButton>
 #include <memory>
 
@@ -10,14 +11,18 @@
 #include "persona.h"
 #include "allenamento.h"
 #include "deepptr.h"
-
+#include "widgetatleti.h"
+#include "widgetallenamenti.h"
+#include "widgetricerca.h"
 
 class FinestraPrincipale : public QMainWindow {
     Q_OBJECT
 private:
     QWidget* centrale;
-    QHBoxLayout *layout;
-    QPushButton *bInserAtleta, *bInserAllenamento, *bRicerca;
+    QTabWidget* tabFunzionalita;
+    WidgetAtleti* fa;
+    WidgetAllenamenti* wa;
+    WidgetRIcerca* wr;
 
     Contenitore<DeepPtr<Allenamento*>>& ca;
     Contenitore<std::shared_ptr<Persona>>& cp;
@@ -25,9 +30,6 @@ public:
     FinestraPrincipale(Contenitore<DeepPtr<Allenamento*>>&,
                        Contenitore<std::shared_ptr<Persona>>&,
                        QWidget *parent = nullptr);
-    ~FinestraPrincipale();
-private slots:
-    void aperturaAtleta(bool);
 };
 
 #endif // FINESTRAPRINCIPALE_H
