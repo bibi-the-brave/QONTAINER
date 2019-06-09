@@ -24,6 +24,9 @@ private:
     WidgetAllenamenti* wa;
     WidgetRIcerca* wr;
 
+    FinestraPrincipale(const FinestraPrincipale&) = delete;
+    FinestraPrincipale& operator=(const FinestraPrincipale&) = delete;
+
     Contenitore<DeepPtr<Allenamento*>>& ca;
     Contenitore<std::shared_ptr<Persona>>& cp;
 public:

@@ -57,6 +57,7 @@ QVariant ModelTabellaAllenamenti::headerData(int section, Qt::Orientation orient
     return QVariant();
 }
 
+//viene chiamato da removeRow
 bool ModelTabellaAllenamenti::removeRows(int position, int rows, const QModelIndex &parent)
 {
     Q_UNUSED(parent);
@@ -66,6 +67,7 @@ bool ModelTabellaAllenamenti::removeRows(int position, int rows, const QModelInd
     return true;
 }
 
+//viene chiamato da insertRow
 bool ModelTabellaAllenamenti::insertRows(int position, int rows, const QModelIndex &parent) {
     Q_UNUSED(parent);
     beginInsertRows(QModelIndex(), position, position+rows-1);

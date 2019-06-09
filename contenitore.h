@@ -144,9 +144,10 @@ Contenitore<T>::getUltimo(typename Contenitore<T>::Nodo* p) {
 
 /*
  * PRE-CONDIZIONE: primo, ultimo e attuale devono essere dei puntatori NON nulli.
- * POST-CONDIZIONE: attuale ounta ad un'are indefinita di memoria,
+ * POST-CONDIZIONE: attuale punta ad un'area indefinita di memoria,
  * primo e ultimo puntano rispettivamente al primo ed all'ultimo elemento della
- * lista. La size del contenitore non è diminuita, è necessario farlo a mano.
+ * lista. La size del contenitore non è stata decrementata, è necessario farlo a mano
+ * nella funzione chiamante.
  */
 template <typename T>
 void Contenitore<T>::eliminaNodo(typename Contenitore<T>::Nodo*& primo,
@@ -613,7 +614,7 @@ typename Contenitore<T>::iterator Contenitore<T>::erase(iterator i) {
 }
 
 /*
- * Ritorna un iterator alla primo elemento nella lista che corrisponde alla
+ * Ritorna un iterator al primo elemento nella lista che corrisponde alla
  * chiave k. Altrimenti ritorna end().
  */
 template <typename T>

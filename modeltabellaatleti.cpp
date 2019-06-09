@@ -50,6 +50,7 @@ QVariant ModelTabellaAtleti::headerData(int section, Qt::Orientation orientation
     return QVariant();
 }
 
+//viene chiamato da removeRow
 bool ModelTabellaAtleti::removeRows(int position, int rows, const QModelIndex &parent)
 {
     Q_UNUSED(parent);
@@ -59,6 +60,7 @@ bool ModelTabellaAtleti::removeRows(int position, int rows, const QModelIndex &p
     return true;
 }
 
+//viene chiamato da insertRow
 bool ModelTabellaAtleti::insertRows(int position, int rows, const QModelIndex &parent) {
     Q_UNUSED(parent);
     beginInsertRows(QModelIndex(), position, position+rows-1);
@@ -75,7 +77,7 @@ void ModelTabellaAtleti::inserimentoNuovoAtletaEsterno() {
 }
 
 void ModelTabellaAtleti::eliminazioneAtleta(int riga) {
-    if(riga >= 0 && riga < columnCount()) {
+    if(riga >= 0 && riga < rowCount()) {
         dati.removeAt(static_cast<unsigned int>(riga));
         removeRow(riga);
     }
