@@ -18,7 +18,7 @@
 class FinestraPrincipale : public QMainWindow {
     Q_OBJECT
 public:
-    FinestraPrincipale(Contenitore<DeepPtr<Allenamento*>>&,
+    FinestraPrincipale(Contenitore<DeepPtr<Allenamento>>&,
                        Contenitore<std::shared_ptr<Persona>>&,
                        QWidget *parent = nullptr);
 
@@ -31,7 +31,7 @@ private:
     WidgetAllenamenti* wa;
     WidgetRicerca* wr;
 
-    Contenitore<DeepPtr<Allenamento*>>& ca;
+    Contenitore<DeepPtr<Allenamento>>& ca;
     Contenitore<std::shared_ptr<Persona>>& cp;
 };
 

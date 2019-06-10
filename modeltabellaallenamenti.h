@@ -11,7 +11,7 @@
 class ModelTabellaAllenamenti : public QAbstractTableModel {
     Q_OBJECT
 public:
-    ModelTabellaAllenamenti(Contenitore<DeepPtr<Allenamento*>>&, QObject* = nullptr);
+    ModelTabellaAllenamenti(Contenitore<DeepPtr<Allenamento>>&, QObject* = nullptr);
     int rowCount(const QModelIndex& = QModelIndex()) const override;
     int columnCount(const QModelIndex& = QModelIndex()) const override;
     QVariant data(const QModelIndex&, int = Qt::DisplayRole) const override;
@@ -20,7 +20,7 @@ public:
     bool insertRows(int, int, const QModelIndex &) override;
 
 private:
-    Contenitore<DeepPtr<Allenamento*>>& dati;
+    Contenitore<DeepPtr<Allenamento>>& dati;
 };
 
 

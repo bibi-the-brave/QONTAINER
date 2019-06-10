@@ -12,6 +12,9 @@ try: Allenamento (atleta, durata, mgMagnesio), kmSterrato(sterrato),
     throw;
 }
 
+std::string Corsa::tipo() const {
+    return "Corsa";
+}
 
 Corsa* Corsa::clone() const {
     return new Corsa(*this);

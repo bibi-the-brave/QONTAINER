@@ -17,14 +17,14 @@ class WidgetAllenamenti : public QWidget
 {
     Q_OBJECT
 public:
-    explicit WidgetAllenamenti(Contenitore<DeepPtr<Allenamento*>>&, QWidget* = nullptr);
+    explicit WidgetAllenamenti(Contenitore<DeepPtr<Allenamento>>&, QWidget* = nullptr);
 private:
     QVBoxLayout* layout;
     QPushButton* btnNuovoAtleta;
     QLabel* lblTitolo;
     QTableView* tabAtleti;
 
-    Contenitore<DeepPtr<Allenamento*>>& ca;
+    Contenitore<DeepPtr<Allenamento>>& ca;
     ModelTabellaAllenamenti* modello;
     DelegateEliminazione* delegato;
 };

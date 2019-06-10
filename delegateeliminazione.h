@@ -19,7 +19,6 @@ public:
     ~DelegateEliminazione() override;
 private:
     void visualizzaMessaggio(const QString&);
-
     typedef QMap<QModelIndex, QStyleOptionButton*> bottoniEliminazione; // per risparmiare anni di vita
     bottoniEliminazione btnEl;
 signals:

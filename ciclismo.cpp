@@ -13,6 +13,10 @@ try: Allenamento(atleta, durata, mgMagnesio), kmSalita(salita),
     throw;
 }
 
+std::string Ciclismo::tipo() const {
+    return "Ciclismo";
+}
+
 Ciclismo* Ciclismo::clone() const {
     return new Ciclismo(*this);
 }

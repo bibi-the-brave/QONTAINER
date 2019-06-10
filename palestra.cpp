@@ -13,6 +13,10 @@ try: Allenamento(atleta, durata, magnesio), addominali(addom),
     throw;
 }
 
+std::string Palestra::tipo() const {
+    return "Palestra";
+}
+
 Palestra* Palestra::clone() const {
     return new Palestra(*this);
 }

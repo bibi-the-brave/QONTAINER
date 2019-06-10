@@ -6,7 +6,7 @@
 #include "widgetallenamenti.h"
 #include "widgetricerca.h"
 
-FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento*>>& a,
+FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento>>& a,
                                        Contenitore<std::shared_ptr<Persona>>& p,
                                        QWidget *parent)
     : QMainWindow(parent), ca(a), cp(p)

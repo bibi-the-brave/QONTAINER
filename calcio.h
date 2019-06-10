@@ -15,6 +15,7 @@ public:
              unsigned int, unsigned int = 0, unsigned int = 0,
              unsigned int = 0, unsigned int = 0, unsigned int = 0);
     Calcio* clone() const override;
+    std::string tipo() const override;
     unsigned int calorie() const override;
     virtual unsigned int massaMuscolare() const override;
     virtual double grassoPerso() const override;

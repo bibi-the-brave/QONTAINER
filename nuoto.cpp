@@ -14,6 +14,10 @@ try: Allenamento (atleta, durata, mgMagnesio), vascheStileLibero(sLibero),
     throw;
 }
 
+std::string Nuoto::tipo() const {
+    return "Nuoto";
+}
+
 Nuoto* Nuoto::clone() const {
     return new Nuoto(*this);
 }

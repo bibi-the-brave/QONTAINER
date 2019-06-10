@@ -9,9 +9,9 @@
 class WidgetRicerca : public QWidget {
     Q_OBJECT
 public:
-    WidgetRicerca(Contenitore<DeepPtr<Allenamento*>>&, QWidget* = nullptr);
+    WidgetRicerca(Contenitore<DeepPtr<Allenamento>>&, QWidget* = nullptr);
 private:
-    Contenitore<DeepPtr<Allenamento*>>& ca;
+    Contenitore<DeepPtr<Allenamento>>& ca;
 };
 
 #endif // _H

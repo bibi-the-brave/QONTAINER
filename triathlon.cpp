@@ -23,6 +23,10 @@ try: Allenamento(atleta, durCorsa+durNuoto+durCiclismo, mgMagnesio),
     throw;
 }
 
+std::string Triathlon::tipo() const {
+    return "Triathlon";
+}
+
 Triathlon* Triathlon::clone() const {
     return new Triathlon(*this);
 }

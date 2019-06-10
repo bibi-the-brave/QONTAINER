@@ -12,6 +12,7 @@ public:
     Nuoto(std::shared_ptr<Persona>, unsigned int, double,
           unsigned int, unsigned int, unsigned int);
     Nuoto* clone() const override;
+    std::string tipo() const override;
     unsigned int calorie() const override;
     virtual unsigned int massaMuscolare() const override;
     virtual double grassoPerso() const override;

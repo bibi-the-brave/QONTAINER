@@ -10,6 +10,7 @@ public:
               unsigned int, unsigned int, unsigned int);
     Pallavolo* clone() const override;
     unsigned int calorie() const override;
+    virtual std::string tipo() const override;
     virtual unsigned int massaMuscolare() const override;
     virtual double grassoPerso() const override;
     double saliMinerali() const override;

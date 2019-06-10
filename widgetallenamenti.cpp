@@ -6,7 +6,7 @@
 #include <QHeaderView>
 #include <QMessageBox>
 
-WidgetAllenamenti::WidgetAllenamenti(Contenitore<DeepPtr<Allenamento*>>& ca_, QWidget* parent)
+WidgetAllenamenti::WidgetAllenamenti(Contenitore<DeepPtr<Allenamento>>& ca_, QWidget* parent)
     : QWidget(parent), ca(ca_)
 {
     lblTitolo = new QLabel("ALLENAMENTI");
@@ -26,7 +26,7 @@ WidgetAllenamenti::WidgetAllenamenti(Contenitore<DeepPtr<Allenamento*>>& ca_, QW
     modello = new ModelTabellaAllenamenti(ca);
     tabAtleti->setModel(modello);
     delegato = new DelegateEliminazione();
-    tabAtleti->setItemDelegateForColumn(3, delegato);
+    tabAtleti->setItemDelegateForColumn(7, delegato);
     // "stira" le colonne per occupare tutta la larghezza della tabella
     tabAtleti->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 

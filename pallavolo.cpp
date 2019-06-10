@@ -15,6 +15,10 @@ try: Allenamento(atleta, durata, magnesio), schiacciate(schiacc),
     throw;
 }
 
+std::string Pallavolo::tipo() const {
+    return "Pallavolo";
+}
+
 Pallavolo* Pallavolo::clone() const {
     return new Pallavolo(*this);
 }

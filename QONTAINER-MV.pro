@@ -43,7 +43,6 @@ SOURCES += \
     persona.cpp \
     menuview.cpp \
     finestrasceltasport.cpp \
-    inserimentosportview.cpp \
     widgetallenamenti.cpp \
     widgetatleti.cpp \
     widgetricerca.cpp
@@ -68,7 +67,6 @@ HEADERS += \
     deepptr.h \
     menuview.h \
     finestrasceltasport.h \
-    inserimentosportview.h \
     widgetallenamenti.h \
     widgetatleti.h \
     widgetricerca.h

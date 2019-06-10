@@ -5,7 +5,7 @@
 #include <QGridLayout>
 #include <QVBoxLayout>
 #include <QPushButton>
-#include "inserimentosportview.h"
+//#include "inserimentosportview.h"
 
 class FinestraSceltaSport : public QWidget {
     Q_OBJECT
@@ -13,7 +13,7 @@ private:
     QVBoxLayout *layoutFinestra;
     QGridLayout *layoutSport;
 
-    InserimentoSportView *inserimentoSport;
+    //InserimentoSportView *inserimentoSport;
 
 
     QPushButton* creaBottoneSport(const QString&) const;

@@ -16,6 +16,7 @@ class Allenamento {
 public:
     Allenamento(std::shared_ptr<Persona>, unsigned int, double = 0.0);
     virtual ~Allenamento() = default;
+    virtual std::string tipo() const = 0;
     virtual Allenamento* clone() const = 0;
     virtual unsigned int calorie() const = 0; //#calorie consumate
 //************************************************************************************

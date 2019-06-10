@@ -16,6 +16,10 @@ try: Allenamento (atleta, durata, magnesio), kmPercorsi(km),
     throw;
 }
 
+std::string Calcio::tipo() const {
+    return "Calcio";
+}
+
 Calcio* Calcio::clone() const {
     return new Calcio(*this);
 }
