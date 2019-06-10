@@ -1,17 +1,17 @@
-#ifndef WIDGETRICERCA_H
-#define WIDGETRICERCA_H
+#ifndef _H
+#define _H
 
 #include <QWidget>
 #include "contenitore.h"
 #include "allenamento.h"
 #include "deepptr.h"
 
-class WidgetRIcerca : public QWidget {
+class WidgetRicerca : public QWidget {
     Q_OBJECT
 public:
-    WidgetRIcerca(Contenitore<DeepPtr<Allenamento*>>&, QWidget* = nullptr);
+    WidgetRicerca(Contenitore<DeepPtr<Allenamento*>>&, QWidget* = nullptr);
 private:
     Contenitore<DeepPtr<Allenamento*>>& ca;
 };
 
-#endif // WIDGETRICERCA_H
+#endif // _H

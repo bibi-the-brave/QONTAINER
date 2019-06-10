@@ -17,22 +17,22 @@
 
 class FinestraPrincipale : public QMainWindow {
     Q_OBJECT
+public:
+    FinestraPrincipale(Contenitore<DeepPtr<Allenamento*>>&,
+                       Contenitore<std::shared_ptr<Persona>>&,
+                       QWidget *parent = nullptr);
+
+    FinestraPrincipale(const FinestraPrincipale&) = delete;
+    FinestraPrincipale& operator=(const FinestraPrincipale&) = delete;
 private:
     QWidget* centrale;
     QTabWidget* tabFunzionalita;
     WidgetAtleti* fa;
     WidgetAllenamenti* wa;
-    WidgetRIcerca* wr;
-
-    FinestraPrincipale(const FinestraPrincipale&) = delete;
-    FinestraPrincipale& operator=(const FinestraPrincipale&) = delete;
+    WidgetRicerca* wr;
 
     Contenitore<DeepPtr<Allenamento*>>& ca;
     Contenitore<std::shared_ptr<Persona>>& cp;
-public:
-    FinestraPrincipale(Contenitore<DeepPtr<Allenamento*>>&,
-                       Contenitore<std::shared_ptr<Persona>>&,
-                       QWidget *parent = nullptr);
 };
 
 #endif // FINESTRAPRINCIPALE_H

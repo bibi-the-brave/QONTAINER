@@ -9,39 +9,44 @@
 #include "dialoginserimentoatleta.h"
 
 WidgetAtleti::WidgetAtleti(Contenitore<std::shared_ptr<Persona>>& a, QWidget *parent)
-                               : QWidget(parent), atleti(a), modello(atleti)
+                               : QWidget(parent), atleti(a)
 {
-    lblTitolo.setText("ATLETI");
-    btnNuovoAtleta.setText("Nuovo Atleta");
+    lblTitolo = new QLabel("ATLETI");
+    btnNuovoAtleta = new QPushButton("Nuovo Atleta");
 
-    layout.addWidget(&lblTitolo);
-    layout.setAlignment(&lblTitolo, Qt::AlignHCenter);
-    layout.addWidget(&tabAtleti);
-    layout.addWidget(&btnNuovoAtleta);
-    layout.setAlignment(&btnNuovoAtleta, Qt::AlignHCenter);
+    layout = new QVBoxLayout;
 
-    setLayout(&layout);
+    layout->addWidget(lblTitolo);
+    layout->setAlignment(lblTitolo, Qt::AlignHCenter);
+    tabAtleti = new QTableView;
+    layout->addWidget(tabAtleti);
+    layout->addWidget(btnNuovoAtleta);
+    layout->setAlignment(btnNuovoAtleta, Qt::AlignHCenter);
 
-    tabAtleti.setModel(&modello);
-    tabAtleti.setItemDelegateForColumn(3,&delegato);
+    setLayout(layout);
+
+    modello = new ModelTabellaAtleti(atleti);
+    tabAtleti->setModel(modello);
+    delegato = new DelegateEliminazione();
+    tabAtleti->setItemDelegateForColumn(3,delegato);
     // "stira" le colonne per occupare tutta la larghezza della tabella
-    tabAtleti.horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    tabAtleti->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     setWindowModality(Qt::ApplicationModal); //le altre finestre non sono usabili
 
-    connect(&btnNuovoAtleta, SIGNAL(clicked(bool)), this, SLOT(avviaDialogInserimento(bool)));
+    connect(btnNuovoAtleta, SIGNAL(clicked(bool)), this, SLOT(avviaDialogInserimento(bool)));
     // il delegate avverte che l'utente ha cliccato un bottone e vuole eliminare una riga
-    connect(&delegato, SIGNAL(avvisoEliminazione(int)), this, SLOT(ricevutaNotificaEliminazioneRiga(int)));
+    connect(delegato, SIGNAL(avvisoEliminazione(int)), this, SLOT(ricevutaNotificaEliminazioneRiga(int)));
     // se l'utente conferma l'eliminazione viene avertito il delegate
-    connect(this, SIGNAL(rimuovereRiga(int)), &delegato, SLOT(slotEliminazione(int)));
+    connect(this, SIGNAL(rimuovereRiga(int)), delegato, SLOT(slotEliminazione(int)));
     // il delegate avverte il model di rimuovere la riga desiderata
-    connect(&delegato, SIGNAL(eliminaRiga(int)), &modello, SLOT(eliminazioneAtleta(int)));
+    connect(delegato, SIGNAL(eliminaRiga(int)), modello, SLOT(eliminazioneAtleta(int)));
 }
 
 void WidgetAtleti::avviaDialogInserimento(bool cliccato) {
     Q_UNUSED(cliccato);
     DialogInserimentoAtleta da(atleti);
-    connect(&da, SIGNAL(reset()), &modello, SLOT(inserimentoNuovoAtletaEsterno()));
+    connect(&da, SIGNAL(reset()), modello, SLOT(inserimentoNuovoAtletaEsterno()));
     da.exec();
     da.disconnect();
 }

@@ -20,14 +20,14 @@ public:
     explicit WidgetAtleti(Contenitore<std::shared_ptr<Persona>>&,QWidget* = nullptr);
 
 private:
-    QVBoxLayout layout;
-    QPushButton btnNuovoAtleta;
-    QLabel lblTitolo;
-    QTableView tabAtleti;
+    QVBoxLayout *layout;
+    QPushButton *btnNuovoAtleta;
+    QLabel *lblTitolo;
+    QTableView *tabAtleti;
 
     Contenitore<std::shared_ptr<Persona>>& atleti;
-    ModelTabellaAtleti modello;
-    DelegateEliminazione delegato;
+    ModelTabellaAtleti *modello;
+    DelegateEliminazione *delegato;
 public slots:
     void avviaDialogInserimento(bool);
     void ricevutaNotificaEliminazioneRiga(int);

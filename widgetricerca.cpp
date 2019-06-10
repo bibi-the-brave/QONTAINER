@@ -1,6 +1,6 @@
 #include "widgetricerca.h"
 
-WidgetRIcerca::WidgetRIcerca(Contenitore<DeepPtr<Allenamento*>>& ca_, QWidget* parent)
+WidgetRicerca::WidgetRicerca(Contenitore<DeepPtr<Allenamento*>>& ca_, QWidget* parent)
     : QWidget (parent), ca(ca_)
 {
 

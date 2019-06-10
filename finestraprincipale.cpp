@@ -4,6 +4,7 @@
 #include "finestrasceltasport.h"
 #include "widgetatleti.h"
 #include "widgetallenamenti.h"
+#include "widgetricerca.h"
 
 FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento*>>& a,
                                        Contenitore<std::shared_ptr<Persona>>& p,
@@ -20,7 +21,7 @@ FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento*>>& a,
     tabFunzionalita->addTab(wa, "Allenamenti");
     wa->show();
 
-    wr = new WidgetRIcerca(ca);
+    wr = new WidgetRicerca(ca);
     tabFunzionalita->addTab(wr, "Ricerca");
     wr->show();
 
