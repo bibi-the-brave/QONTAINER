@@ -15,16 +15,12 @@ FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento*>>& a,
 
     fa = new WidgetAtleti(cp);
     tabFunzionalita->addTab(fa, "Atleti");
-    fa->show();
 
     wa = new WidgetAllenamenti(ca);
     tabFunzionalita->addTab(wa, "Allenamenti");
-    wa->show();
 
     wr = new WidgetRicerca(ca);
     tabFunzionalita->addTab(wr, "Ricerca");
-    wr->show();
-
     setCentralWidget(tabFunzionalita);
 
     //largezza iniziale finestra 60% schermo

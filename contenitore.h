@@ -208,8 +208,8 @@ Contenitore<T>::Contenitore(T el, unsigned int occ)
 }
 
 template <typename T>
-Contenitore<T>::Contenitore(const Contenitore &l):
-    primo(copiaProfonda(l.primo)), ultimo(getUltimo(primo)), size(l.size) {}
+Contenitore<T>::Contenitore(const Contenitore &l)
+    : primo(copiaProfonda(l.primo)), ultimo(getUltimo(primo)), size(l.size) {}
 
 template <typename T>
 Contenitore<T>& Contenitore<T>::operator=(const Contenitore& l) {
