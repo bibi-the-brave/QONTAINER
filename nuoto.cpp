@@ -26,12 +26,6 @@ unsigned int Nuoto::calorie() const {
     return 50 * vascheStileLibero + 25 * vascheRana + 40 * vascheDorso;
 }
 
-
-unsigned int Nuoto::massaMuscolare() const  {
-    return 1;
-}
-
-
 double Nuoto::grassoPerso() const {
     return (calorie() / 7500) + 0.5 * vascheStileLibero + 0.5 * vascheRana
             + 0.25 * vascheDorso;

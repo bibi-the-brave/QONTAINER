@@ -26,10 +26,6 @@ unsigned int Ciclismo::calorie() const {
     return (400 * kmTot * kmTot) / getDurata() + 30 * kmSalita + 10 * kmPianura;
 }
 
-unsigned int Ciclismo::massaMuscolare() const  {
-    return 1;
-}
-
 double Ciclismo::grassoPerso() const {
     return (calorie() / 7500) + (110 * kmSalita)/7500
             + (45 * kmDiscesa)/7500 + (90 * kmPianura)/7500;

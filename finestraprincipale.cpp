@@ -1,7 +1,7 @@
 #include "finestraprincipale.h"
 #include <QtGlobal>
 #include <QDesktopWidget>
-#include "finestrasceltasport.h"
+#include "widgetnuovosport.h"
 #include "widgetatleti.h"
 #include "widgetallenamenti.h"
 #include "widgetricerca.h"
@@ -23,6 +23,6 @@ FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento>>& a,
     tabFunzionalita->addTab(wr, "Ricerca");
     setCentralWidget(tabFunzionalita);
 
-    //largezza iniziale finestra 60% schermo
-    resize(QDesktopWidget().availableGeometry(this).size() * 0.6);
+    //largezza iniziale finestra 70% schermo
+    resize(QDesktopWidget().availableGeometry(this).size() * 0.7);
 }

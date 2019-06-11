@@ -13,6 +13,12 @@ try: atleta(atl), durata(dur), mgMagnesioAssunti(mgMagnesio)
     throw;
 }
 
+bool Allenamento::operator==(const Allenamento& allenamento) const {
+    return atleta->getPersona() == allenamento.getAtleta() &&
+           durata == allenamento.durata &&
+           mgMagnesioAssunti == allenamento.mgMagnesioAssunti;
+}
+
 Persona Allenamento::getAtleta() const {
     return atleta->getPersona();
 }

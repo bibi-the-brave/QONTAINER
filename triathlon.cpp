@@ -46,10 +46,6 @@ unsigned int Triathlon::calorie() const {
         (800 * kmTotCorsa * kmTotCorsa) / durataCorsa + getKmSterrato()/2;
 }
 
-unsigned int Triathlon::massaMuscolare() const  {
-    return 1;
-}
-
 double Triathlon::grassoPerso() const {
     return Nuoto::grassoPerso() + Ciclismo::grassoPerso() + Corsa::grassoPerso();
 }

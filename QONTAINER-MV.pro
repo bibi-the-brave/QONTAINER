@@ -27,6 +27,7 @@ QMAKE_CXXFLAGS += -std=c++0x
 
 SOURCES += \
     delegateeliminazione.cpp \
+    dialogcreazioneallenamento.cpp \
     dialoginserimentoatleta.cpp \
         main.cpp \
     finestraprincipale.cpp \
@@ -34,22 +35,20 @@ SOURCES += \
     modeltabellaatleti.cpp \
     allenamento.cpp \
     nuoto.cpp \
-    palestra.cpp \
     corsa.cpp \
     ciclismo.cpp \
-    calcio.cpp \
-    pallavolo.cpp \
     triathlon.cpp \
     persona.cpp \
     menuview.cpp \
-    finestrasceltasport.cpp \
     widgetallenamenti.cpp \
     widgetatleti.cpp \
+    widgetnuovosport.cpp \
     widgetricerca.cpp
 
 HEADERS += \
     contenitore.h \
     delegateeliminazione.h \
+    dialogcreazioneallenamento.h \
     dialoginserimentoatleta.h \
     errori.h \
     finestraprincipale.h \
@@ -57,18 +56,15 @@ HEADERS += \
     modeltabellaatleti.h \
     allenamento.h \
     nuoto.h \
-    palestra.h \
     corsa.h \
     ciclismo.h \
-    calcio.h \
-    pallavolo.h \
     triathlon.h \
     persona.h \
     deepptr.h \
     menuview.h \
-    finestrasceltasport.h \
     widgetallenamenti.h \
     widgetatleti.h \
+    widgetnuovosport.h \
     widgetricerca.h
 
 # Default rules for deployment.

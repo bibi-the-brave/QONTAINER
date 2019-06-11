@@ -61,12 +61,12 @@ QVariant ModelTabellaAllenamenti::headerData(int section, Qt::Orientation orient
         case 3:
             return QString("Magnesio");
         case 4:
-            return QString("Consumo cal.");
+            return QString("Calorie");
         case 5:
-            return QString("Grasso perso");
+            return QString("Dimagrimento");
         case 6:
             return QString("Sali Consumati");
-        case 7: //questo dopo diventa case 7 perché prima ci va qualità dell'allenamento da implementare
+        case 7: //questo dopo diventa case 8 perché prima ci va qualità dell'allenamento da implementare
             return QString("Eliminazione");
         }
     }
@@ -92,3 +92,9 @@ bool ModelTabellaAllenamenti::insertRows(int position, int rows, const QModelInd
     return true;
 }
 
+void ModelTabellaAllenamenti::eliminazioneAllenamento(int riga) {
+    if(riga >= 0 && riga < rowCount()) {
+        dati.removeAt(static_cast<unsigned int>(riga));
+        removeRow(riga);
+    }
+}

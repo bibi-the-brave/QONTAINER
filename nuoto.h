@@ -14,7 +14,6 @@ public:
     Nuoto* clone() const override;
     std::string tipo() const override;
     unsigned int calorie() const override;
-    virtual unsigned int massaMuscolare() const override;
     virtual double grassoPerso() const override;
     double saliMinerali() const override;
 

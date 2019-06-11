@@ -34,14 +34,6 @@ int main(int argc, char *argv[])
     a.setWindowIcon(QIcon(":/immagini/logo.svg"));
     FinestraPrincipale p(ca,cp);
     //p.setAttribute(Qt::WA_DeleteOnClose);
-    /*.setGeometry(
-        QStyle::alignedRect(
-            Qt::LeftToRight,
-            Qt::AlignCenter,
-            w.minimumSize(),//size(),
-            qApp->desktop()->availableGeometry()
-        )
-    );*/
     p.show();
     return a.exec();
 }

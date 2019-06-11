@@ -10,29 +10,24 @@
 #include <memory>
 
 class Allenamento {
-    std::shared_ptr<Persona> atleta; /*Vedere se metterlo come puntatore un atleta*/
-    unsigned int durata; //>0
-    double mgMagnesioAssunti; //prima o durante l'allenamento
+    std::shared_ptr<Persona> atleta;
+    unsigned int durata; // >0
+    double mgMagnesioAssunti; // prima o durante l'allenamento
 public:
     Allenamento(std::shared_ptr<Persona>, unsigned int, double = 0.0);
     virtual ~Allenamento() = default;
     virtual std::string tipo() const = 0;
     virtual Allenamento* clone() const = 0;
-    virtual unsigned int calorie() const = 0; //#calorie consumate
-//************************************************************************************
-//massaMuscolare da implementare in tutte le sottoclassi, per ora ritorna 1 alla cazzo
-//************************************************************************************
-    virtual unsigned int massaMuscolare() const = 0; //aumento massa muscolare
-    virtual double grassoPerso() const = 0;//in kg
-    virtual double saliMinerali() const = 0; //mg di sali minerali consumati, >= 0
-    //virtual double stanchezza() const; // double 0 <= x <= 1
-    // stanchezza tiene conto dei sali minerali consumati e del magnesio assunto
-    //felicità \in {1,...,10}
+    virtual unsigned int calorie() const = 0; // #calorie consumate
+    virtual double grassoPerso() const = 0;// in grammi
+    virtual double saliMinerali() const = 0; // mg di sali minerali consumati, >= 0
+    virtual bool operator==(const Allenamento&) const;
+    //QUALITÀ ALLENAMENTO, STELLINE DA 1 A 5
 
     Persona getAtleta() const;
     double getMgMagnesioAssunti() const;
     unsigned int getDurata() const;
-    //mettere override di operator==
+
 };
 
 #endif // ALLENAMENTO_H

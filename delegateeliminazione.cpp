@@ -33,8 +33,10 @@ void DelegateEliminazione::paint(QPainter *painter, const QStyleOptionViewItem &
     QApplication::style()->drawControl(QStyle::CE_PushButton, bottone, painter);
 }
 
-bool DelegateEliminazione::editorEvent(QEvent *event, QAbstractItemModel *model,
-                                 const QStyleOptionViewItem &option, const QModelIndex &index)
+bool DelegateEliminazione::editorEvent(
+        QEvent *event, QAbstractItemModel *model,
+        const QStyleOptionViewItem &option,
+        const QModelIndex &index)
 {
     Q_UNUSED(option);
     Q_UNUSED(model);

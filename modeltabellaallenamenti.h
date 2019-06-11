@@ -18,9 +18,10 @@ public:
     QVariant headerData(int, Qt::Orientation, int) const override;
     bool removeRows(int, int, const QModelIndex &) override;
     bool insertRows(int, int, const QModelIndex &) override;
-
 private:
     Contenitore<DeepPtr<Allenamento>>& dati;
+public slots:
+    void eliminazioneAllenamento(int riga);
 };
 
 
