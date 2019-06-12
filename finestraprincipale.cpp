@@ -16,7 +16,7 @@ FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento>>& a,
     fa = new WidgetAtleti(cp);
     tabFunzionalita->addTab(fa, "Atleti");
 
-    wa = new WidgetAllenamenti(ca);
+    wa = new WidgetAllenamenti(cp, ca);
     tabFunzionalita->addTab(wa, "Allenamenti");
 
     wr = new WidgetRicerca(ca);
@@ -24,5 +24,5 @@ FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento>>& a,
     setCentralWidget(tabFunzionalita);
 
     //largezza iniziale finestra 70% schermo
-    resize(QDesktopWidget().availableGeometry(this).size() * 0.7);
+    resize(QDesktopWidget().availableGeometry(this).size() * 0.8);
 }

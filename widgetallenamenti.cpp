@@ -6,11 +6,12 @@
 #include <QHeaderView>
 #include <QMessageBox>
 
-WidgetAllenamenti::WidgetAllenamenti(Contenitore<DeepPtr<Allenamento>>& ca_, QWidget* parent)
-    : QWidget(parent), ca(ca_)
+WidgetAllenamenti::WidgetAllenamenti(Contenitore<std::shared_ptr<Persona>>& catleti_,
+                                     Contenitore<DeepPtr<Allenamento>>& ca_, QWidget* parent)
+    : QWidget(parent), ca(ca_), catleti(catleti_)
 {
     lblTitolo = new QLabel("ALLENAMENTI");
-    widgetCreazione = new WidgetNuovoSport();
+    widgetCreazione = new WidgetNuovoSport(catleti,ca);
 
     layout = new QVBoxLayout;
     layout->addWidget(lblTitolo);

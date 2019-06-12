@@ -55,7 +55,6 @@ public:
     bool operator==(const Contenitore&) const;
     unsigned int count(const T&) const;
     void clear();
-    /*Pensare meglio se il tipo di ritorno va bene*/
     std::list<T> stdList() const;
     std::vector<T> stdVector() const;
 
@@ -64,8 +63,8 @@ public:
     private:
         Nodo* punt;
     public:
-        bool operator ==(iterator) const;
-        bool operator !=(iterator) const;
+        bool operator==(iterator) const;
+        bool operator!=(iterator) const;
         iterator& operator++();    //prefisso
         iterator operator++(int); //postfisso
         iterator& operator--();

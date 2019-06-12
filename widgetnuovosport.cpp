@@ -4,8 +4,14 @@
 #include <QPushButton>
 #include <QIcon>
 #include <QSize>
+#include "dialogcreazioneallenamento.h"
+#include "dialogcreazionenuoto.h"
 
-WidgetNuovoSport::WidgetNuovoSport(QWidget *parent) : QWidget(parent) {
+WidgetNuovoSport::WidgetNuovoSport(Contenitore<std::shared_ptr<Persona>>& cp_,
+                                   Contenitore<DeepPtr<Allenamento>>& ca_,
+                                   QWidget *parent)
+    : QWidget(parent), cp(cp_), ca(ca_)
+{
     layout = new QVBoxLayout();
     layoutBottoni = new QHBoxLayout();
     layoutBottoni->addWidget( creaBottoneSport("ciclismo") );
@@ -17,27 +23,38 @@ WidgetNuovoSport::WidgetNuovoSport(QWidget *parent) : QWidget(parent) {
     layout->setAlignment(lblCreazione, Qt::AlignHCenter);
     layout->addLayout(layoutBottoni);
     setLayout(layout);
+    creaOggettoInserimentoSport("nuoto");
 }
 
 QPushButton* WidgetNuovoSport::creaBottoneSport(const QString& nomeSport) const {
     QPushButton *sport = new QPushButton();
     sport->setIcon(QIcon(":/immagini/" + nomeSport + ".svg"));
     sport->setIconSize(QSize(75,75));
-    sport->setToolTip(nomeSport);
-    /*connect(sport, &QPushButton::clicked, [this]() {
+    sport->setToolTip(nomeSport);/*
+    connect(sport, &QPushButton::clicked, [nomeSport, ]() {
         this->creaOggettoInserimentoSport(nomeSport);
     });*/
     return sport;
 }
 
 /*
- * Crea un'oggetto che ha come tipo dinamico quello della view di inserimento dati
- * relatica allo sport selezionato
+ * Crea un'oggetto che ha il tipo dinamico corrispondente al dialog che permette
+ * di inserire un allenamento dello sport selezionato
  */
 void WidgetNuovoSport::creaOggettoInserimentoSport(QString sport) {
-    if( sport == "" ) {
-       //inserimentoSport = new
-    } else if( sport == "" ) {
-        //inserimentoSport = new
-    }//...
+    DialogCreazioneAllenamento* dialog;
+    dialog = new DialogCreazioneNuoto(cp, ca);
+    if( sport == "ciclismo" ) {
+
+    } else if( sport == "nuoto" ) {
+        dialog = new DialogCreazioneNuoto(cp, ca);
+    } else if( sport == "corsa" ) {
+
+    } else if( sport == "triathlon" ) {
+
+    }
+
+    dialog->exec();
+    dialog->disconnect();
+    delete dialog;
 }

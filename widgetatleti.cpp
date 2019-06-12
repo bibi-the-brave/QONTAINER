@@ -55,7 +55,10 @@ void WidgetAtleti::ricevutaNotificaEliminazioneRiga(int riga) {
     QMessageBox boxConfermaEliminazione;
     boxConfermaEliminazione.setIcon(QMessageBox::Question);
     boxConfermaEliminazione.setText("ATTENZIONE:");
-    boxConfermaEliminazione.setInformativeText("Vuoi davvero eliminare l'atleta? L'operazione è definitiva");
+    boxConfermaEliminazione.setInformativeText(
+                QString("Vuoi davvero eliminare l'atleta?") +
+                " L'operazione è definitiva e verranno eliminati "
+                + "tutti gli allenamenti associati a tale atleta.");
     boxConfermaEliminazione.addButton("No", QMessageBox::NoRole);
     boxConfermaEliminazione.addButton("Sì", QMessageBox::YesRole);
     int scelta = boxConfermaEliminazione.exec();
