@@ -10,3 +10,7 @@ DialogCreazioneNuoto::DialogCreazioneNuoto(
     layoutPrincipale->addWidget(wNuoto);
     aggiungiBottoni();
 }
+
+void DialogCreazioneNuoto::setLabelTitolo() {
+    lblTitolo->setText("ALLENAMENTO NUOTO");
+}

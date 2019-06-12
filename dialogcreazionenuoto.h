@@ -14,6 +14,8 @@ public:
 private:
     QGroupBox *gbNuoto;
     WidgetNuoto *wNuoto;
+protected:
+    void setLabelTitolo() override;
 };
 
 #endif // DIALOGCREAZIONENUOTO_H

@@ -34,6 +34,7 @@ protected:
     QSpinBox *spinDurata, *spinMagnesio;
 
     void aggiungiBottoni();
+    virtual void setLabelTitolo() = 0;
 };
 
 #endif // DIALOGCREAZIONEALLENAMENTO_H

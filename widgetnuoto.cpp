@@ -3,7 +3,7 @@
 WidgetNuoto::WidgetNuoto()
 {
     layoutWidget = new QGridLayout;
-    gbNuoto = new QGroupBox("Nuoto");
+    gbNuoto = new QGroupBox("NUOTO");
     layout = new QFormLayout;
 
     lblLibero = new QLabel("Vasche stile:");
