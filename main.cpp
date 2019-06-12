@@ -33,7 +33,6 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     a.setWindowIcon(QIcon(":/immagini/logo.svg"));
     FinestraPrincipale p(ca,cp);
-    //p.setAttribute(Qt::WA_DeleteOnClose);
     p.show();
     return a.exec();
 }

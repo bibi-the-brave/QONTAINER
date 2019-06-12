@@ -16,10 +16,10 @@
 #include "deepptr.h"
 
 
-class DialogCreazioneAllenamento : public QDialog {
+class DialogAllenamento : public QDialog {
     Q_OBJECT
 public:
-    explicit DialogCreazioneAllenamento(Contenitore<std::shared_ptr<Persona>>&,
+    explicit DialogAllenamento(Contenitore<std::shared_ptr<Persona>>&,
                                         Contenitore<DeepPtr<Allenamento>>&,
                                         QWidget* = nullptr);
 protected:
@@ -35,6 +35,9 @@ protected:
 
     void aggiungiBottoni();
     virtual void setLabelTitolo() = 0;
+
+public slots:
+    void reset();
 };
 
 #endif // DIALOGCREAZIONEALLENAMENTO_H

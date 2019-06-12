@@ -1,14 +1,14 @@
 #ifndef DIALOGCREAZIONENUOTO_H
 #define DIALOGCREAZIONENUOTO_H
 
-#include "dialogcreazioneallenamento.h"
+#include "dialogallenamento.h"
 #include <QGroupBox>
 #include "widgetnuoto.h"
 
-class DialogCreazioneNuoto : public DialogCreazioneAllenamento {
+class DialogNuoto : public DialogAllenamento {
     Q_OBJECT
 public:
-    DialogCreazioneNuoto(Contenitore<std::shared_ptr<Persona>>&,
+    DialogNuoto(Contenitore<std::shared_ptr<Persona>>&,
                          Contenitore<DeepPtr<Allenamento>>&,
                          QWidget* = nullptr);
 private:

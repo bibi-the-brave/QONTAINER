@@ -4,8 +4,8 @@
 #include <QPushButton>
 #include <QIcon>
 #include <QSize>
-#include "dialogcreazioneallenamento.h"
-#include "dialogcreazionenuoto.h"
+#include "dialogallenamento.h"
+#include "dialognuoto.h"
 
 WidgetNuovoSport::WidgetNuovoSport(Contenitore<std::shared_ptr<Persona>>& cp_,
                                    Contenitore<DeepPtr<Allenamento>>& ca_,
@@ -42,12 +42,12 @@ QPushButton* WidgetNuovoSport::creaBottoneSport(const QString& nomeSport) const 
  * di inserire un allenamento dello sport selezionato
  */
 void WidgetNuovoSport::creaOggettoInserimentoSport(QString sport) {
-    DialogCreazioneAllenamento* dialog;
-    dialog = new DialogCreazioneNuoto(cp, ca);
+    DialogAllenamento* dialog;
+    dialog = new DialogNuoto(cp, ca);
     if( sport == "ciclismo" ) {
 
     } else if( sport == "nuoto" ) {
-        dialog = new DialogCreazioneNuoto(cp, ca);
+        dialog = new DialogNuoto(cp, ca);
     } else if( sport == "corsa" ) {
 
     } else if( sport == "triathlon" ) {

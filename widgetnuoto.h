@@ -12,7 +12,9 @@ class WidgetNuoto : public QWidget {
     Q_OBJECT
 public:
     WidgetNuoto();
-    // ... mettere i getter
+    int vascheLibero() const;
+    int vascheRana() const;
+    int vascheDorso() const;
 private:
     QGroupBox *gbNuoto;
     QGridLayout *layoutWidget;
@@ -22,7 +24,7 @@ private:
     QSpinBox *spinLibero, *spinRana, *spineDorso;
 
 public slots:
-    //void reset();
+    void reset();
 };
 
 #endif // WIDGETNUOTO_H

@@ -35,7 +35,6 @@ private slots:
 
 signals:
     void reset();
-
 };
 
 #endif // DIALOGINSERIMENTOATLETA_H

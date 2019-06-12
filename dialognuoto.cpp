@@ -1,16 +1,19 @@
-#include "dialogcreazionenuoto.h"
+#include "dialognuoto.h"
 
-DialogCreazioneNuoto::DialogCreazioneNuoto(
+DialogNuoto::DialogNuoto(
         Contenitore<std::shared_ptr<Persona>>& cp_,
         Contenitore<DeepPtr<Allenamento>>& ca_,
         QWidget* parent)
-    : DialogCreazioneAllenamento(cp_,ca_,parent)
+    : DialogAllenamento(cp_,ca_,parent)
 {
     wNuoto = new WidgetNuoto();
     layoutPrincipale->addWidget(wNuoto);
     aggiungiBottoni();
+
+    connect(bReset, SIGNAL(clicked()), wNuoto, SLOT(reset()));
+    connect(bReset, SIGNAL(clicked()), this, SLOT(reset()));
 }
 
-void DialogCreazioneNuoto::setLabelTitolo() {
+void DialogNuoto::setLabelTitolo() {
     lblTitolo->setText("ALLENAMENTO NUOTO");
 }
