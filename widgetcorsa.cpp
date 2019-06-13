@@ -6,12 +6,12 @@ WidgetCorsa::WidgetCorsa()
     gbCorsa = new QGroupBox("CORSA  ");
     layout = new QFormLayout;
 
-    lblStrada = new QLabel("Km in salita:");
+    lblStrada = new QLabel("Km su strada:");
     spinStrada = new QSpinBox();
     spinStrada->setRange(0, 400);
     layout->addRow(lblStrada, spinStrada);
 
-    lblSterrato = new QLabel("Km in discesa:");
+    lblSterrato = new QLabel("Km su sterrato:");
     spinSterrato = new QSpinBox();
     spinSterrato->setRange(0, 400);
     layout->addRow(lblSterrato, spinSterrato);

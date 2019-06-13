@@ -34,7 +34,7 @@ QPushButton* WidgetNuovoSport::creaBottoneSport(const QString& nomeSport) {
     sport->setIconSize(QSize(75,75));
     sport->setToolTip(nomeSport);
     connect(sport, &QPushButton::clicked, [=]() {
-        creaOggettoInserimentoSport(nomeSport);
+        creaDialogInserimentoSport(nomeSport);
     });
     return sport;
 }
@@ -43,7 +43,7 @@ QPushButton* WidgetNuovoSport::creaBottoneSport(const QString& nomeSport) {
  * Crea un'oggetto che ha il tipo dinamico corrispondente al dialog che permette
  * di inserire un allenamento dello sport selezionato
  */
-void WidgetNuovoSport::creaOggettoInserimentoSport(QString sport) {
+void WidgetNuovoSport::creaDialogInserimentoSport(QString sport) {
     DialogAllenamento* dialog;
     if( sport == "ciclismo" ) {
         dialog = new DialogCiclismo(cp, ca);

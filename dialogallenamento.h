@@ -35,9 +35,10 @@ protected:
 
     void aggiungiBottoni();
     virtual void setLabelTitolo() = 0;
-
+    void dialogErroreForm() const;
 public slots:
     void reset();
+    void controlloForm(bool& controllo);
 };
 
 #endif // DIALOGCREAZIONEALLENAMENTO_H

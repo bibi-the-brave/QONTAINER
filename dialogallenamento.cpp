@@ -1,5 +1,6 @@
 #include "dialogallenamento.h"
 #include <QStringList>
+#include <QMessageBox>
 #include "contenitore.h"
 #include <memory>
 #include "persona.h"
@@ -23,7 +24,7 @@ DialogAllenamento::DialogAllenamento(
     QStringList atleti;
     Contenitore<std::shared_ptr<Persona>>::iterator it = cp.begin();
     for(; it != cp.end(); it++)
-        atleti << QString::fromStdString((*it)->getNome()) +
+        atleti << QString::fromStdString((*it)->getNome()) + " " +
                   QString::fromStdString((*it)->getCognome());
     cmbAtleti->addItems(atleti);
     lFormAllenamento->addRow(lblAtleta, cmbAtleti);
@@ -52,8 +53,22 @@ void DialogAllenamento::aggiungiBottoni() {
     layoutPrincipale->addLayout(lBottoni);
 }
 
+void DialogAllenamento::dialogErroreForm() const {
+    QMessageBox mes;
+    mes.setIcon(QMessageBox::Information);
+    mes.setText("Errore!");
+    mes.setInformativeText("L'allenamento deve durare almeno un minuto.");
+    mes.setStandardButtons(QMessageBox::Ok);
+    mes.exec();
+}
+
 void DialogAllenamento::reset() {
     cmbAtleti->setCurrentIndex(0);
     spinDurata->setValue(0);
     spinMagnesio->setValue(0);
+}
+
+void DialogAllenamento::controlloForm(bool& controllo) {
+    if(spinDurata->value() == 0)
+        controllo = true;
 }

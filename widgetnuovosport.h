@@ -30,7 +30,7 @@ signals:
     void sportSelezionato(QString);
 
 private slots:
-    void creaOggettoInserimentoSport(QString);
+    void creaDialogInserimentoSport(QString);
 };
 
 #endif // WIDGETNUOVOSPORT_H

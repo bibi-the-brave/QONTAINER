@@ -32,7 +32,6 @@ private:
 private slots:
     void inserimentoAtleta(bool);
     void azzeramentoForm(bool);
-
 signals:
     void reset();
 };

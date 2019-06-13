@@ -1,4 +1,5 @@
 #include "dialognuoto.h"
+#include <QMessageBox>
 
 DialogNuoto::DialogNuoto(
         Contenitore<std::shared_ptr<Persona>>& cp_,
@@ -16,4 +17,14 @@ DialogNuoto::DialogNuoto(
 
 void DialogNuoto::setLabelTitolo() {
     lblTitolo->setText("ALLENAMENTO NUOTO");
+}
+
+
+void DialogNuoto::dialogErroreForm() const {
+    QMessageBox mes;
+    mes.setIcon(QMessageBox::Information);
+    mes.setText("Errore!");
+    mes.setInformativeText("È necessario aver fatto almeno una vasca in uno dei tre stili.");
+    mes.setStandardButtons(QMessageBox::Ok);
+    mes.exec();
 }
