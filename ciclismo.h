@@ -5,7 +5,7 @@
 #include <memory>
 
 class Ciclismo : virtual public Allenamento {
-    unsigned int kmSalita, kmDiscesa, kmPianura;
+    unsigned int kmSalita, kmPianura, kmDiscesa;
 public:
     Ciclismo(std::shared_ptr<Persona>, unsigned int, double,
              unsigned int, unsigned int, unsigned int);

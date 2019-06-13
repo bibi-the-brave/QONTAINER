@@ -20,6 +20,8 @@ private:
     WidgetCorsa *wCorsa;
 protected:
     void setLabelTitolo() override;
+public slots:
+    void inserimentoAllenamento();
 };
 
 #endif // DIALOGTRIATHLON_H

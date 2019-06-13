@@ -17,7 +17,7 @@ template <typename T>
 class Contenitore {
     friend class iterator;
     friend class const_iterator;
-protected:
+private:
     class Nodo {
     public:
         T elemento;
@@ -33,7 +33,6 @@ protected:
     static Nodo* copiaProfonda(Nodo*);
     static Nodo* getUltimo(Nodo*);
     static void eliminaNodo(Nodo*&, Nodo*&, Nodo*&);
-    static bool isElementoPresente(const Contenitore&, const T&);
 
 public:
     Contenitore();
@@ -52,6 +51,7 @@ public:
     void popBack();
     void remove(const T&);
     void removeAt(unsigned int);
+    bool elementoPresente(const T&);
     bool operator==(const Contenitore&) const;
     unsigned int count(const T&) const;
     void clear();
@@ -173,8 +173,8 @@ void Contenitore<T>::eliminaNodo(typename Contenitore<T>::Nodo*& primo,
 }
 
 template <typename T>
-bool Contenitore<T>::isElementoPresente(const Contenitore& m, const T& el) {
-    Nodo* scorri = m.primo;
+bool Contenitore<T>::elementoPresente(const T& el) {
+    Nodo* scorri = primo;
     while(scorri) {
         if(scorri->elemento == el)
             return true;

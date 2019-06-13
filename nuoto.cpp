@@ -37,12 +37,16 @@ double Nuoto::saliMinerali() const {
 }
 
 bool Nuoto::operator==(const Allenamento& al) const {
-    if( typeid(al) !=  typeid (Nuoto) )
+    try {
+        const Nuoto& t = dynamic_cast<const Nuoto&>(al); //se ok non viene lanciata eccezione
+        return Allenamento::operator==(al) &&
+                vascheRana == (dynamic_cast<const Nuoto&>(al)).vascheRana &&
+                vascheStileLibero == (dynamic_cast<const Nuoto&>(al)).vascheStileLibero &&
+                vascheDorso == (dynamic_cast<const Nuoto&>(al)).vascheDorso;
+    } catch (std::bad_cast e) {
         return false;
-    return Allenamento::operator==(al) &&
-            vascheRana == (dynamic_cast<const Nuoto&>(al)).vascheRana &&
-            vascheStileLibero == (dynamic_cast<const Nuoto&>(al)).vascheStileLibero &&
-            vascheDorso == (dynamic_cast<const Nuoto&>(al)).vascheDorso;
+    }
+
 }
 
 unsigned int Nuoto::getVascheStileLibero() const {

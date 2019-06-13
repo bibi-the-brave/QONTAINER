@@ -33,7 +33,6 @@ private:
     DelegateEliminazione* delegato;
 public slots:
     void ricevutaNotificaEliminazioneRiga(int);
-    void avviaFinestraInserimentoAllen(bool);
 signals:
     void rimuovereRiga(int);
 };

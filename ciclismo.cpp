@@ -4,9 +4,9 @@
 
 Ciclismo::Ciclismo(std::shared_ptr<Persona> atleta, unsigned int durata,
                    double mgMagnesio, unsigned int salita,
-                   unsigned int discesa, unsigned int pianura)
+                   unsigned int pianura, unsigned int discesa)
 try: Allenamento(atleta, durata, mgMagnesio), kmSalita(salita),
-    kmDiscesa(discesa), kmPianura(pianura)
+     kmPianura(pianura), kmDiscesa(discesa)
 {
     //if(kmSalita + kmPianura + kmDiscesa == 0)
     //    throw ErrCiclismo();
@@ -37,12 +37,16 @@ double Ciclismo::saliMinerali() const {
 }
 
 bool Ciclismo::operator==(const Allenamento& al) const {
-    if( typeid(al) !=  typeid (Ciclismo) )
+    try {
+        const Ciclismo& t = dynamic_cast<const Ciclismo&>(al); //se ok non viene lanciata eccezione
+        return Allenamento::operator==(al) &&
+                kmSalita == (dynamic_cast<const Ciclismo&>(al)).kmSalita &&
+                kmDiscesa == (dynamic_cast<const Ciclismo&>(al)).kmDiscesa &&
+                kmPianura == (dynamic_cast<const Ciclismo&>(al)).kmPianura;
+    } catch (std::bad_cast e) {
         return false;
-    return Allenamento::operator==(al) &&
-            kmSalita == (dynamic_cast<const Ciclismo&>(al)).kmSalita &&
-            kmDiscesa == (dynamic_cast<const Ciclismo&>(al)).kmDiscesa &&
-            kmPianura == (dynamic_cast<const Ciclismo&>(al)).kmPianura;
+    }
+
 }
 
 unsigned int Ciclismo::getKmSalita() const {

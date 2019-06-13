@@ -16,6 +16,8 @@ private:
     WidgetCorsa *wCorsa;
 protected:
     void setLabelTitolo() override;
+public slots:
+    void inserimentoAllenamento();
 };
 
 #endif // DIALOGCORSA_H

@@ -68,8 +68,18 @@ void DialogAllenamento::reset() {
     spinMagnesio->setValue(0);
 }
 
-void DialogAllenamento::controlloForm(bool& controllo) {
+void DialogAllenamento::controlloForm(bool& controllo) const {
     if( !spinDurata->value() )
         controllo = true;
-    controllo = false;
+    else
+        controllo = false;
+}
+
+void DialogAllenamento::dialogErroreDoppione() const {
+    QMessageBox mes;
+    mes.setIcon(QMessageBox::Information);
+    mes.setText("Errore!");
+    mes.setInformativeText("Allenamento già presente.");
+    mes.setStandardButtons(QMessageBox::Ok);
+    mes.exec();
 }

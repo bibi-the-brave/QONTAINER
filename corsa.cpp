@@ -36,11 +36,15 @@ double Corsa::saliMinerali() const {
 }
 
 bool Corsa::operator==(const Allenamento& al) const {
-    if( typeid(al) !=  typeid (Corsa))
+    try {
+        const Corsa& t = dynamic_cast<const Corsa&>(al); //se ok non viene lanciata eccezione
+        return Allenamento::operator==(al) &&
+                kmStrada == (dynamic_cast<const Corsa&>(al)).kmStrada &&
+                kmSterrato == (dynamic_cast<const Corsa&>(al)).kmSterrato;
+    } catch (std::bad_cast e) {
         return false;
-    return Allenamento::operator==(al) &&
-            kmStrada == (dynamic_cast<const Corsa&>(al)).kmStrada &&
-            kmSterrato == (dynamic_cast<const Corsa&>(al)).kmStrada;
+    }
+
 }
 
 unsigned int Corsa::getKmSterrato() const {

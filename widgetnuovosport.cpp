@@ -9,11 +9,13 @@
 #include "dialogciclismo.h"
 #include "dialogcorsa.h"
 #include "dialogtriathlon.h"
+#include "modeltabellaallenamenti.h"
 
 WidgetNuovoSport::WidgetNuovoSport(Contenitore<std::shared_ptr<Persona>>& cp_,
                                    Contenitore<DeepPtr<Allenamento>>& ca_,
+                                   ModelTabellaAllenamenti& m_,
                                    QWidget *parent)
-    : QWidget(parent), cp(cp_), ca(ca_)
+    : QWidget(parent), cp(cp_), ca(ca_), m(m_)
 {
     layout = new QVBoxLayout();
     layoutBottoni = new QHBoxLayout();
@@ -57,6 +59,7 @@ void WidgetNuovoSport::creaDialogInserimentoSport(QString sport) {
         return;
     }
 
+    connect(dialog, SIGNAL(aggiungereAllenamento()), &m,SLOT(inserimentoNuovoAllenamentoEsterno()));
     dialog->exec();
     dialog->disconnect();
     delete dialog;

@@ -60,5 +60,6 @@ void WidgetNuoto::dialogErroreForm() const {
 void WidgetNuoto::controlloForm(bool& controllo) {
     if( !spinRana->value() && !spinLibero->value() && !spineDorso->value() )
         controllo = true;
-    controllo = false;
+    else
+        controllo = false;
 }

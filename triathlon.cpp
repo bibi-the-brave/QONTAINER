@@ -1,25 +1,17 @@
 #include "triathlon.h"
 #include "errori.h"
+#include <typeinfo>
 
-Triathlon::Triathlon(std::shared_ptr<Persona> atleta, double mgMagnesio,
-                     unsigned int durCorsa,
-                     unsigned int durNuoto, unsigned int durCiclismo,
+Triathlon::Triathlon(std::shared_ptr<Persona> atleta, double mgMagnesio, unsigned int durata,
                      unsigned int vascheLibero, unsigned int vascheRana,
                      unsigned int vascheDorso, unsigned int kmSterrato,
                      unsigned int kmStrada, unsigned int kmSalita,
                      unsigned int kmPianura, unsigned int kmDiscesa)
-try: Allenamento(atleta, durCorsa+durNuoto+durCiclismo, mgMagnesio),
-    Nuoto(atleta, durCorsa+durNuoto+durCiclismo, mgMagnesio,
-          vascheLibero, vascheRana, vascheDorso),
-    Ciclismo(atleta, durCorsa+durNuoto+durCiclismo, mgMagnesio,
-          kmSalita, kmPianura, kmDiscesa),
-    Corsa(atleta, durCorsa+durNuoto+durCiclismo, mgMagnesio,
-          kmSterrato, kmStrada),
-    durataNuoto(durNuoto), durataCiclismo(durCiclismo), durataCorsa(durCorsa)
-{
-    if(durataNuoto + durataCorsa + durataCiclismo == 0)
-        throw ErrTriathlon();
-} catch(...) { //catch di tutte le eccezioni lanciate dai costruttori dei sottooggetti
+try: Allenamento(atleta, durata, mgMagnesio),
+    Nuoto(atleta, durata, mgMagnesio, vascheLibero, vascheRana, vascheDorso),
+    Ciclismo(atleta, durata, mgMagnesio, kmSalita, kmPianura, kmDiscesa),
+    Corsa(atleta, durata, mgMagnesio, kmSterrato, kmStrada)
+{} catch(...) { //catch di tutte le eccezioni lanciate dai costruttori dei sottooggetti
     throw;
 }
 
@@ -32,18 +24,15 @@ Triathlon* Triathlon::clone() const {
 }
 
 unsigned int Triathlon::calorie() const {
-    unsigned int kmTotCicl = getKmSalita() + getKmDiscesa() + getKmPianura();
-    unsigned int kmTotCorsa = getKmSterrato() + getKmStrada();
     return
         // calorie nuoto
         Nuoto::calorie()
         +
         // calorie ciclismo
-        (90 * kmTotCicl * kmTotCicl) / durataCiclismo +
-            30 * getKmSalita() + 10 * getKmPianura()
+        Ciclismo::calorie()
         +
         // calorie corsa
-        (800 * kmTotCorsa * kmTotCorsa) / durataCorsa + getKmSterrato()/2;
+        Corsa::calorie();
 }
 
 double Triathlon::grassoPerso() const {
@@ -53,22 +42,14 @@ double Triathlon::grassoPerso() const {
 double Triathlon::saliMinerali() const {
     return Nuoto::saliMinerali() + Ciclismo::saliMinerali() + Corsa::saliMinerali();
 }
-
+#include <QDebug>
 bool Triathlon::operator==(const Allenamento& al) const {
-    if( typeid(al) !=  typeid (Triathlon) )
+    try {
+        Triathlon& t = dynamic_cast<Triathlon&>(t);
+        return Nuoto::operator==(al) && Corsa::operator==(al) && Ciclismo::operator==(al);
+    } catch (std::bad_cast e) {
         return false;
-    return Nuoto::operator==(al) && Corsa::operator==(al) && Ciclismo::operator==(al);
+    }
 }
 
-unsigned int Triathlon::getDurataNuoto() const {
-    return durataNuoto;
-}
-
-unsigned int Triathlon::getDurataCiclismo() const {
-    return durataCiclismo;
-}
-
-unsigned int Triathlon::getDurataCorsa() const {
-    return durataCorsa;
-}
 

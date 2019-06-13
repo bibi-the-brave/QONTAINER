@@ -11,7 +11,8 @@ WidgetAllenamenti::WidgetAllenamenti(Contenitore<std::shared_ptr<Persona>>& catl
     : QWidget(parent), ca(ca_), catleti(catleti_)
 {
     lblTitolo = new QLabel("ALLENAMENTI");
-    widgetCreazione = new WidgetNuovoSport(catleti,ca);
+    modello = new ModelTabellaAllenamenti(ca);
+    widgetCreazione = new WidgetNuovoSport(catleti,ca, *modello);
 
     layout = new QVBoxLayout;
     layout->addWidget(lblTitolo);
@@ -23,7 +24,6 @@ WidgetAllenamenti::WidgetAllenamenti(Contenitore<std::shared_ptr<Persona>>& catl
     setLayout(layout);
 
 
-    modello = new ModelTabellaAllenamenti(ca);
     tabAllenamenti->setModel(modello);
     delegato = new DelegateEliminazione();
     tabAllenamenti->setItemDelegateForColumn(7, delegato);
@@ -39,15 +39,6 @@ WidgetAllenamenti::WidgetAllenamenti(Contenitore<std::shared_ptr<Persona>>& catl
     connect(this, SIGNAL(rimuovereRiga(int)), delegato, SLOT(slotEliminazione(int)));
     // il delegate avverte il model di rimuovere la riga desiderata
     connect(delegato, SIGNAL(eliminaRiga(int)), modello, SLOT(eliminazioneAllenamento(int)));
-}
-
-
-void WidgetAllenamenti::avviaFinestraInserimentoAllen(bool cliccato) {
-    Q_UNUSED(cliccato);
-    /*-DialogInserimentoAtleta da(atleti);
-    connect(&da, SIGNAL(reset()), modello, SLOT(inserimentoNuovoAtletaEsterno()));
-    da.exec();
-    da.disconnect();*/
 }
 
 void WidgetAllenamenti::ricevutaNotificaEliminazioneRiga(int riga) {

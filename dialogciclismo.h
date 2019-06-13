@@ -16,6 +16,8 @@ private:
     WidgetCiclismo *wCiclismo;
 protected:
     void setLabelTitolo() override;
+public slots:
+    void inserimentoAllenamento();
 };
 
 #endif // DIALOGCICLISMO_H

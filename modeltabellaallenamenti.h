@@ -21,6 +21,7 @@ public:
 private:
     Contenitore<DeepPtr<Allenamento>>& dati;
 public slots:
+    void inserimentoNuovoAllenamentoEsterno();
     void eliminazioneAllenamento(int riga);
 };
 

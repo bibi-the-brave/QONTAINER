@@ -52,7 +52,7 @@ DeepPtr<T>& DeepPtr<T>::operator=(const DeepPtr<T>& dptr) {
 
 template <typename T>
 bool DeepPtr<T>::operator==(const DeepPtr& dptr) {
-    return ptr == dptr.ptr;
+    return *ptr == *dptr.ptr;
 }
 
 template <typename T>

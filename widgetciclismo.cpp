@@ -62,5 +62,6 @@ void WidgetCiclismo::dialogErroreForm() const {
 void WidgetCiclismo::controlloForm(bool& controllo) {
     if( !spinSalita->value() && !spinePianura->value() && !spinDiscesa->value())
         controllo = true;
-    controllo = false;
+    else
+        controllo = false;
 }

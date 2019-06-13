@@ -16,6 +16,8 @@ private:
     WidgetNuoto *wNuoto;
 protected:
     void setLabelTitolo() override;
+public slots:
+    void inserimentoAllenamento();
 };
 
 #endif // DIALOGCREAZIONENUOTO_H

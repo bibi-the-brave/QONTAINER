@@ -52,5 +52,6 @@ void WidgetCorsa::dialogErroreForm() const {
 void WidgetCorsa::controlloForm(bool& controllo) {
     if( !spinStrada->value() && !spinSterrato->value() )
         controllo = true;
-    controllo = false;
+    else
+        controllo = false;
 }

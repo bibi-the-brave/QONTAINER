@@ -92,6 +92,12 @@ bool ModelTabellaAllenamenti::insertRows(int position, int rows, const QModelInd
     return true;
 }
 
+void ModelTabellaAllenamenti::inserimentoNuovoAllenamentoEsterno() {
+    beginResetModel();
+        insertRow(rowCount());
+    endResetModel();
+}
+
 void ModelTabellaAllenamenti::eliminazioneAllenamento(int riga) {
     if(riga >= 0 && riga < rowCount()) {
         dati.removeAt(static_cast<unsigned int>(riga));

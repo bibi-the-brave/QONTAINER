@@ -7,10 +7,9 @@
 #include <memory>
 
 class Triathlon : public Nuoto, Ciclismo, Corsa {
-    unsigned int durataNuoto, durataCiclismo, durataCorsa;
 public:
-    Triathlon(std::shared_ptr<Persona>, double, unsigned int,
-              unsigned int, unsigned int, unsigned int, unsigned int,
+    Triathlon(std::shared_ptr<Persona>,
+              double, unsigned int, unsigned int, unsigned int,
               unsigned int, unsigned int, unsigned int, unsigned int,
               unsigned int, unsigned int);
     Triathlon* clone() const override;
@@ -19,10 +18,6 @@ public:
     virtual double grassoPerso() const override;
     double saliMinerali() const override;
     bool operator==(const Allenamento&) const override;
-
-    unsigned int getDurataNuoto() const;
-    unsigned int getDurataCiclismo() const;
-    unsigned int getDurataCorsa() const;
 };
 
 #endif // TRIATHLON_H
