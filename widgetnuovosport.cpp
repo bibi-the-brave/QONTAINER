@@ -6,6 +6,9 @@
 #include <QSize>
 #include "dialogallenamento.h"
 #include "dialognuoto.h"
+#include "dialogciclismo.h"
+#include "dialogcorsa.h"
+#include "dialogtriathlon.h"
 
 WidgetNuovoSport::WidgetNuovoSport(Contenitore<std::shared_ptr<Persona>>& cp_,
                                    Contenitore<DeepPtr<Allenamento>>& ca_,
@@ -23,17 +26,16 @@ WidgetNuovoSport::WidgetNuovoSport(Contenitore<std::shared_ptr<Persona>>& cp_,
     layout->setAlignment(lblCreazione, Qt::AlignHCenter);
     layout->addLayout(layoutBottoni);
     setLayout(layout);
-    creaOggettoInserimentoSport("nuoto");
 }
 
-QPushButton* WidgetNuovoSport::creaBottoneSport(const QString& nomeSport) const {
+QPushButton* WidgetNuovoSport::creaBottoneSport(const QString& nomeSport) {
     QPushButton *sport = new QPushButton();
     sport->setIcon(QIcon(":/immagini/" + nomeSport + ".svg"));
     sport->setIconSize(QSize(75,75));
-    sport->setToolTip(nomeSport);/*
-    connect(sport, &QPushButton::clicked, [nomeSport, ]() {
-        this->creaOggettoInserimentoSport(nomeSport);
-    });*/
+    sport->setToolTip(nomeSport);
+    connect(sport, &QPushButton::clicked, [=]() {
+        creaOggettoInserimentoSport(nomeSport);
+    });
     return sport;
 }
 
@@ -43,15 +45,16 @@ QPushButton* WidgetNuovoSport::creaBottoneSport(const QString& nomeSport) const 
  */
 void WidgetNuovoSport::creaOggettoInserimentoSport(QString sport) {
     DialogAllenamento* dialog;
-    dialog = new DialogNuoto(cp, ca);
     if( sport == "ciclismo" ) {
-
+        dialog = new DialogCiclismo(cp, ca);
     } else if( sport == "nuoto" ) {
         dialog = new DialogNuoto(cp, ca);
     } else if( sport == "corsa" ) {
-
+        dialog = new DialogCorsa(cp, ca);
     } else if( sport == "triathlon" ) {
-
+        dialog = new DialogTriathlon(cp, ca);
+    } else {
+        return;
     }
 
     dialog->exec();

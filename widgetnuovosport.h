@@ -18,7 +18,7 @@ private:
     QLabel* lblCreazione;
     QVBoxLayout *layout;
     QHBoxLayout *layoutBottoni;
-    QPushButton* creaBottoneSport(const QString&) const;
+    QPushButton* creaBottoneSport(const QString&) ;
 
     Contenitore<std::shared_ptr<Persona>>& cp;
     Contenitore<DeepPtr<Allenamento>>& ca;

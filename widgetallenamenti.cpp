@@ -30,7 +30,7 @@ WidgetAllenamenti::WidgetAllenamenti(Contenitore<std::shared_ptr<Persona>>& catl
     // "stira" le colonne per occupare tutta la larghezza della tabella
     tabAllenamenti->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    setWindowModality(Qt::ApplicationModal); //le altre finestre non sono usabili
+    //setWindowModality(Qt::ApplicationModal); //le altre finestre non sono usabili
 
     //connect(btnNuovoAllenamento, SIGNAL(clicked(bool)), this, SLOT(avviaFinestraInserimentoAllen(bool)));
     // il delegate avverte che l'utente ha cliccato un bottone e vuole eliminare una riga
