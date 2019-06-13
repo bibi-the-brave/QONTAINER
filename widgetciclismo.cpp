@@ -1,4 +1,5 @@
 #include "widgetciclismo.h"
+#include <QMessageBox>
 
 WidgetCiclismo::WidgetCiclismo()
 {
@@ -46,4 +47,20 @@ void WidgetCiclismo::reset() {
     spinSalita->setValue(0);
     spinDiscesa->setValue(0);
     spinePianura->setValue(0);
+}
+
+void WidgetCiclismo::dialogErroreForm() const {
+    QMessageBox mes;
+    mes.setIcon(QMessageBox::Information);
+    mes.setText("Errore!");
+    mes.setInformativeText("È necessario aver fatto almeno un km di corsa in salita, pianura o discesa.");
+    mes.setStandardButtons(QMessageBox::Ok);
+    mes.exec();
+}
+
+
+void WidgetCiclismo::controlloForm(bool& controllo) {
+    if( !spinSalita->value() && !spinePianura->value() && !spinDiscesa->value())
+        controllo = true;
+    controllo = false;
 }

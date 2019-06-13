@@ -1,4 +1,5 @@
 #include "widgetnuoto.h"
+#include <QMessageBox>
 
 WidgetNuoto::WidgetNuoto()
 {
@@ -45,4 +46,19 @@ void WidgetNuoto::reset() {
     spinLibero->setValue(0);
     spinRana->setValue(0);
     spineDorso->setValue(0);
+}
+
+void WidgetNuoto::dialogErroreForm() const {
+    QMessageBox mes;
+    mes.setIcon(QMessageBox::Information);
+    mes.setText("Errore!");
+    mes.setInformativeText("È necessario aver fatto almeno una vasca in uno dei tre stili.");
+    mes.setStandardButtons(QMessageBox::Ok);
+    mes.exec();
+}
+
+void WidgetNuoto::controlloForm(bool& controllo) {
+    if( !spinRana->value() && !spinLibero->value() && !spineDorso->value() )
+        controllo = true;
+    controllo = false;
 }

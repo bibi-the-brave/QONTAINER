@@ -54,6 +54,12 @@ double Triathlon::saliMinerali() const {
     return Nuoto::saliMinerali() + Ciclismo::saliMinerali() + Corsa::saliMinerali();
 }
 
+bool Triathlon::operator==(const Allenamento& al) const {
+    if( typeid(al) !=  typeid (Triathlon) )
+        return false;
+    return Nuoto::operator==(al) && Corsa::operator==(al) && Ciclismo::operator==(al);
+}
+
 unsigned int Triathlon::getDurataNuoto() const {
     return durataNuoto;
 }

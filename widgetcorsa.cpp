@@ -1,4 +1,5 @@
 #include "widgetcorsa.h"
+#include <QMessageBox>
 
 WidgetCorsa::WidgetCorsa()
 {
@@ -36,4 +37,20 @@ int WidgetCorsa::kmSterrato() const {
 void WidgetCorsa::reset() {
     spinStrada->setValue(0);
     spinSterrato->setValue(0);
+}
+
+void WidgetCorsa::dialogErroreForm() const {
+    QMessageBox mes;
+    mes.setIcon(QMessageBox::Information);
+    mes.setText("Errore!");
+    mes.setInformativeText("È necessario aver fatto almeno un km di corsa su strada o su sterrato.");
+    mes.setStandardButtons(QMessageBox::Ok);
+    mes.exec();
+}
+
+
+void WidgetCorsa::controlloForm(bool& controllo) {
+    if( !spinStrada->value() && !spinSterrato->value() )
+        controllo = true;
+    controllo = false;
 }

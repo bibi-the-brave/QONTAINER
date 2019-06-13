@@ -15,6 +15,8 @@ public:
     WidgetCorsa();
     int kmStrada() const;
     int kmSterrato() const;
+    void dialogErroreForm() const;
+    void controlloForm(bool& controllo);
 private:
     QGroupBox *gbCorsa;
     QGridLayout *layoutWidget;

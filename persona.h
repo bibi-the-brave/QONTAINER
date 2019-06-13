@@ -13,6 +13,7 @@ public:
     bool operator==(const Persona&) const;
     std::string getNome() const;
     std::string getCognome() const;
+    std::string getNomeCognome() const;
     bool getSesso() const;
     std::string getSessoStr() const;
     void setNome(std::string);

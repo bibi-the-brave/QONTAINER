@@ -11,8 +11,6 @@ public:
     DialogNuoto(Contenitore<std::shared_ptr<Persona>>&,
                          Contenitore<DeepPtr<Allenamento>>&,
                          QWidget* = nullptr);
-    void dialogErroreForm() const;
-    void controlloForm(bool& controllo);
 private:
     QGroupBox *gbNuoto;
     WidgetNuoto *wNuoto;

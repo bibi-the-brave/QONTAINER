@@ -69,6 +69,7 @@ void DialogAllenamento::reset() {
 }
 
 void DialogAllenamento::controlloForm(bool& controllo) {
-    if(spinDurata->value() == 0)
+    if( !spinDurata->value() )
         controllo = true;
+    controllo = false;
 }

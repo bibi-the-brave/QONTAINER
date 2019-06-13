@@ -16,6 +16,8 @@ public:
     int kmSalita() const;
     int kmDiscesa() const;
     int kmPianura() const;
+    void dialogErroreForm() const;
+    void controlloForm(bool& controllo);
 private:
     QGroupBox *gbCiclismo;
     QGridLayout *layoutWidget;

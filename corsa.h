@@ -15,10 +15,10 @@ public:
     unsigned int calorie() const override;
     virtual double grassoPerso() const override;
     double saliMinerali() const override;
+    bool operator==(const Allenamento&) const override;
 
     unsigned int getKmSterrato() const;
     unsigned int getKmStrada() const;
-
 };
 
 #endif // CORSA_H

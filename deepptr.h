@@ -68,6 +68,3 @@ T& DeepPtr<T>::operator*() const {
 
 #endif // DEEPPTR_H
 
-/*template <typename T>
-DeepPtr<T>::
-*/

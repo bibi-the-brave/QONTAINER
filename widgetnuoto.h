@@ -15,6 +15,8 @@ public:
     int vascheLibero() const;
     int vascheRana() const;
     int vascheDorso() const;
+    void dialogErroreForm() const;
+    void controlloForm(bool& controllo);
 private:
     QGroupBox *gbNuoto;
     QGridLayout *layoutWidget;

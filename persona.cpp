@@ -39,6 +39,10 @@ std::string Persona::getCognome() const {
     return cognome;
 }
 
+std::string Persona::getNomeCognome() const {
+    return nome + " " + cognome;
+}
+
 bool Persona::getSesso() const {
     return sesso;
 }

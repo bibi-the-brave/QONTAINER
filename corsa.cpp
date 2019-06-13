@@ -1,5 +1,6 @@
 #include "corsa.h"
 #include "errori.h"
+#include <typeinfo>
 
 Corsa::Corsa(std::shared_ptr<Persona> atleta, unsigned int durata,
              double mgMagnesio, unsigned int sterrato, unsigned int strada)
@@ -32,6 +33,14 @@ double Corsa::grassoPerso() const {
 
 double Corsa::saliMinerali() const {
     return 90.0 * kmStrada + 95.0 * kmSterrato;
+}
+
+bool Corsa::operator==(const Allenamento& al) const {
+    if( typeid(al) !=  typeid (Corsa))
+        return false;
+    return Allenamento::operator==(al) &&
+            kmStrada == (dynamic_cast<const Corsa&>(al)).kmStrada &&
+            kmSterrato == (dynamic_cast<const Corsa&>(al)).kmStrada;
 }
 
 unsigned int Corsa::getKmSterrato() const {

@@ -1,6 +1,7 @@
 #include "nuoto.h"
 #include "errori.h"
 #include <string>
+#include <typeinfo>
 
 Nuoto::Nuoto(std::shared_ptr<Persona> atleta, unsigned int durata,
              double mgMagnesio, unsigned int sLibero, unsigned int sRana,
@@ -33,6 +34,15 @@ double Nuoto::grassoPerso() const {
 
 double Nuoto::saliMinerali() const {
     return 25.0 * vascheStileLibero + 10.0* vascheDorso + 15.0 *vascheRana;
+}
+
+bool Nuoto::operator==(const Allenamento& al) const {
+    if( typeid(al) !=  typeid (Nuoto) )
+        return false;
+    return Allenamento::operator==(al) &&
+            vascheRana == (dynamic_cast<const Nuoto&>(al)).vascheRana &&
+            vascheStileLibero == (dynamic_cast<const Nuoto&>(al)).vascheStileLibero &&
+            vascheDorso == (dynamic_cast<const Nuoto&>(al)).vascheDorso;
 }
 
 unsigned int Nuoto::getVascheStileLibero() const {

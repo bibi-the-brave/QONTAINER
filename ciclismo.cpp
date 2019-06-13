@@ -1,5 +1,6 @@
 #include "ciclismo.h"
 #include "errori.h"
+#include <typeinfo>
 
 Ciclismo::Ciclismo(std::shared_ptr<Persona> atleta, unsigned int durata,
                    double mgMagnesio, unsigned int salita,
@@ -33,6 +34,15 @@ double Ciclismo::grassoPerso() const {
 
 double Ciclismo::saliMinerali() const {
     return 110.0 * kmSalita + 90 * kmPianura;
+}
+
+bool Ciclismo::operator==(const Allenamento& al) const {
+    if( typeid(al) !=  typeid (Ciclismo) )
+        return false;
+    return Allenamento::operator==(al) &&
+            kmSalita == (dynamic_cast<const Ciclismo&>(al)).kmSalita &&
+            kmDiscesa == (dynamic_cast<const Ciclismo&>(al)).kmDiscesa &&
+            kmPianura == (dynamic_cast<const Ciclismo&>(al)).kmPianura;
 }
 
 unsigned int Ciclismo::getKmSalita() const {

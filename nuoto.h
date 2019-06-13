@@ -16,6 +16,7 @@ public:
     unsigned int calorie() const override;
     virtual double grassoPerso() const override;
     double saliMinerali() const override;
+    bool operator==(const Allenamento&) const override;
 
     unsigned int getVascheStileLibero() const;
     unsigned int getVascheRana() const;
