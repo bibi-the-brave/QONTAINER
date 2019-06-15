@@ -26,6 +26,7 @@ CONFIG += c++11
 QMAKE_CXXFLAGS += -std=c++0x
 
 SOURCES += \
+    data.cpp \
     delegateeliminazione.cpp \
     dialogciclismo.cpp \
     dialogallenamento.cpp \
@@ -41,6 +42,7 @@ SOURCES += \
     nuoto.cpp \
     corsa.cpp \
     ciclismo.cpp \
+    sortfilterproxymodelallenamenti.cpp \
     triathlon.cpp \
     persona.cpp \
     menuview.cpp \
@@ -54,6 +56,7 @@ SOURCES += \
 
 HEADERS += \
     contenitore.h \
+    data.h \
     delegateeliminazione.h \
     dialogciclismo.h \
     dialogallenamento.h \
@@ -69,6 +72,7 @@ HEADERS += \
     nuoto.h \
     corsa.h \
     ciclismo.h \
+    sortfilterproxymodelallenamenti.h \
     triathlon.h \
     persona.h \
     deepptr.h \
