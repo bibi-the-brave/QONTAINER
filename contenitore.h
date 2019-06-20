@@ -68,7 +68,7 @@ public:
         iterator& operator++();    //prefisso
         iterator operator++(int); //postfisso
         iterator& operator--();
-        iterator& operator--(int);
+        iterator operator--(int);
         T* operator->() const;
         T& operator*() const;
     };
@@ -81,9 +81,9 @@ public:
         bool operator ==(const_iterator) const;
         bool operator !=(const_iterator) const;
         const_iterator& operator++() const;
-        const_iterator& operator++(int) const;
+        const_iterator operator++(int) const;
         const_iterator& operator--() const;
-        const_iterator& operator--(int) const;
+        const_iterator operator--(int) const;
         const T* operator->() const;
         const T& operator*() const;
     };
@@ -493,7 +493,7 @@ typename Contenitore<T>::iterator& Contenitore<T>::iterator::operator--() {
 
 //postfisso
 template <typename T>
-typename Contenitore<T>::iterator& Contenitore<T>::iterator::operator--(int) {
+typename Contenitore<T>::iterator Contenitore<T>::iterator::operator--(int) {
     iterator vecchio = *this;
     if(punt)
         punt = punt->sx;
@@ -539,7 +539,7 @@ Contenitore<T>::const_iterator::operator++() const {
 
 //postfisso
 template <typename T>
-typename Contenitore<T>::const_iterator&
+typename Contenitore<T>::const_iterator
 Contenitore<T>::const_iterator::operator++(int) const {
     const_iterator vecchio = *this;
     if(punt)
@@ -559,7 +559,7 @@ Contenitore<T>::const_iterator::operator--() const {
 
 //postfisso
 template <typename T>
-typename Contenitore<T>::const_iterator&
+typename Contenitore<T>::const_iterator
 Contenitore<T>::const_iterator::operator--(int) const{
     const_iterator vecchio = *this;
     if(punt)
