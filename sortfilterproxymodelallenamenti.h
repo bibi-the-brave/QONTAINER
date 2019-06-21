@@ -16,6 +16,8 @@ protected:
     bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const override;
     bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
 
+private:
+    Contenitore<DeepPtr<Allenamento>>& ca;
 };
 
 #endif // SORTFILTERPROXYMODELALLENAMENTI_H

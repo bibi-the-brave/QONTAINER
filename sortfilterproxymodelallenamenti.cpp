@@ -1,7 +1,7 @@
 #include "sortfilterproxymodelallenamenti.h"
 
-SortFilterProxyModelAllenamenti::SortFilterProxyModelAllenamenti(QObject *parent)
-    : QSortFilterProxyModel(parent)
+SortFilterProxyModelAllenamenti::SortFilterProxyModelAllenamenti(Contenitore<DeepPtr<Allenamento>>& ca_,QObject* p)
+    : QSortFilterProxyModel(p), ca(ca_)
 {
 
 }

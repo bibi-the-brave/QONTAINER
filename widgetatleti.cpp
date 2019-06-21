@@ -32,7 +32,7 @@ WidgetAtleti::WidgetAtleti(Contenitore<std::shared_ptr<Persona>>& a, QWidget *pa
     // "stira" le colonne per occupare tutta la larghezza della tabella
     tabAtleti->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    setWindowModality(Qt::ApplicationModal); //le altre finestre non sono usabili
+    //setWindowModality(Qt::ApplicationModal); //le altre finestre non sono usabili
 
     connect(btnNuovoAtleta, SIGNAL(clicked(bool)), this, SLOT(avviaDialogInserimento(bool)));
     // il delegate avverte che l'utente ha cliccato un bottone e vuole eliminare una riga
