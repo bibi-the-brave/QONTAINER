@@ -14,7 +14,9 @@ DialogInserimentoAtleta::DialogInserimentoAtleta(Contenitore<std::shared_ptr<Per
 {
     lblTitolo = new QLabel("CREAZIONE ATLETA");
     lblNome = new QLabel("Nome:");
+    leNome = new QLineEdit();
     lblCognome = new QLabel("Cognome:");
+    leCognome = new QLineEdit();
     lblSesso = new QLabel("Sesso:");
 
     rbUomo = new QRadioButton("Uomo");
@@ -27,11 +29,11 @@ DialogInserimentoAtleta::DialogInserimentoAtleta(Contenitore<std::shared_ptr<Per
     bInserisci = new QPushButton("Inserisci");
     bAzzera = new QPushButton("Reset");
 
-    layoutPrincipale = new QVBoxLayout;
+    layoutPrincipale = new QVBoxLayout();
     layoutPrincipale->addWidget(lblTitolo);
     layoutPrincipale->setAlignment(lblTitolo, Qt::AlignHCenter);
 
-    layoutForm = new QFormLayout;
+    layoutForm = new QFormLayout();
     layoutForm->addRow(lblNome, leNome);
     layoutForm->addRow(lblCognome, leCognome);
     layoutForm->addRow(lblSesso, layoutRadioButton);
