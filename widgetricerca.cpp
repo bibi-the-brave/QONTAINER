@@ -30,10 +30,11 @@ WidgetRicerca::WidgetRicerca(Contenitore<DeepPtr<Allenamento>>& ca_, QWidget* pa
     rbCiclismo = new QRadioButton("Ciclismo");
     rbTriathlon = new QRadioButton("Triathlon");
     layoutRadioSport = new QHBoxLayout();
-    layoutRadioSport->addWidget(rbNuoto);
-    layoutRadioSport->addWidget(rbCorsa);
-    layoutRadioSport->addWidget(rbCiclismo);
-    layoutRadioSport->addWidget(rbTriathlon);
+    layoutRadioSport->addWidget(rbNuoto, 0, Qt::AlignLeft);
+    layoutRadioSport->addWidget(rbCorsa, 0, Qt::AlignLeft);
+    layoutRadioSport->addWidget(rbCiclismo, 0, Qt::AlignLeft);
+    layoutRadioSport->addWidget(rbTriathlon, 0, Qt::AlignLeft);
+    layoutRadioSport->setAlignment(Qt::AlignLeft);
     rbNuoto->setChecked(true);
     layoutComponentiRicerca->addLayout(layoutRadioSport);
 
@@ -45,6 +46,8 @@ WidgetRicerca::WidgetRicerca(Contenitore<DeepPtr<Allenamento>>& ca_, QWidget* pa
     layoutBoxFormRicerca->addWidget(wCorsa = new WidgetCorsa(),1,1);
     layoutBoxFormRicerca->setColumnStretch(0,1);
     layoutBoxFormRicerca->setColumnStretch(1,1);
+    layoutBoxFormRicerca->setRowStretch(0,1);
+    layoutBoxFormRicerca->setRowStretch(1,1);
     layoutComponentiRicerca->addLayout(layoutBoxFormRicerca);
 
     btnRicerca = new QPushButton("Cerca");
@@ -78,6 +81,7 @@ QGroupBox* WidgetRicerca::costruzioneFormPersona() {
     rbUomo->setChecked(true);
     lSesso->addWidget(rbUomo);
     lSesso->addWidget(rbDonna);
+    lSesso->setAlignment(Qt::AlignLeft);
     lPersona->addRow(lblSesso, lSesso);
     boxPersona->setLayout(lPersona);
     return  boxPersona;
