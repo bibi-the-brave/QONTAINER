@@ -15,6 +15,9 @@
 #include "widgetnuoto.h"
 #include "widgetciclismo.h"
 #include "widgetcorsa.h"
+#include "modeltabellaallenamenti.h"
+#include "delegateeliminazione.h"
+#include <QHeaderView>
 
 WidgetRicerca::WidgetRicerca(Contenitore<DeepPtr<Allenamento>>& ca_, QWidget* parent)
     : QWidget (parent), ca(ca_)
@@ -25,17 +28,19 @@ WidgetRicerca::WidgetRicerca(Contenitore<DeepPtr<Allenamento>>& ca_, QWidget* pa
     boxRicerca = new QGroupBox("RICERCA");
     layoutComponentiRicerca = new QVBoxLayout;
 
+    rbAtleta = new QRadioButton("Atleta");
     rbNuoto = new QRadioButton("Nuoto");
     rbCorsa = new QRadioButton("Corsa");
     rbCiclismo = new QRadioButton("Ciclismo");
     rbTriathlon = new QRadioButton("Triathlon");
     layoutRadioSport = new QHBoxLayout();
-    layoutRadioSport->addWidget(rbNuoto, 0, Qt::AlignLeft);
-    layoutRadioSport->addWidget(rbCorsa, 0, Qt::AlignLeft);
-    layoutRadioSport->addWidget(rbCiclismo, 0, Qt::AlignLeft);
-    layoutRadioSport->addWidget(rbTriathlon, 0, Qt::AlignLeft);
+    layoutRadioSport->addWidget(rbAtleta);
+    layoutRadioSport->addWidget(rbNuoto);
+    layoutRadioSport->addWidget(rbCorsa);
+    layoutRadioSport->addWidget(rbCiclismo);
+    layoutRadioSport->addWidget(rbTriathlon);
     layoutRadioSport->setAlignment(Qt::AlignLeft);
-    rbNuoto->setChecked(true);
+    rbAtleta->setChecked(true);
     layoutComponentiRicerca->addLayout(layoutRadioSport);
 
 
@@ -50,18 +55,28 @@ WidgetRicerca::WidgetRicerca(Contenitore<DeepPtr<Allenamento>>& ca_, QWidget* pa
     layoutBoxFormRicerca->setRowStretch(1,1);
     layoutComponentiRicerca->addLayout(layoutBoxFormRicerca);
 
+    // di default è selezionato il radiobutton atleta quindi li disabilito
+    wNuoto->setEnabled(false);
+    wCorsa->setEnabled(false);
+    wCiclismo->setEnabled(false);
+
     btnRicerca = new QPushButton("Cerca");
     layoutComponentiRicerca->addWidget(btnRicerca);
     layoutComponentiRicerca->setAlignment(btnRicerca, Qt::AlignHCenter);
 
     boxRicerca->setLayout(layoutComponentiRicerca);
 
-
     layoutPrincipale->addWidget(boxRicerca);
     tabellaRicerca = new QTableView();
     layoutPrincipale->addWidget(tabellaRicerca);
 
     setLayout(layoutPrincipale);
+
+    modello = new ModelTabellaAllenamenti(ca);
+    tabellaRicerca->setModel(modello);
+    delegato = new DelegateEliminazione();
+    tabellaRicerca->setItemDelegateForColumn(8, delegato);
+    tabellaRicerca->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 

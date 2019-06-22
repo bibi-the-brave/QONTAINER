@@ -5,13 +5,13 @@
 #include "ciclismo.h"
 #include "corsa.h"
 #include <memory>
+#include "data.h"
 
 class Triathlon : public Nuoto, Ciclismo, Corsa {
 public:
-    Triathlon(std::shared_ptr<Persona>,
-              double, unsigned int, unsigned int, unsigned int,
+    Triathlon(std::shared_ptr<Persona>, unsigned int, Data data, double,
               unsigned int, unsigned int, unsigned int, unsigned int,
-              unsigned int, unsigned int);
+              unsigned int, unsigned int, unsigned int, unsigned int);
     Triathlon* clone() const override;
     virtual std::string tipo() const override;
     unsigned int calorie() const override;

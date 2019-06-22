@@ -4,6 +4,8 @@
 #include "contenitore.h"
 #include <memory>
 #include "persona.h"
+#include <QDate>
+#include <QDateEdit>
 
 DialogAllenamento::DialogAllenamento(
         Contenitore<std::shared_ptr<Persona>>& cp_,
@@ -28,6 +30,11 @@ DialogAllenamento::DialogAllenamento(
                   QString::fromStdString((*it)->getCognome());
     cmbAtleti->addItems(atleti);
     lFormAllenamento->addRow(lblAtleta, cmbAtleti);
+
+    lblData = new QLabel("Data:");
+    deData = new QDateEdit(QDate::currentDate());
+    deData->setCalendarPopup(true);
+    lFormAllenamento->addRow(lblData, deData);
 
     lblDurata = new QLabel("Durata (in min.):");
     spinDurata = new QSpinBox();

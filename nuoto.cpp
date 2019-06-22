@@ -3,10 +3,10 @@
 #include <string>
 #include <typeinfo>
 
-Nuoto::Nuoto(std::shared_ptr<Persona> atleta, unsigned int durata,
+Nuoto::Nuoto(std::shared_ptr<Persona> atleta, unsigned int durata, Data data,
              double mgMagnesio, unsigned int sLibero, unsigned int sRana,
              unsigned int sDorso)
-try: Allenamento (atleta, durata, mgMagnesio), vascheStileLibero(sLibero),
+try: Allenamento (atleta, durata, data, mgMagnesio), vascheStileLibero(sLibero),
     vascheRana(sRana), vascheDorso(sDorso)
 {
     if(vascheStileLibero + vascheRana + vascheDorso == 0)

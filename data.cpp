@@ -1,11 +1,35 @@
 #include "data.h"
+#include <string>
+#include <sstream>
+#include <iostream>
+#include <cstdlib>
 
 Data::Data(int y_, int m_, int d_) {
     if( controlloValidita(y_,m_,d_) ) {
-        y = y_; m = m_; d = d_;
-    } else { //inizializzazione di default
-        y = m = d = 0;
+        y = y_;
+        m = m_;
+        d = d_;
+        valida = true;
+    } else { //la data non è valida, setto il flag
+        valida = false;
     }
+}
+
+//la stringa passata deve essere delle forma "d/m/y"
+Data::Data(std::string data) {
+    std::istringstream iss(data);
+    std::string s;
+    std::getline(iss, s, '/');
+    d = std::stoi(s);
+    std::getline(iss, s, '/');
+    m = std::stoi(s);
+    std::getline(iss, s, '/');
+    y = std::stoi(s);
+
+    if( controlloValidita(y,m,d) )
+        valida = true;
+    else
+        valida = false;
 }
 
 bool Data::controlloValidita(int y, int m, int d) {
@@ -28,4 +52,56 @@ bool Data::controlloValidita(int y, int m, int d) {
         return d <= 30;
 
     return true;
+}
+
+bool Data::operator==(const Data& d_) const {
+    return  d == d_.d && m == d_.m && y == d_.y;
+}
+
+std::string Data::toString() const {
+    if(valida)
+        return "" + std::to_string(d) + "/" + std::to_string(m) + "/" + std::to_string(y);
+    return "indefinita";
+}
+
+void Data::setY(int y_) {
+    if(valida) {
+        valida = controlloValidita(y_,m,d);
+        if(valida)
+            y = y_;
+    }
+}
+
+void Data::setM(int m_) {
+    if(valida) {
+        valida = controlloValidita(y,m_,d);
+        if(valida)
+            m = m_;
+    }
+}
+
+void Data::setD(int d_) {
+    if(valida) {
+        valida = controlloValidita(y,m,d_);
+        if(valida)
+            d = d_;
+    }
+}
+
+int Data::getY() const {
+    if(valida)
+        return y;
+    return -1;
+}
+
+int Data::getM() const {
+    if(valida)
+        return m;
+    return -1;
+}
+
+int Data::getD() const {
+    if(valida)
+        return d;
+    return -1;
 }

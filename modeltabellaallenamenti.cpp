@@ -15,9 +15,9 @@ int ModelTabellaAllenamenti::rowCount(const QModelIndex &parent) const {
 
 int ModelTabellaAllenamenti::columnCount(const QModelIndex &parent) const {
     Q_UNUSED(parent);
-    // 0) Atleta, 1) Allenamento, 2) durata, 3) magnesio, 4) calorie, 5) grasso perso,
-    // 6)sali cosumati, 7) elimina(delegato)
-    return 8;
+    // 0) Atleta, 1) Data 2) Allenamento, 3) durata, 4) magnesio, 5) calorie,
+    // 6) grasso perso, 7) sali cosumati, 8) elimina (delegato)
+    return 9;
 }
 
 QVariant ModelTabellaAllenamenti::data(const QModelIndex &index, int role) const {
@@ -31,17 +31,19 @@ QVariant ModelTabellaAllenamenti::data(const QModelIndex &index, int role) const
             return QString::fromStdString( dati.At(riga)->getAtleta().getNome())
                 + " " + QString::fromStdString( dati.At(riga)->getAtleta().getCognome() );
         case 1:
-            return QString::fromStdString( dati.At(riga)->tipo() );
+            return QString::fromStdString( dati.At(riga)->getData().toString());
         case 2:
-            return QString::fromStdString( std::to_string( dati.At(riga)->getDurata() ) ) + " min";
+            return QString::fromStdString( dati.At(riga)->tipo() );
         case 3:
+            return QString::fromStdString( std::to_string( dati.At(riga)->getDurata() ) ) + " min";
+        case 4:
             return QString::fromStdString( std::to_string( dati.At(riga)->getMgMagnesioAssunti() ) )
                     + " mg";
-        case 4:
-            return QString::fromStdString( std::to_string( dati.At(riga)->calorie() ));
         case 5:
-            return QString::fromStdString( std::to_string( dati.At(riga)->grassoPerso() )) + " g";
+            return QString::fromStdString( std::to_string( dati.At(riga)->calorie() ));
         case 6:
+            return QString::fromStdString( std::to_string( dati.At(riga)->grassoPerso() )) + " g";
+        case 7:
             return QString::fromStdString( std::to_string( dati.At(riga)->saliMinerali() )) + " mg";
         }
     }
@@ -55,18 +57,20 @@ QVariant ModelTabellaAllenamenti::headerData(int section, Qt::Orientation orient
         case 0:
             return QString("Atleta");
         case 1:
-            return QString("Allenamento");
+            return QString("Data");
         case 2:
-            return QString("Durata");
+            return QString("Allenamento");
         case 3:
-            return QString("Magnesio");
+            return QString("Durata");
         case 4:
-            return QString("Calorie");
+            return QString("Magnesio");
         case 5:
-            return QString("Dimagrimento");
+            return QString("Calorie");
         case 6:
+            return QString("Dimagrimento");
+        case 7:
             return QString("Sali Consumati");
-        case 7: //questo dopo diventa case 8 perché prima ci va qualità dell'allenamento da implementare
+        case 8: //questo dopo diventa case 8 perché prima ci va qualità dell'allenamento da implementare
             return QString("Eliminazione");
         }
     }

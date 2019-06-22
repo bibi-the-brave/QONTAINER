@@ -23,6 +23,8 @@ FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento>>& a,
     tabFunzionalita->addTab(wr, "Ricerca");
     setCentralWidget(tabFunzionalita);
 
+    setWindowTitle("QONTAINER ALLENAMENTI");
+
     //largezza iniziale finestra 70% schermo
     resize(QDesktopWidget().availableGeometry(this).size() * 0.8);
 }

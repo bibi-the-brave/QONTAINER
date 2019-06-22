@@ -12,55 +12,55 @@
 DialogInserimentoAtleta::DialogInserimentoAtleta(Contenitore<std::shared_ptr<Persona>>& a, QWidget* parent)
     : QDialog(parent), atleti(a)
 {
-    lblTitolo.setText("CREAZIONE ATLETA");
-    lblNome.setText("Nome");
-    lblCognome.setText("Cognome");
-    lblSesso.setText("Sesso");
+    lblTitolo = new QLabel("CREAZIONE ATLETA");
+    lblNome = new QLabel("Nome:");
+    lblCognome = new QLabel("Cognome:");
+    lblSesso = new QLabel("Sesso:");
 
-    rbUomo.setText("Uomo");
-    rbDonna.setText("Donna");
-    rbUomo.setChecked(true);
-    QHBoxLayout *lGbSesso = new QHBoxLayout;
-    lGbSesso->addWidget(&rbUomo);
-    lGbSesso->addWidget(&rbDonna);
-    //lGbSesso.stretch(2);
-    gbSesso.setLayout(lGbSesso);
+    rbUomo = new QRadioButton("Uomo");
+    rbDonna = new QRadioButton("Donna");
+    rbUomo->setChecked(true);
+    layoutRadioButton = new QHBoxLayout();
+    layoutRadioButton->addWidget(rbUomo);
+    layoutRadioButton->addWidget(rbDonna);
 
-    bInserisci.setText("Inserisci");
-    bAzzera.setText("Reset");
+    bInserisci = new QPushButton("Inserisci");
+    bAzzera = new QPushButton("Reset");
 
-    layoutPrincipale.addWidget(&lblTitolo);
-    layoutPrincipale.setAlignment(&lblTitolo, Qt::AlignHCenter);
+    layoutPrincipale = new QVBoxLayout;
+    layoutPrincipale->addWidget(lblTitolo);
+    layoutPrincipale->setAlignment(lblTitolo, Qt::AlignHCenter);
 
-    layoutForm.addRow(&lblNome, &leNome);
-    layoutForm.addRow(&lblCognome, &leCognome);
+    layoutForm = new QFormLayout;
+    layoutForm->addRow(lblNome, leNome);
+    layoutForm->addRow(lblCognome, leCognome);
+    layoutForm->addRow(lblSesso, layoutRadioButton);
+    layoutPrincipale->addLayout(layoutForm);
 
-    layoutForm.addRow(&lblSesso, &gbSesso);
-    //lblSesso.setAlignment(Qt::AlignVCenter);
+    layoutBottoniConferma = new QHBoxLayout;
+    layoutBottoniConferma->addWidget(bInserisci);
+    layoutBottoniConferma->addWidget(bAzzera);
 
-    layoutBottoniConferma.addWidget(&bInserisci);
-    layoutBottoniConferma.addWidget(&bAzzera);
-
-    layoutPrincipale.addLayout(&layoutForm);
-    layoutPrincipale.addLayout(&layoutBottoniConferma);
-    setLayout(&layoutPrincipale);
+    layoutPrincipale->addLayout(layoutBottoniConferma);
+    setLayout(layoutPrincipale);
 
     QRegExp rx("^\\S+(\\s\\S+)+$");
     QValidator *validator = new QRegExpValidator(rx, this);
 
-    leNome.setValidator(validator);
-    leCognome.setValidator(validator);
+    leNome->setValidator(validator);
+    leCognome->setValidator(validator);
 
     //this->setFixedSize(QSize(this->width(),this->height()));
+    setWindowTitle("ATLETA");
 
-    connect(&bInserisci, SIGNAL(clicked(bool)), this, SLOT(inserimentoAtleta(bool)));
-    connect(&bAzzera, SIGNAL(clicked(bool)), this, SLOT(azzeramentoForm(bool)));
+    connect(bInserisci, SIGNAL(clicked(bool)), this, SLOT(inserimentoAtleta(bool)));
+    connect(bAzzera, SIGNAL(clicked(bool)), this, SLOT(azzeramentoForm(bool)));
 }
 
 void DialogInserimentoAtleta::inserimentoAtleta(bool cliccato) {
     Q_UNUSED(cliccato);
-    std::string nome = leNome.text().simplified().toStdString();
-    std::string cognome = leCognome.text().simplified().toStdString();
+    std::string nome = leNome->text().simplified().toStdString();
+    std::string cognome = leCognome->text().simplified().toStdString();
 
     if(nome == "" || cognome == "") {
         QMessageBox mes;
@@ -74,7 +74,7 @@ void DialogInserimentoAtleta::inserimentoAtleta(bool cliccato) {
 
     bool sesso;
 
-    if(rbUomo.isChecked())
+    if(rbUomo->isChecked())
         sesso = 0;
     else
         sesso = 1;
@@ -105,6 +105,6 @@ void DialogInserimentoAtleta::inserimentoAtleta(bool cliccato) {
 
 void DialogInserimentoAtleta::azzeramentoForm(bool cliccato) {
     Q_UNUSED(cliccato);
-    leNome.setText("");
-    leCognome.setText("");
+    leNome->setText("");
+    leCognome->setText("");
 }

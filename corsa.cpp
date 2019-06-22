@@ -1,10 +1,11 @@
 #include "corsa.h"
 #include "errori.h"
 #include <typeinfo>
+#include "data.h"
 
-Corsa::Corsa(std::shared_ptr<Persona> atleta, unsigned int durata,
+Corsa::Corsa(std::shared_ptr<Persona> atleta, unsigned int durata, Data data,
              double mgMagnesio, unsigned int sterrato, unsigned int strada)
-try: Allenamento (atleta, durata, mgMagnesio), kmSterrato(sterrato),
+try: Allenamento (atleta, durata, data, mgMagnesio), kmSterrato(sterrato),
     kmStrada(strada)
 {
     //if(kmStrada + kmSterrato == 0)

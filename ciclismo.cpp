@@ -3,9 +3,9 @@
 #include <typeinfo>
 
 Ciclismo::Ciclismo(std::shared_ptr<Persona> atleta, unsigned int durata,
-                   double mgMagnesio, unsigned int salita,
+                   Data data, double mgMagnesio, unsigned int salita,
                    unsigned int pianura, unsigned int discesa)
-try: Allenamento(atleta, durata, mgMagnesio), kmSalita(salita),
+try: Allenamento(atleta, durata, data, mgMagnesio), kmSalita(salita),
      kmPianura(pianura), kmDiscesa(discesa)
 {
     //if(kmSalita + kmPianura + kmDiscesa == 0)

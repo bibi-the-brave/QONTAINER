@@ -11,6 +11,8 @@ DialogCiclismo::DialogCiclismo(Contenitore<std::shared_ptr<Persona>>& cp_,
     layoutPrincipale->addWidget(wCiclismo);
     aggiungiBottoni();
 
+    setWindowTitle("CICLISMO");
+
     connect(bReset, SIGNAL(clicked()), wCiclismo, SLOT(reset()));
     connect(bReset, SIGNAL(clicked()), this, SLOT(reset()));
     connect(bConferma, SIGNAL(clicked()), this, SLOT(inserimentoAllenamento()));
@@ -34,8 +36,10 @@ void DialogCiclismo::inserimentoAllenamento() {
         return;
     }
 
+    std::string strData = deData->date().toString("dd/MM/yyyy").toStdString();
     Allenamento* al = new Ciclismo(cp.At(cmbAtleti->currentIndex()),
                                 static_cast<unsigned int>(spinDurata->value()),
+                                Data(strData),
                                 spinMagnesio->value(),
                                 static_cast<unsigned int>(wCiclismo->kmPianura()),
                                 static_cast<unsigned int>(wCiclismo->kmSalita()),

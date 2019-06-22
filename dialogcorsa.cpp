@@ -11,6 +11,8 @@ DialogCorsa::DialogCorsa(Contenitore<std::shared_ptr<Persona>>& cp_,
     layoutPrincipale->addWidget(wCorsa);
     aggiungiBottoni();
 
+    setWindowTitle("CORSA");
+
     connect(bReset, SIGNAL(clicked()), wCorsa, SLOT(reset()));
     connect(bReset, SIGNAL(clicked()), this, SLOT(reset()));
     connect(bConferma, SIGNAL(clicked()), this, SLOT(inserimentoAllenamento()));
@@ -34,8 +36,10 @@ void DialogCorsa::inserimentoAllenamento() {
         return;
     }
 
+    std::string strData = deData->date().toString("dd/MM/yyyy").toStdString();
     Allenamento* al = new Corsa(cp.At(cmbAtleti->currentIndex()),
                                 static_cast<unsigned int>(spinDurata->value()),
+                                Data(strData),
                                 spinMagnesio->value(),
                                 static_cast<unsigned int>(wCorsa->kmSterrato()),
                                 static_cast<unsigned int>(wCorsa->kmStrada()));

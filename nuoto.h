@@ -2,14 +2,14 @@
 #define NUOTO_H
 
 #include <string>
-
 #include "allenamento.h"
 #include <memory>
+#include "data.h"
 
 class Nuoto : virtual public Allenamento {
     unsigned int vascheStileLibero, vascheRana, vascheDorso;
 public:
-    Nuoto(std::shared_ptr<Persona>, unsigned int, double,
+    Nuoto(std::shared_ptr<Persona>, unsigned int, Data, double,
           unsigned int, unsigned int, unsigned int);
     Nuoto* clone() const override;
     std::string tipo() const override;

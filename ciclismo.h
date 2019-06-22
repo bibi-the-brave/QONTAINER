@@ -3,11 +3,12 @@
 
 #include "allenamento.h"
 #include <memory>
+#include "data.h"
 
 class Ciclismo : virtual public Allenamento {
     unsigned int kmSalita, kmPianura, kmDiscesa;
 public:
-    Ciclismo(std::shared_ptr<Persona>, unsigned int, double,
+    Ciclismo(std::shared_ptr<Persona>, unsigned int, Data, double,
              unsigned int, unsigned int, unsigned int);
     Ciclismo* clone() const override;
     std::string tipo() const override;

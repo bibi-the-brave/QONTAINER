@@ -19,14 +19,13 @@ class DialogInserimentoAtleta : public QDialog {
 public:
     explicit DialogInserimentoAtleta(Contenitore<std::shared_ptr<Persona>>&, QWidget* = nullptr);
 private:
-    QVBoxLayout layoutPrincipale;
-    QHBoxLayout layoutBottoniConferma;
-    QFormLayout layoutForm;
-    QLabel lblTitolo, lblNome, lblCognome, lblSesso;
-    QLineEdit leNome, leCognome;
-    QPushButton bInserisci, bAzzera;
-    QGroupBox gbSesso;
-    QRadioButton rbUomo, rbDonna;
+    QVBoxLayout *layoutPrincipale;
+    QHBoxLayout *layoutBottoniConferma, *layoutRadioButton;
+    QFormLayout *layoutForm;
+    QLabel *lblTitolo, *lblNome, *lblCognome, *lblSesso;
+    QLineEdit *leNome, *leCognome;
+    QPushButton *bInserisci, *bAzzera;
+    QRadioButton *rbUomo, *rbDonna;
 
     Contenitore<std::shared_ptr<Persona>>& atleti;
 private slots:

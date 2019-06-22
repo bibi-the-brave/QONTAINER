@@ -18,6 +18,8 @@
 #include "widgetnuoto.h"
 #include "widgetciclismo.h"
 #include "widgetcorsa.h"
+#include "modeltabellaallenamenti.h"
+#include "delegateeliminazione.h"
 
 class WidgetRicerca : public QWidget {
     Q_OBJECT
@@ -32,7 +34,7 @@ private:
     QFormLayout *lPersona;
     QGroupBox *boxRicerca, *boxPersona;
     QPushButton *btnRicerca;
-    QRadioButton *rbNuoto, *rbCorsa, *rbCiclismo, *rbTriathlon;
+    QRadioButton *rbNuoto, *rbCorsa, *rbCiclismo, *rbTriathlon, *rbAtleta;
 
     // ricerca persona
     QLabel *lblNome, *lblCognome, *lblSesso;
@@ -46,6 +48,8 @@ private:
     WidgetCiclismo* wCiclismo;
 
     QTableView* tabellaRicerca;
+    ModelTabellaAllenamenti* modello;
+    DelegateEliminazione* delegato;
 
     QGroupBox* costruzioneFormPersona();
 };

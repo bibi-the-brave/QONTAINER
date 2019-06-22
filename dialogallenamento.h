@@ -9,6 +9,7 @@
 #include <QFormLayout>
 #include <QComboBox>
 #include <QSpinBox>
+#include <QDateEdit>
 
 #include "contenitore.h"
 #include "persona.h"
@@ -30,8 +31,9 @@ protected:
     QHBoxLayout *lBottoni;
     QFormLayout *lFormAllenamento;
     QComboBox *cmbAtleti;
-    QLabel *lblTitolo, *lblAtleta, *lblDurata, *lblMagnesio;
+    QLabel *lblTitolo, *lblAtleta, *lblDurata, *lblMagnesio, *lblData;
     QSpinBox *spinDurata, *spinMagnesio;
+    QDateEdit *deData;
 
     void aggiungiBottoni();
     virtual void setLabelTitolo() = 0;

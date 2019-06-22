@@ -8,13 +8,15 @@
 
 #include "persona.h"
 #include <memory>
+#include "data.h"
 
 class Allenamento {
     std::shared_ptr<Persona> atleta;
     unsigned int durata; // >0
+    Data data;
     double mgMagnesioAssunti; // prima o durante l'allenamento
 public:
-    Allenamento(std::shared_ptr<Persona>, unsigned int, double = 0.0);
+    Allenamento(std::shared_ptr<Persona>, unsigned int, Data, double = 0.0);
     virtual ~Allenamento() = default;
     virtual std::string tipo() const = 0;
     virtual Allenamento* clone() const = 0;
@@ -27,6 +29,7 @@ public:
     Persona getAtleta() const;
     double getMgMagnesioAssunti() const;
     unsigned int getDurata() const;
+    Data getData() const;
 
 };
 

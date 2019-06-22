@@ -1,11 +1,13 @@
 #include "allenamento.h"
 #include "errori.h"
 #include "persona.h"
+#include "data.h"
 
 Allenamento::Allenamento(std::shared_ptr<Persona> atl,
                          unsigned int dur,
+                         Data d,
                          double mgMagnesio)
-try: atleta(atl), durata(dur), mgMagnesioAssunti(mgMagnesio)
+try: atleta(atl), durata(dur), data(d), mgMagnesioAssunti(mgMagnesio)
 {
    if(mgMagnesio < 0 || durata == 0)
        throw ErrAllenamento();
@@ -16,6 +18,7 @@ try: atleta(atl), durata(dur), mgMagnesioAssunti(mgMagnesio)
 bool Allenamento::operator==(const Allenamento& allenamento) const {
     return atleta->getPersona() == allenamento.getAtleta() &&
            durata == allenamento.durata &&
+           data == allenamento.data &&
            mgMagnesioAssunti == allenamento.mgMagnesioAssunti;
 }
 
@@ -29,4 +32,8 @@ double Allenamento::getMgMagnesioAssunti() const {
 
 unsigned int Allenamento::getDurata() const {
     return durata;
+}
+
+Data Allenamento::getData() const {
+    return data;
 }

@@ -18,6 +18,7 @@ DialogTriathlon::DialogTriathlon(Contenitore<std::shared_ptr<Persona>>& cp_,
     wCiclismo = new WidgetCiclismo();
     layoutPrincipale->addWidget(wCiclismo);
     aggiungiBottoni();
+    setWindowTitle("TRIATHLON");
 
     connect(bReset, SIGNAL(clicked()), wNuoto, SLOT(reset()));
     connect(bReset, SIGNAL(clicked()), wCorsa, SLOT(reset()));
@@ -57,9 +58,11 @@ void DialogTriathlon::inserimentoAllenamento() {
         return;
     }
 
+    std::string strData = deData->date().toString("dd/MM/yyyy").toStdString();
     Allenamento* al = new Triathlon(cp.At(cmbAtleti->currentIndex()),
-                                    spinMagnesio->value(),
                                     static_cast<unsigned int>(spinDurata->value()),
+                                    Data(strData),
+                                    spinMagnesio->value(),
                                     static_cast<unsigned int>(wNuoto->vascheLibero()),
                                     static_cast<unsigned int>(wNuoto->vascheRana()),
                                     static_cast<unsigned int>(wNuoto->vascheDorso()),

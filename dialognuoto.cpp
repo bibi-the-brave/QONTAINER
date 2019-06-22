@@ -1,5 +1,6 @@
 #include "dialognuoto.h"
 #include "nuoto.h"
+#include <string>
 
 DialogNuoto::DialogNuoto(
         Contenitore<std::shared_ptr<Persona>>& cp_,
@@ -10,6 +11,7 @@ DialogNuoto::DialogNuoto(
     wNuoto = new WidgetNuoto();
     layoutPrincipale->addWidget(wNuoto);
     aggiungiBottoni();
+    setWindowTitle("NUOTO");
 
     connect(bReset, SIGNAL(clicked()), wNuoto, SLOT(reset()));
     connect(bReset, SIGNAL(clicked()), this, SLOT(reset()));
@@ -34,8 +36,10 @@ void DialogNuoto::inserimentoAllenamento() {
         return;
     }
 
+    std::string strData = deData->date().toString("dd/MM/yyyy").toStdString();
     Allenamento* al = new Nuoto(cp.At(cmbAtleti->currentIndex()),
                                 static_cast<unsigned int>(spinDurata->value()),
+                                Data(strData),
                                 spinMagnesio->value(),
                                 static_cast<unsigned int>(wNuoto->vascheLibero()),
                                 static_cast<unsigned int>(wNuoto->vascheRana()),

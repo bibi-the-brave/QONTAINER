@@ -26,7 +26,7 @@ WidgetAllenamenti::WidgetAllenamenti(Contenitore<std::shared_ptr<Persona>>& catl
 
     tabAllenamenti->setModel(modello);
     delegato = new DelegateEliminazione();
-    tabAllenamenti->setItemDelegateForColumn(7, delegato);
+    tabAllenamenti->setItemDelegateForColumn(8, delegato);
     // "stira" le colonne per occupare tutta la larghezza della tabella
     tabAllenamenti->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
