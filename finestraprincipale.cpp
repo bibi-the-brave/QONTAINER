@@ -25,6 +25,6 @@ FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento>>& a,
 
     setWindowTitle("QONTAINER ALLENAMENTI");
 
-    //largezza iniziale finestra 70% schermo
-    resize(QDesktopWidget().availableGeometry(this).size() * 0.8);
+    //largezza iniziale finestra 90% schermo
+    resize(QDesktopWidget().availableGeometry(this).size() * 0.9);
 }

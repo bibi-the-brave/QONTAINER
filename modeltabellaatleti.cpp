@@ -13,7 +13,7 @@ int ModelTabellaAtleti::rowCount(const QModelIndex &parent) const {
 
 int ModelTabellaAtleti::columnCount(const QModelIndex &parent) const {
     Q_UNUSED(parent);
-    return 4;   //nome, cognome, sesso, eliminazione (delegato)
+    return 5;   //nome, cognome, sesso, eliminazione (delegato), modifica (delegato)
 }
 
 QVariant ModelTabellaAtleti::data(const QModelIndex &index, int role) const {
@@ -45,6 +45,8 @@ QVariant ModelTabellaAtleti::headerData(int section, Qt::Orientation orientation
             return QString("Sesso");
         case 3:
             return QString("Eliminazione");
+        case 4:
+            return QString("Modifica");
         }
     }
     return QVariant();

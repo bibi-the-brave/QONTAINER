@@ -14,10 +14,13 @@
 #include <QRadioButton>
 #include <QGroupBox>
 
-class DialogInserimentoAtleta : public QDialog {
+class DialogAtleta : public QDialog {
     Q_OBJECT
 public:
-    explicit DialogInserimentoAtleta(Contenitore<std::shared_ptr<Persona>>&, QWidget* = nullptr);
+    explicit DialogAtleta(Contenitore<std::shared_ptr<Persona>>&,
+                          bool mod = false,
+                          int rMod = 0, //se mod == 0 non uso rigaMod
+                          QWidget* = nullptr);
 private:
     QVBoxLayout *layoutPrincipale;
     QHBoxLayout *layoutBottoniConferma, *layoutRadioButton;
@@ -28,8 +31,15 @@ private:
     QRadioButton *rbUomo, *rbDonna;
 
     Contenitore<std::shared_ptr<Persona>>& atleti;
+    bool modifica;
+    int rigaMod;
+
+    void compilazioneFormModifica();
+    bool verificaCampiNomeCognome(QString, QString) const;
+    bool verificaAtletaPresente(std::shared_ptr<Persona>& persona) const;
 private slots:
     void inserimentoAtleta(bool);
+    void modificaAtleta(bool);
     void azzeramentoForm(bool);
 signals:
     void reset();

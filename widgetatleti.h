@@ -13,6 +13,7 @@
 #include "allenamento.h"
 #include "modeltabellaatleti.h"
 #include "delegateeliminazione.h"
+#include "delegatemodifica.h"
 
 class WidgetAtleti : public QWidget {
     Q_OBJECT
@@ -27,10 +28,12 @@ private:
 
     Contenitore<std::shared_ptr<Persona>>& atleti;
     ModelTabellaAtleti *modello;
-    DelegateEliminazione *delegato;
+    DelegateEliminazione *delegatoEl;
+    DelegateModifica *delegatoMod;
 public slots:
     void avviaDialogInserimento(bool);
     void ricevutaNotificaEliminazioneRiga(int);
+    void avviaDialogModifica(int);
 signals:
     void rimuovereRiga(int);
 };

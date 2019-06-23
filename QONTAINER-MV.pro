@@ -30,11 +30,11 @@ SOURCES += \
     delegatebottone.cpp \
     delegateeliminazione.cpp \
     delegatemodifica.cpp \
+    dialogatleta.cpp \
     dialogciclismo.cpp \
     dialogallenamento.cpp \
     dialogcorsa.cpp \
     dialognuoto.cpp \
-    dialoginserimentoatleta.cpp \
     dialogtriathlon.cpp \
         main.cpp \
     finestraprincipale.cpp \
@@ -62,11 +62,11 @@ HEADERS += \
     delegatebottone.h \
     delegateeliminazione.h \
     delegatemodifica.h \
+    dialogatleta.h \
     dialogciclismo.h \
     dialogallenamento.h \
     dialogcorsa.h \
     dialognuoto.h \
-    dialoginserimentoatleta.h \
     dialogtriathlon.h \
     errori.h \
     finestraprincipale.h \

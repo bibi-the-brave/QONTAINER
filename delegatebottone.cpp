@@ -59,7 +59,7 @@ bool DelegateBottone::editorEvent(
             if (btns->rect.contains(e->x(), e->y())) {
                 btns->state &= (~QStyle::State_Sunken);
                 // avvisa che l'utente vuole eliminare la riga index.row()
-                emit avvisoEliminazione(index.row());
+                emit avvisoPressioneBottone(index.row());
             }
         }
     }

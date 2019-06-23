@@ -3,6 +3,7 @@
 DelegateEliminazione::DelegateEliminazione(QString strBottone, QObject* parent)
     : DelegateBottone (strBottone, parent)
 {
+    connect(this, SIGNAL(avvisoPressioneBottone(int)), this, SIGNAL(avvisoEliminazione(int)));
 }
 
 void DelegateEliminazione::slotEliminazione(int riga) {

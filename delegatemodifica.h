@@ -7,6 +7,7 @@ class DelegateModifica : public DelegateBottone {
     Q_OBJECT
 public:
     DelegateModifica(QString = "Modifica", QObject* = nullptr);
-public slots:
+signals:
+    void avvisoModifica(int);
 };
 #endif // DELEGATEMODIFICA_H
