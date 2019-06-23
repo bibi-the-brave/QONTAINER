@@ -43,6 +43,10 @@ WidgetAllenamenti::WidgetAllenamenti(Contenitore<std::shared_ptr<Persona>>& catl
     connect(delegatoEl, SIGNAL(eliminaRiga(int)), modello, SLOT(eliminazioneAllenamento(int)));
 }
 
+ModelTabellaAllenamenti* WidgetAllenamenti::getModello() const {
+    return modello;
+}
+
 void WidgetAllenamenti::ricevutaNotificaEliminazioneRiga(int riga) {
     QMessageBox boxConfermaEliminazione;
     boxConfermaEliminazione.setIcon(QMessageBox::Question);

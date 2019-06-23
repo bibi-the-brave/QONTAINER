@@ -21,6 +21,8 @@ public slots:
     void eliminazioneAtleta(int);
 private:
     Contenitore<std::shared_ptr<Persona>>& dati;
+signals:
+    void atletaDaEliminare(std::shared_ptr<Persona>);
 };
 
 #endif // MODELTABELLAATLETI_H

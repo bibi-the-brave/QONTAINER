@@ -80,6 +80,7 @@ void ModelTabellaAtleti::inserimentoNuovoAtletaEsterno() {
 
 void ModelTabellaAtleti::eliminazioneAtleta(int riga) {
     if(riga >= 0 && riga < rowCount()) {
+        emit atletaDaEliminare(dati.At(static_cast<unsigned int>(riga)));
         dati.removeAt(static_cast<unsigned int>(riga));
         removeRow(riga);
     }

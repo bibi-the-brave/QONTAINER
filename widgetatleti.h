@@ -19,7 +19,7 @@ class WidgetAtleti : public QWidget {
     Q_OBJECT
 public:
     explicit WidgetAtleti(Contenitore<std::shared_ptr<Persona>>&,QWidget* = nullptr);
-
+    ModelTabellaAtleti* getModello() const;
 private:
     QVBoxLayout *layout;
     QPushButton *btnNuovoAtleta;

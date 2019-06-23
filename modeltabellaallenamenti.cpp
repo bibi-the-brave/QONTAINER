@@ -110,3 +110,15 @@ void ModelTabellaAllenamenti::eliminazioneAllenamento(int riga) {
         removeRow(riga);
     }
 }
+
+void ModelTabellaAllenamenti::eliminazioneAllenamenti(std::shared_ptr<Persona> atleta) {
+    Contenitore<DeepPtr<Allenamento>>::iterator it = dati.begin();
+    for(int i = 0; it != dati.end();  ++i) {
+        if( (*it)->getAtleta() == *atleta ) {
+            it = dati.erase(it);
+            removeRow(i);
+            --i;
+        } else
+            ++it;
+    }
+}

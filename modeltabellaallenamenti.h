@@ -23,6 +23,7 @@ private:
 public slots:
     void inserimentoNuovoAllenamentoEsterno();
     void eliminazioneAllenamento(int riga);
+    void eliminazioneAllenamenti(std::shared_ptr<Persona>);
 };
 
 

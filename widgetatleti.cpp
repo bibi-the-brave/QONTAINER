@@ -51,6 +51,10 @@ WidgetAtleti::WidgetAtleti(Contenitore<std::shared_ptr<Persona>>& a, QWidget *pa
     connect(delegatoMod, SIGNAL(avvisoModifica(int)), this, SLOT(avviaDialogModifica(int)));
 }
 
+ModelTabellaAtleti* WidgetAtleti::getModello() const {
+    return modello;
+}
+
 void WidgetAtleti::avviaDialogInserimento(bool cliccato) {
     Q_UNUSED(cliccato);
     DialogAtleta da(atleti);

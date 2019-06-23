@@ -88,10 +88,10 @@ public:
         const T& operator*() const;
     };
 
-    iterator begin() const;
-    iterator end() const;
-    //const_iterator begin() const;
-    //const_iterator end() const;
+    iterator begin();
+    iterator end();
+    const_iterator begin() const;
+    const_iterator end() const;
     T& operator[](iterator) const;
     iterator erase(iterator);
     iterator find(const T&) const;
@@ -309,6 +309,8 @@ void Contenitore<T>::popFront() {
 
     typename Contenitore<T>::Nodo *daRimuovere = primo;
     primo = primo->dx;
+    if(primo)
+        primo->sx = 0;
     daRimuovere->dx = 0;
     delete daRimuovere;
 
@@ -581,15 +583,29 @@ const T& Contenitore<T>::const_iterator::operator*() const {
 /// metodi di Contenitore che utilizzano iteratori
 //////////////////////////////////////////////////////////////////////////////
 template <typename T>
-typename Contenitore<T>::iterator Contenitore<T>::begin() const {
+typename Contenitore<T>::iterator Contenitore<T>::begin() {
     typename Contenitore<T>::iterator appoggio;
     appoggio.punt = primo;
     return appoggio;
 }
 
 template <typename T>
-typename Contenitore<T>::iterator Contenitore<T>::end() const {
+typename Contenitore<T>::iterator Contenitore<T>::end() {
     typename Contenitore<T>::iterator appoggio;
+    appoggio.punt = 0;
+    return appoggio;
+}
+
+template<typename T>
+typename Contenitore<T>::const_iterator Contenitore<T>::begin() const {
+    typename Contenitore<T>::const_iterator appoggio;
+    appoggio.punt = primo;
+    return appoggio;
+}
+
+template <typename T>
+typename Contenitore<T>::const_iterator Contenitore<T>::end() const {
+    typename Contenitore<T>::const_iterator appoggio;
     appoggio.punt = 0;
     return appoggio;
 }
@@ -601,15 +617,18 @@ T& Contenitore<T>::operator[](iterator i) const {
 
 template <typename T>
 typename Contenitore<T>::iterator Contenitore<T>::erase(iterator i) {
-    iterator ret;
+    if(size == 0)
+        return begin();
     if(i.punt) {
+        iterator ret;
         ret.punt = i.punt->dx;
         try {
             eliminaNodo(primo, ultimo, i.punt);
         } catch (ErrContenitore) {throw;}
         size--;
+        return ret;
     } else
-        throw ErrContenitore();
+        return end();
 }
 
 /*
@@ -633,5 +652,6 @@ typename Contenitore<T>::iterator Contenitore<T>::find(const T& k) const {
     else
         return end();
 }
+
 
 #endif // CONTENITORE_H

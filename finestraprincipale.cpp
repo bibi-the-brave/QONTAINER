@@ -27,4 +27,9 @@ FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento>>& a,
 
     //largezza iniziale finestra 90% schermo
     resize(QDesktopWidget().availableGeometry(this).size() * 0.9);
+
+    //permette di eliminare a cascata gli allenamenti di un atleta che viene cancellato
+    connect(fa->getModello(), SIGNAL(atletaDaEliminare(std::shared_ptr<Persona>)),
+            wa->getModello(), SLOT(eliminazioneAllenamenti(std::shared_ptr<Persona>)));
 }
+

@@ -14,7 +14,7 @@ DialogAtleta::DialogAtleta(Contenitore<std::shared_ptr<Persona>>& a,
                            bool modifica_,
                            int rigaMod_,
                            QWidget* parent)
-    : QDialog(parent), atleti(a), modifica(modifica_), rigaMod(rigaMod_)
+    : QDialog(parent), atleti(a), modifica(modifica_), rigaMod(modifica_ ? rigaMod_ : 0)
 {
     if(!modifica)
         lblTitolo = new QLabel("CREAZIONE ATLETA");
@@ -167,7 +167,9 @@ void DialogAtleta::modificaAtleta(bool cliccato) {
         mes.setInformativeText("Non è stata effetuata alcuna modifica ai dati dell'atleta.");
         mes.setStandardButtons(QMessageBox::Ok);
         mes.exec();
-        return;
+        this->close();
+        return; //lo metto perché è capitato che prima di eseguire close venga eseguita
+        //la parte in cui si controlla doppione. Close penso perché close potrebbe essere multithread
     }
 
     // controlla che l'atleta creato non sia già presente nel contenitore
