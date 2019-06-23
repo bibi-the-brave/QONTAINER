@@ -27,7 +27,7 @@ WidgetAtleti::WidgetAtleti(Contenitore<std::shared_ptr<Persona>>& a, QWidget *pa
 
     modello = new ModelTabellaAtleti(atleti);
     tabAtleti->setModel(modello);
-    delegato = new DelegateEliminazione();
+    delegato = new DelegateEliminazione;
     tabAtleti->setItemDelegateForColumn(3,delegato);
     // "stira" le colonne per occupare tutta la larghezza della tabella
     tabAtleti->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);

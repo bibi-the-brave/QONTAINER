@@ -27,7 +27,9 @@ QMAKE_CXXFLAGS += -std=c++0x
 
 SOURCES += \
     data.cpp \
+    delegatebottone.cpp \
     delegateeliminazione.cpp \
+    delegatemodifica.cpp \
     dialogciclismo.cpp \
     dialogallenamento.cpp \
     dialogcorsa.cpp \
@@ -57,7 +59,9 @@ SOURCES += \
 HEADERS += \
     contenitore.h \
     data.h \
+    delegatebottone.h \
     delegateeliminazione.h \
+    delegatemodifica.h \
     dialogciclismo.h \
     dialogallenamento.h \
     dialogcorsa.h \

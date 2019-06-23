@@ -16,7 +16,7 @@
 #include "widgetciclismo.h"
 #include "widgetcorsa.h"
 #include "modeltabellaallenamenti.h"
-#include "delegateeliminazione.h"
+#include "delegatebottone.h"
 #include <QHeaderView>
 
 WidgetRicerca::WidgetRicerca(Contenitore<DeepPtr<Allenamento>>& ca_, QWidget* parent)
@@ -74,7 +74,7 @@ WidgetRicerca::WidgetRicerca(Contenitore<DeepPtr<Allenamento>>& ca_, QWidget* pa
 
     modello = new ModelTabellaAllenamenti(ca);
     tabellaRicerca->setModel(modello);
-    delegato = new DelegateEliminazione();
+    delegato = new DelegateEliminazione;
     tabellaRicerca->setItemDelegateForColumn(8, delegato);
     tabellaRicerca->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }

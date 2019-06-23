@@ -25,6 +25,7 @@ DialogInserimentoAtleta::DialogInserimentoAtleta(Contenitore<std::shared_ptr<Per
     layoutRadioButton = new QHBoxLayout();
     layoutRadioButton->addWidget(rbUomo);
     layoutRadioButton->addWidget(rbDonna);
+    layoutRadioButton->setAlignment(Qt::AlignLeft);
 
     bInserisci = new QPushButton("Inserisci");
     bAzzera = new QPushButton("Reset");
