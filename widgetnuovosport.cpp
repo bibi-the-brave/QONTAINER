@@ -4,6 +4,7 @@
 #include <QPushButton>
 #include <QIcon>
 #include <QSize>
+#include <QMessageBox>
 #include "dialogallenamento.h"
 #include "dialognuoto.h"
 #include "dialogciclismo.h"
@@ -46,6 +47,18 @@ QPushButton* WidgetNuovoSport::creaBottoneSport(const QString& nomeSport) {
  * di inserire un allenamento dello sport selezionato
  */
 void WidgetNuovoSport::creaDialogInserimentoSport(QString sport) {
+    if(cp.Size() == 0) {
+        QMessageBox mes;
+        mes.setIcon(QMessageBox::Information);
+        mes.setText("Errore!");
+        mes.setInformativeText(
+            QString::fromStdString("Prima di creare un qualsiasi allenamento") +
+                                    " è necessario inserire almeno un atleta.");
+        mes.setStandardButtons(QMessageBox::Ok);
+        mes.exec();
+        return;
+    }
+
     DialogAllenamento* dialog;
     if( sport == "ciclismo" ) {
         dialog = new DialogCiclismo(cp, ca);

@@ -16,8 +16,8 @@ int ModelTabellaAllenamenti::rowCount(const QModelIndex &parent) const {
 int ModelTabellaAllenamenti::columnCount(const QModelIndex &parent) const {
     Q_UNUSED(parent);
     // 0) Atleta, 1) Data 2) Allenamento, 3) durata, 4) magnesio, 5) calorie,
-    // 6) grasso perso, 7) sali cosumati, 8) elimina (delegato)
-    return 9;
+    // 6) grasso perso, 7) sali cosumati, 8) elimina (delegato), 9) modifica (delegato)
+    return 10;
 }
 
 QVariant ModelTabellaAllenamenti::data(const QModelIndex &index, int role) const {
@@ -70,8 +70,10 @@ QVariant ModelTabellaAllenamenti::headerData(int section, Qt::Orientation orient
             return QString("Dimagrimento");
         case 7:
             return QString("Sali Consumati");
-        case 8: //questo dopo diventa case 8 perché prima ci va qualità dell'allenamento da implementare
+        case 8:
             return QString("Eliminazione");
+        case 9:
+            return QString("Modifica");
         }
     }
     return QVariant();

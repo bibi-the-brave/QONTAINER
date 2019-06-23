@@ -25,8 +25,10 @@ WidgetAllenamenti::WidgetAllenamenti(Contenitore<std::shared_ptr<Persona>>& catl
 
 
     tabAllenamenti->setModel(modello);
-    delegato = new DelegateEliminazione();
-    tabAllenamenti->setItemDelegateForColumn(8, delegato);
+    delegatoEl = new DelegateEliminazione();
+    tabAllenamenti->setItemDelegateForColumn(8, delegatoEl);
+    delegatoMod = new DelegateModifica();
+    tabAllenamenti->setItemDelegateForColumn(9, delegatoMod);
     // "stira" le colonne per occupare tutta la larghezza della tabella
     tabAllenamenti->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
@@ -34,11 +36,11 @@ WidgetAllenamenti::WidgetAllenamenti(Contenitore<std::shared_ptr<Persona>>& catl
 
     //connect(btnNuovoAllenamento, SIGNAL(clicked(bool)), this, SLOT(avviaFinestraInserimentoAllen(bool)));
     // il delegate avverte che l'utente ha cliccato un bottone e vuole eliminare una riga
-    connect(delegato, SIGNAL(avvisoEliminazione(int)), this, SLOT(ricevutaNotificaEliminazioneRiga(int)));
+    connect(delegatoEl, SIGNAL(avvisoEliminazione(int)), this, SLOT(ricevutaNotificaEliminazioneRiga(int)));
     // se l'utente conferma l'eliminazione viene avertito il delegate
-    connect(this, SIGNAL(rimuovereRiga(int)), delegato, SLOT(slotEliminazione(int)));
+    connect(this, SIGNAL(rimuovereRiga(int)), delegatoEl, SLOT(slotEliminazione(int)));
     // il delegate avverte il model di rimuovere la riga desiderata
-    connect(delegato, SIGNAL(eliminaRiga(int)), modello, SLOT(eliminazioneAllenamento(int)));
+    connect(delegatoEl, SIGNAL(eliminaRiga(int)), modello, SLOT(eliminazioneAllenamento(int)));
 }
 
 void WidgetAllenamenti::ricevutaNotificaEliminazioneRiga(int riga) {

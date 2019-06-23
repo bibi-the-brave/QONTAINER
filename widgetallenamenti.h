@@ -13,6 +13,7 @@
 #include "deepptr.h"
 #include "modeltabellaallenamenti.h"
 #include "delegateeliminazione.h"
+#include "delegatemodifica.h"
 #include "widgetnuovosport.h"
 
 class WidgetAllenamenti : public QWidget
@@ -30,7 +31,8 @@ private:
     Contenitore<DeepPtr<Allenamento>>& ca;
     Contenitore<std::shared_ptr<Persona>>& catleti;
     ModelTabellaAllenamenti* modello;
-    DelegateEliminazione* delegato;
+    DelegateEliminazione* delegatoEl;
+    DelegateModifica* delegatoMod;
 public slots:
     void ricevutaNotificaEliminazioneRiga(int);
 signals:
