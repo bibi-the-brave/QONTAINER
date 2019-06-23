@@ -24,7 +24,6 @@ public:
     virtual double grassoPerso() const = 0;// in grammi
     virtual double saliMinerali() const = 0; // mg di sali minerali consumati, >= 0
     virtual bool operator==(const Allenamento&) const;
-    //QUALITÀ ALLENAMENTO, STELLINE DA 1 A 5
 
     Persona getAtleta() const;
     double getMgMagnesioAssunti() const;

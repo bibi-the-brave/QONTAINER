@@ -36,6 +36,7 @@ private:
     DelegateModifica* delegatoMod;
 public slots:
     void ricevutaNotificaEliminazioneRiga(int);
+    void avviaDialogModifica(int);
 signals:
     void rimuovereRiga(int);
 };

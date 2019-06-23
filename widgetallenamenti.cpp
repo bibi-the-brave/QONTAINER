@@ -1,4 +1,9 @@
 #include "widgetallenamenti.h"
+#include "allenamento.h"
+#include "nuoto.h"
+#include "corsa.h"
+#include "ciclismo.h"
+#include "triathlon.h"
 
 #include <QStringList>
 #include <QStandardItemModel>
@@ -41,6 +46,9 @@ WidgetAllenamenti::WidgetAllenamenti(Contenitore<std::shared_ptr<Persona>>& catl
     connect(this, SIGNAL(rimuovereRiga(int)), delegatoEl, SLOT(slotEliminazione(int)));
     // il delegate avverte il model di rimuovere la riga desiderata
     connect(delegatoEl, SIGNAL(eliminaRiga(int)), modello, SLOT(eliminazioneAllenamento(int)));
+
+    // 'Eventi' relativi alla modifica di un allenamento
+    connect(delegatoMod, SIGNAL(avvisoModifica(int)), this, SLOT(avviaDialogModifica(int)));
 }
 
 ModelTabellaAllenamenti* WidgetAllenamenti::getModello() const {
@@ -57,4 +65,9 @@ void WidgetAllenamenti::ricevutaNotificaEliminazioneRiga(int riga) {
     int scelta = boxConfermaEliminazione.exec();
     if(scelta)
         emit rimuovereRiga(riga);
+}
+
+void WidgetAllenamenti::avviaDialogModifica(int riga) {
+    //Allenamento* a = ca.At(riga);
+    //*ca.At(riga);
 }
