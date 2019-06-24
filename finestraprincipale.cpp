@@ -15,6 +15,7 @@ FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento>>& a,
     tabFunzionalita = new QTabWidget();
 
     CaricatoreContenitori caricatore(cp,ca);
+    caricatore.leggiFile(); //carica cp e ca con gli atleti e gli allenamenti salvati su file
 
     fa = new WidgetAtleti(cp);
     tabFunzionalita->addTab(fa, "Atleti");

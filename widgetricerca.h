@@ -8,6 +8,7 @@
 #include <QGroupBox>
 #include <QRadioButton>
 #include <QLabel>
+#include <QComboBox>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QVBoxLayout>

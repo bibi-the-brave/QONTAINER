@@ -1,96 +1,31 @@
 {
-  
-	"nuoto" : {
-		"atleta" : {
-			"nome" : "Andrea",
-			"cognome" : "Favero",
-			"sesso" : "false"
-		},
-		"durata" : "45",
-		"data": {
-			"d":"1",
-			"m":"1",
-			"y":"2020"
-		},
-		"magnesio": "10",
-		"stile": "50",
-		"rana": "2",
-		"dorso": "20"
+	"atleta" : {
+		"nome" : "Andrea",
+		"cognome" : "Favero",
+		"sesso" : false
+	},
+	
+	"atleta" : {
+		"nome" : "Margherita",
+		"cognome" : "Panziera",
+		"sesso" : true
 	},
 
-	"nuoto" : {
-		"atleta" : {
-			"nome" : "Margherita",
-			"cognome" : "Panziera",
-			"sesso" : "true"
-		},
-		"durata" : "240",
-		"data": {
-			"d":"1",
-			"m":"1",
-			"y":"2020"
-		},
-		"magnesio": "10",
-		"stile": "2",
-		"rana": "0",
-		"dorso": "450"
+	"atleta" : {
+		"nome" : "Vincenzo",
+		"cognome" : "Nibali",
+		"sesso" : false
 	},
 
-	"ciclismo" : {
-		"atleta" : {
-			"nome" : "Vincenzo",
-			"cognome" : "Nibali",
-			"sesso" : "false"
-		},
-		"durata" : "360",
-		"data": {
-			"d":"1",
-			"m":"1",
-			"y":"2020"
-		},
-		"magnesio": "30",
-		"salita": "40",
-		"discesa": "20",
-		"pianura": "10"
+	"atleta" : {
+		"nome" : "Filippo",
+		"cognome" : "Tortu",
+		"sesso" : false
 	},
 
-	"corsa" : {
-		"atleta" : {
-			"nome" : "Filippo",
-			"cognome" : "Tortu",
-			"sesso" : "false"
-		},
-		"durata" : "360",
-		"data": {
-			"d":"1",
-			"m":"1",
-			"y":"2020"
-		},
-		"magnesio": "30",
-		"sterrato": "5",
-		"strada": "8"
-	},
-
-	"triathlon" : {
-		"atleta" : {
-			"nome" : "Laurence",
-			"cognome" : "Quinto",
-			"sesso" : "false"
-		},
-		"durata" : "620",
-		"data": {
-			"d":"1",
-			"m":"1",
-			"y":"2020"
-		},
-		"magnesio": "10",
-		"stile": "50",
-		"rana": "2",
-		"dorso": "20",
-		"salita": "40",
-		"discesa": "20",
-		"pianura": "10",
-		"sterrato": "5",
-		"strada": "8"
+	"atleta" : {
+		"nome" : "Laurence",
+		"cognome" : "Quinto",
+		"sesso" : false
 	}
 }
