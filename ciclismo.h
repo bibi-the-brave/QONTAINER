@@ -8,7 +8,7 @@
 class Ciclismo : virtual public Allenamento {
     unsigned int kmSalita, kmPianura, kmDiscesa;
 public:
-    Ciclismo(std::shared_ptr<Persona>, unsigned int, Data, double,
+    Ciclismo(std::shared_ptr<Persona>, unsigned int, Data, unsigned int,
              unsigned int, unsigned int, unsigned int);
     Ciclismo* clone() const override;
     std::string tipo() const override;
@@ -20,6 +20,9 @@ public:
     unsigned int getKmSalita() const;
     unsigned int getKmDiscesa() const;
     unsigned int getKmPianura() const;
+    void setKmSalita(unsigned int);
+    void setKmDiscesa(unsigned int);
+    void setKmPianura(unsigned int);
 };
 
 #endif // CICLISMO_H

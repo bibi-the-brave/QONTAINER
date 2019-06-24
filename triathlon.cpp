@@ -2,7 +2,8 @@
 #include "errori.h"
 #include <typeinfo>
 
-Triathlon::Triathlon(std::shared_ptr<Persona> atleta,  unsigned int durata, Data data,double mgMagnesio,
+Triathlon::Triathlon(std::shared_ptr<Persona> atleta,  unsigned int durata,
+                     Data data, unsigned int mgMagnesio,
                      unsigned int vascheLibero, unsigned int vascheRana,
                      unsigned int vascheDorso, unsigned int kmSterrato,
                      unsigned int kmStrada, unsigned int kmSalita,

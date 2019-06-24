@@ -21,6 +21,7 @@ protected:
     void compilazioneFormModifica();
 public slots:
     void inserimentoAllenamento();
+    void modificaAllenamento();
 };
 
 #endif // DIALOGCICLISMO_H

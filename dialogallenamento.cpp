@@ -82,6 +82,7 @@ void DialogAllenamento::compilazioneFormModifica() {
                                        + a->getAtleta().getCognome())
     );
     cmbAtleti->setCurrentIndex(i);
+    cmbAtleti->setEnabled(false);//non lascio modificare gli atleti ma solo i loro campi dati
 
     QDate data(a->getData().getY(), a->getData().getM(), a->getData().getD());
     deData->setDate(data);
@@ -108,6 +109,16 @@ void DialogAllenamento::dialogErroreDoppione() const {
     mes.setIcon(QMessageBox::Information);
     mes.setText("Errore!");
     mes.setInformativeText("Allenamento già presente.");
+    mes.setStandardButtons(QMessageBox::Ok);
+    mes.exec();
+}
+
+void DialogAllenamento::visualizzaMessaggioAllenamentoNonModificato() const {
+    //l'utente ha lasciato l'atleta invariato
+    QMessageBox mes;
+    mes.setIcon(QMessageBox::Information);
+    mes.setText("OK! Niente da modificare.");
+    mes.setInformativeText("Non è stata effetuata alcuna modifica all'allenamento.");
     mes.setStandardButtons(QMessageBox::Ok);
     mes.exec();
 }

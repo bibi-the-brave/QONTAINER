@@ -4,7 +4,7 @@
 #include <typeinfo>
 
 Nuoto::Nuoto(std::shared_ptr<Persona> atleta, unsigned int durata, Data data,
-             double mgMagnesio, unsigned int sLibero, unsigned int sRana,
+             unsigned int mgMagnesio, unsigned int sLibero, unsigned int sRana,
              unsigned int sDorso)
 try: Allenamento (atleta, durata, data, mgMagnesio), vascheStileLibero(sLibero),
     vascheRana(sRana), vascheDorso(sDorso)
@@ -59,4 +59,16 @@ unsigned int Nuoto::getVascheRana() const {
 
 unsigned int Nuoto::getVascheDorso() const {
     return vascheDorso;
+}
+
+void Nuoto::setVascheStileLibero(unsigned int v) {
+    vascheStileLibero = v;
+}
+
+void Nuoto::setVascheRana(unsigned int v) {
+    vascheRana = v;
+}
+
+void Nuoto::setVascheDorso(unsigned int v) {
+    vascheDorso = v;
 }

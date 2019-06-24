@@ -3,13 +3,13 @@
 #include <typeinfo>
 
 Ciclismo::Ciclismo(std::shared_ptr<Persona> atleta, unsigned int durata,
-                   Data data, double mgMagnesio, unsigned int salita,
+                   Data data, unsigned int mgMagnesio, unsigned int salita,
                    unsigned int pianura, unsigned int discesa)
 try: Allenamento(atleta, durata, data, mgMagnesio), kmSalita(salita),
      kmPianura(pianura), kmDiscesa(discesa)
 {
-    //if(kmSalita + kmPianura + kmDiscesa == 0)
-    //    throw ErrCiclismo();
+    if(kmSalita + kmPianura + kmDiscesa == 0)
+        throw ErrCiclismo();
 } catch (ErrAllenamento) {
     throw;
 }
@@ -59,4 +59,16 @@ unsigned int Ciclismo::getKmDiscesa() const {
 
 unsigned int Ciclismo::getKmPianura() const {
     return kmPianura;
+}
+
+void Ciclismo::setKmSalita(unsigned int km) {
+    kmSalita = km;
+}
+
+void Ciclismo::setKmDiscesa(unsigned int km) {
+    kmDiscesa = km;
+}
+
+void Ciclismo::setKmPianura(unsigned int km) {
+    kmPianura = km;
 }

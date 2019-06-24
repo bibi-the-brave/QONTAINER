@@ -10,7 +10,7 @@ class Corsa : virtual public Allenamento {
     unsigned int kmSterrato;
     unsigned int kmStrada;
 public:
-    Corsa(std::shared_ptr<Persona>, unsigned int, Data, double, unsigned int, unsigned int);
+    Corsa(std::shared_ptr<Persona>, unsigned int, Data, unsigned int, unsigned int, unsigned int);
     Corsa* clone() const override;
     std::string tipo() const override;
     unsigned int calorie() const override;
@@ -20,6 +20,8 @@ public:
 
     unsigned int getKmSterrato() const;
     unsigned int getKmStrada() const;
+    void setKmSterrato(unsigned int);
+    void setKmStrada(unsigned int);
 };
 
 #endif // CORSA_H

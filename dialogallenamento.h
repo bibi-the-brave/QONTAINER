@@ -45,6 +45,7 @@ protected:
     void controlloForm(bool& controllo) const;
     void dialogErroreDoppione() const;
     void compilazioneFormModifica();
+    void visualizzaMessaggioAllenamentoNonModificato() const;
 public slots:
     void reset();
     //void slotModificaAllenamento(bool);

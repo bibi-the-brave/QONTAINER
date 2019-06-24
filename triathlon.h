@@ -7,9 +7,9 @@
 #include <memory>
 #include "data.h"
 
-class Triathlon : public Nuoto, Ciclismo, Corsa {
+class Triathlon : public Nuoto, public Ciclismo, public Corsa {
 public:
-    Triathlon(std::shared_ptr<Persona>, unsigned int, Data data, double,
+    Triathlon(std::shared_ptr<Persona>, unsigned int, Data data, unsigned int,
               unsigned int, unsigned int, unsigned int, unsigned int,
               unsigned int, unsigned int, unsigned int, unsigned int);
     Triathlon* clone() const override;

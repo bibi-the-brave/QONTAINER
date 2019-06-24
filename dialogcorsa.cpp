@@ -14,6 +14,7 @@ DialogCorsa::DialogCorsa(Contenitore<std::shared_ptr<Persona>>& cp_,
     aggiungiBottoni();
 
     setWindowTitle("CORSA");
+    setLabelTitolo();
 
     connect(bReset, SIGNAL(clicked()), wCorsa, SLOT(reset()));
     connect(bReset, SIGNAL(clicked()), this, SLOT(reset()));
@@ -21,11 +22,12 @@ DialogCorsa::DialogCorsa(Contenitore<std::shared_ptr<Persona>>& cp_,
         connect(bConferma, SIGNAL(clicked()), this, SLOT(inserimentoAllenamento()));
     else {
         compilazioneFormModifica();
+        connect(bConferma, SIGNAL(clicked()), this, SLOT(modificaAllenamento()));
     }
 }
 
 void DialogCorsa::setLabelTitolo() {
-    if(modifica)
+    if(!modifica)
         lblTitolo->setText("NUOVO ALLENAMENTO CORSA");
     else
         lblTitolo->setText("MODIFICA ALLENAMENTO CORSA");
@@ -70,4 +72,53 @@ void DialogCorsa::inserimentoAllenamento() {
     emit aggiungereAllenamento();
     delete al; //DeepPtr costruisce di copia i suoi elementi
     close();
+}
+
+void DialogCorsa::modificaAllenamento() {
+    Corsa* allenamentoSelezionato = dynamic_cast<Corsa*>(ca.At(rigaMod).get());
+    if(!allenamentoSelezionato)
+        return;
+
+    bool erroriCompilazione;
+    controlloForm(erroriCompilazione);
+    if(erroriCompilazione) {
+        dialogErroreForm();
+        return;
+    }
+
+    wCorsa->controlloForm(erroriCompilazione);
+    if(erroriCompilazione) {
+        wCorsa->dialogErroreForm();
+        return;
+    }
+
+    std::string strData = deData->date().toString("dd/MM/yyyy").toStdString();
+    Allenamento* al = new Corsa(cp.At(cmbAtleti->currentIndex()),
+                                static_cast<unsigned int>(spinDurata->value()),
+                                Data(strData),
+                                spinMagnesio->value(),
+                                static_cast<unsigned int>(wCorsa->kmSterrato()),
+                                static_cast<unsigned int>(wCorsa->kmStrada()));
+
+
+    if(*allenamentoSelezionato == *al) {
+        visualizzaMessaggioAllenamentoNonModificato();
+        this->close();
+        return; //lo metto perché è capitato che prima di eseguire close venga eseguita
+        //la parte in cui si controlla doppione. Penso perché close possa essere multithread
+    }
+
+
+    if(ca.elementoPresente(al)) {
+        dialogErroreDoppione();
+        return;
+    } else { //modifico l'atleta. Il model e la view si aggiornano in automatico
+        allenamentoSelezionato->setData(al->getData());
+        allenamentoSelezionato->setDurata(al->getDurata());
+        allenamentoSelezionato->setMgMagnesio(al->getMgMagnesioAssunti());
+        allenamentoSelezionato->setKmSterrato(dynamic_cast<Corsa*>(al)->getKmSterrato());
+        allenamentoSelezionato->setKmStrada(dynamic_cast<Corsa*>(al)->getKmStrada());
+        this->close();
+    }
+
 }

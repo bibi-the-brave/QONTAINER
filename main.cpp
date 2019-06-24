@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     Contenitore<DeepPtr<Allenamento>> ca;
 
     //fittizie da togliere
-    auto sp1 = std::make_shared<Persona>("Tullio", "Pietro Maria Vardanega", 0);
+    auto sp1 = std::make_shared<Persona>("Tullio", "Vardanega", 0);
     auto sp2 = std::make_shared<Persona>("Francescopaolo", "Montefalcone", 0);
     auto sp3 = std::make_shared<Persona>("Francesco", "Ranzato", 0);
     cp.pushBack(sp1); cp.pushBack(sp3); cp.pushBack(sp2);

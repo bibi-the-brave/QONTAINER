@@ -9,7 +9,7 @@
 class Nuoto : virtual public Allenamento {
     unsigned int vascheStileLibero, vascheRana, vascheDorso;
 public:
-    Nuoto(std::shared_ptr<Persona>, unsigned int, Data, double,
+    Nuoto(std::shared_ptr<Persona>, unsigned int, Data, unsigned int,
           unsigned int, unsigned int, unsigned int);
     Nuoto* clone() const override;
     std::string tipo() const override;
@@ -21,6 +21,9 @@ public:
     unsigned int getVascheStileLibero() const;
     unsigned int getVascheRana() const;
     unsigned int getVascheDorso() const;
+    void setVascheStileLibero(unsigned int);
+    void setVascheRana(unsigned int);
+    void setVascheDorso(unsigned int);
 };
 
 #endif // NUOTO_H

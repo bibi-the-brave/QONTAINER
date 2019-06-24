@@ -76,14 +76,14 @@ void WidgetAllenamenti::avviaDialogModifica(int riga) {
     Allenamento* a = ca.At(riga).get();
     DialogAllenamento* da;
 
-    if(dynamic_cast<Nuoto*>(a)) {
+    if(dynamic_cast<Triathlon*>(a)) {
+        da = new DialogTriathlon(catleti, ca, true,riga);
+    } else if(dynamic_cast<Nuoto*>(a)) {
         da = new DialogNuoto(catleti, ca, true,riga);
     } else if(dynamic_cast<Ciclismo*>(a)) {
         da = new DialogCiclismo(catleti, ca, true,riga);
     } else if(dynamic_cast<Corsa*>(a)) {
         da = new DialogCorsa(catleti, ca, true,riga);
-    } else if(dynamic_cast<Triathlon*>(a)) {
-        da = new DialogTriathlon(catleti, ca, true,riga);
     } else {
         return;
     }

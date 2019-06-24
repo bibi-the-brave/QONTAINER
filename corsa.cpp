@@ -4,7 +4,7 @@
 #include "data.h"
 
 Corsa::Corsa(std::shared_ptr<Persona> atleta, unsigned int durata, Data data,
-             double mgMagnesio, unsigned int sterrato, unsigned int strada)
+             unsigned int mgMagnesio, unsigned int sterrato, unsigned int strada)
 try: Allenamento (atleta, durata, data, mgMagnesio), kmSterrato(sterrato),
     kmStrada(strada)
 {
@@ -54,4 +54,12 @@ unsigned int Corsa::getKmSterrato() const {
 
 unsigned int Corsa::getKmStrada() const {
     return kmStrada;
+}
+
+void Corsa::setKmSterrato(unsigned int km) {
+    kmSterrato = km;
+}
+
+void Corsa::setKmStrada(unsigned int km) {
+    kmStrada = km;
 }
