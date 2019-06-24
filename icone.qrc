@@ -8,7 +8,8 @@
         <file>immagini/nuoto.svg</file>
         <file>immagini/palestra.svg</file>
         <file>immagini/triathlon.svg</file>
-        <file>immagini/icona.svg</file>
         <file>immagini/logo.svg</file>
+        <file>file/atleti.json</file>
+        <file>file/allenamenti.json</file>
     </qresource>
 </RCC>

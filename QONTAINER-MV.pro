@@ -26,6 +26,7 @@ CONFIG += c++11
 QMAKE_CXXFLAGS += -std=c++0x
 
 SOURCES += \
+    caricatorecontenitori.cpp \
     data.cpp \
     delegatebottone.cpp \
     delegateeliminazione.cpp \
@@ -57,6 +58,7 @@ SOURCES += \
     widgetricerca.cpp
 
 HEADERS += \
+    caricatorecontenitori.h \
     contenitore.h \
     data.h \
     delegatebottone.h \

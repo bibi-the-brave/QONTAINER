@@ -5,6 +5,7 @@
 #include "widgetatleti.h"
 #include "widgetallenamenti.h"
 #include "widgetricerca.h"
+#include "caricatorecontenitori.h"
 
 FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento>>& a,
                                        Contenitore<std::shared_ptr<Persona>>& p,
@@ -12,6 +13,8 @@ FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento>>& a,
     : QMainWindow(parent), ca(a), cp(p)
 {
     tabFunzionalita = new QTabWidget();
+
+    CaricatoreContenitori caricatore(cp,ca);
 
     fa = new WidgetAtleti(cp);
     tabFunzionalita->addTab(fa, "Atleti");
