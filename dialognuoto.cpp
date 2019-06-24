@@ -1,12 +1,15 @@
 #include "dialognuoto.h"
+#include "allenamento.h"
 #include "nuoto.h"
 #include <string>
 
 DialogNuoto::DialogNuoto(
         Contenitore<std::shared_ptr<Persona>>& cp_,
         Contenitore<DeepPtr<Allenamento>>& ca_,
+        bool modifica,
+        int rigaMod,
         QWidget* parent)
-    : DialogAllenamento(cp_,ca_,parent)
+    : DialogAllenamento(cp_,ca_,modifica, rigaMod, parent)
 {
     wNuoto = new WidgetNuoto();
     layoutPrincipale->addWidget(wNuoto);
@@ -15,11 +18,28 @@ DialogNuoto::DialogNuoto(
 
     connect(bReset, SIGNAL(clicked()), wNuoto, SLOT(reset()));
     connect(bReset, SIGNAL(clicked()), this, SLOT(reset()));
-    connect(bConferma, SIGNAL(clicked()), this, SLOT(inserimentoAllenamento()));
+    if(!modifica)
+        connect(bConferma, SIGNAL(clicked()), this, SLOT(inserimentoAllenamento()));
+    else {
+        compilazioneFormModifica();
+    }
 }
 
 void DialogNuoto::setLabelTitolo() {
-    lblTitolo->setText("ALLENAMENTO NUOTO");
+    if(modifica)
+        lblTitolo->setText("NUOVO ALLENAMENTO NUOTO");
+    else
+        lblTitolo->setText("MODIFICA ALLENAMENTO NUOTO");
+}
+
+void DialogNuoto::compilazioneFormModifica() {
+    Nuoto* a = dynamic_cast<Nuoto*>(ca.At(rigaMod).get());
+    if(!a)
+        return;
+
+    wNuoto->setVascheLibero(static_cast<int>(a->getVascheStileLibero()));
+    wNuoto->setVascheDorso(static_cast<int>(a->getVascheDorso()));
+    wNuoto->setVascheRana(static_cast<int>(a->getVascheRana()));
 }
 
 void DialogNuoto::inserimentoAllenamento() {

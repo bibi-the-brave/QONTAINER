@@ -6,16 +6,19 @@
 #include "persona.h"
 #include <QDate>
 #include <QDateEdit>
+#include "allenamento.h"
 
 DialogAllenamento::DialogAllenamento(
         Contenitore<std::shared_ptr<Persona>>& cp_,
         Contenitore<DeepPtr<Allenamento>>& ca_,
+        bool modifica_,
+        int rigaMod_,
         QWidget* parent)
-    : QDialog(parent), cp(cp_), ca(ca_)
+    : QDialog(parent), cp(cp_), ca(ca_), modifica(modifica_), rigaMod(rigaMod_)
 {
     layoutPrincipale = new QVBoxLayout;
 
-    lblTitolo = new QLabel;
+    lblTitolo = new QLabel; //il testo viene settato dalle sottoclassi che derivano DialogAllenamento
     layoutPrincipale->addWidget(lblTitolo);
     layoutPrincipale->setAlignment(lblTitolo, Qt::AlignHCenter);
 
@@ -49,6 +52,9 @@ DialogAllenamento::DialogAllenamento(
     layoutPrincipale->addLayout(lFormAllenamento);
 
     setLayout(layoutPrincipale);
+
+    if(modifica)
+        compilazioneFormModifica();
 }
 
 void DialogAllenamento::aggiungiBottoni() {
@@ -67,6 +73,21 @@ void DialogAllenamento::dialogErroreForm() const {
     mes.setInformativeText("L'allenamento deve durare almeno un minuto.");
     mes.setStandardButtons(QMessageBox::Ok);
     mes.exec();
+}
+
+void DialogAllenamento::compilazioneFormModifica() {
+    Allenamento* a = ca.At(rigaMod).get();
+    int i = cmbAtleti->findText(
+                QString::fromStdString(a->getAtleta().getNome() + " "
+                                       + a->getAtleta().getCognome())
+    );
+    cmbAtleti->setCurrentIndex(i);
+
+    QDate data(a->getData().getY(), a->getData().getM(), a->getData().getD());
+    deData->setDate(data);
+
+    spinDurata->setValue(static_cast<int>(a->getDurata()));
+    spinMagnesio->setValue(static_cast<int>(a->getMgMagnesioAssunti()));
 }
 
 void DialogAllenamento::reset() {

@@ -15,6 +15,8 @@ public:
     WidgetCorsa();
     int kmStrada() const;
     int kmSterrato() const;
+    void setKmStrada(int);
+    void setKmSterrato(int);
     void dialogErroreForm() const;
     void controlloForm(bool& controllo);
 private:

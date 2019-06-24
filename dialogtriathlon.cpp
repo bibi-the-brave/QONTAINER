@@ -7,8 +7,10 @@
 
 DialogTriathlon::DialogTriathlon(Contenitore<std::shared_ptr<Persona>>& cp_,
                                  Contenitore<DeepPtr<Allenamento>>& ca_,
+                                 bool modifica,
+                                 int rigaMod,
                                  QWidget* parent)
-    : DialogAllenamento(cp_,ca_,parent)
+    : DialogAllenamento(cp_,ca_,modifica, rigaMod,parent)
 {
 
     wNuoto = new WidgetNuoto();
@@ -24,13 +26,26 @@ DialogTriathlon::DialogTriathlon(Contenitore<std::shared_ptr<Persona>>& cp_,
     connect(bReset, SIGNAL(clicked()), wCorsa, SLOT(reset()));
     connect(bReset, SIGNAL(clicked()), wCiclismo, SLOT(reset()));
     connect(bReset, SIGNAL(clicked()), this, SLOT(reset()));
-    connect(bConferma, SIGNAL(clicked()), this, SLOT(inserimentoAllenamento()));
+    if(!modifica)
+        connect(bConferma, SIGNAL(clicked()), this, SLOT(inserimentoAllenamento()));
+    else {
+        compilazioneFormModifica();
+    }
 }
 
 void DialogTriathlon::setLabelTitolo() {
-    lblTitolo->setText("ALLENAMENTO TRIATHLON");
+    if(modifica)
+        lblTitolo->setText("NUOVO ALLENAMENTO TRIATHLON");
+    else
+        lblTitolo->setText("MODIFICA ALLENAMENTO TRIATHLON");
 }
 
+void DialogTriathlon::compilazioneFormModifica() {
+    DialogTriathlon* a = dynamic_cast<DialogTriathlon*>(ca.At(rigaMod).get());
+    if(!a)
+        return;
+    Dial
+}
 
 void DialogTriathlon::inserimentoAllenamento() {
     bool erroriCompilazione;

@@ -34,6 +34,14 @@ int WidgetCorsa::kmSterrato() const {
     return spinSterrato->value();
 }
 
+void WidgetCorsa::setKmStrada(int v) {
+    spinStrada->setValue(v);
+}
+
+void WidgetCorsa::setKmSterrato(int v) {
+    spinSterrato->setValue(v);
+}
+
 void WidgetCorsa::reset() {
     spinStrada->setValue(0);
     spinSterrato->setValue(0);

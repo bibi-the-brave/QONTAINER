@@ -4,8 +4,10 @@
 
 DialogCorsa::DialogCorsa(Contenitore<std::shared_ptr<Persona>>& cp_,
                          Contenitore<DeepPtr<Allenamento>>& ca_,
+                         bool modifica,
+                         int rigaMod,
                          QWidget* parent)
-                     : DialogAllenamento(cp_,ca_,parent)
+    : DialogAllenamento(cp_,ca_,modifica, rigaMod,parent)
 {
     wCorsa = new WidgetCorsa();
     layoutPrincipale->addWidget(wCorsa);
@@ -15,11 +17,27 @@ DialogCorsa::DialogCorsa(Contenitore<std::shared_ptr<Persona>>& cp_,
 
     connect(bReset, SIGNAL(clicked()), wCorsa, SLOT(reset()));
     connect(bReset, SIGNAL(clicked()), this, SLOT(reset()));
-    connect(bConferma, SIGNAL(clicked()), this, SLOT(inserimentoAllenamento()));
+    if(!modifica)
+        connect(bConferma, SIGNAL(clicked()), this, SLOT(inserimentoAllenamento()));
+    else {
+        compilazioneFormModifica();
+    }
 }
 
 void DialogCorsa::setLabelTitolo() {
-    lblTitolo->setText("ALLENAMENTO CORSO");
+    if(modifica)
+        lblTitolo->setText("NUOVO ALLENAMENTO CORSA");
+    else
+        lblTitolo->setText("MODIFICA ALLENAMENTO CORSA");
+}
+
+void DialogCorsa::compilazioneFormModifica() {
+    Corsa* a = dynamic_cast<Corsa*>(ca.At(rigaMod).get());
+    if(!a)
+        return;
+
+    wCorsa->setKmStrada(static_cast<int>(a->getKmStrada()));
+    wCorsa->setKmSterrato(static_cast<int>(a->getKmSterrato()));
 }
 
 void DialogCorsa::inserimentoAllenamento() {

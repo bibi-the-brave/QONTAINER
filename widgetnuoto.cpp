@@ -42,6 +42,18 @@ int WidgetNuoto::vascheDorso() const {
     return  spineDorso->value();
 }
 
+void WidgetNuoto::setVascheLibero(int v) {
+    spinLibero->setValue(v);
+}
+
+void WidgetNuoto::setVascheRana(int v) {
+    spinRana->setValue(v);
+}
+
+void WidgetNuoto::setVascheDorso(int v) {
+    spineDorso->setValue(v);
+}
+
 void WidgetNuoto::reset() {
     spinLibero->setValue(0);
     spinRana->setValue(0);

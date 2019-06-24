@@ -43,6 +43,18 @@ int WidgetCiclismo::kmPianura() const {
     return spinePianura->value();
 }
 
+void WidgetCiclismo::setKmSalita(int v) {
+    spinSalita->setValue(v);
+}
+
+void WidgetCiclismo::setKmDiscesa(int v) {
+    spinDiscesa->setValue(v);
+}
+
+void WidgetCiclismo::setKmPianura(int v) {
+    spinePianura->setValue(v);
+}
+
 void WidgetCiclismo::reset() {
     spinSalita->setValue(0);
     spinDiscesa->setValue(0);

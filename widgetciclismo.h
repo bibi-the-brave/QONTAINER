@@ -16,6 +16,9 @@ public:
     int kmSalita() const;
     int kmDiscesa() const;
     int kmPianura() const;
+    void setKmSalita(int);
+    void setKmDiscesa(int);
+    void setKmPianura(int);
     void dialogErroreForm() const;
     void controlloForm(bool& controllo);
 private:

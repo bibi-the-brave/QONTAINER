@@ -9,13 +9,16 @@ class DialogNuoto : public DialogAllenamento {
     Q_OBJECT
 public:
     DialogNuoto(Contenitore<std::shared_ptr<Persona>>&,
-                         Contenitore<DeepPtr<Allenamento>>&,
-                         QWidget* = nullptr);
+                Contenitore<DeepPtr<Allenamento>>&,
+                bool = false,
+                int = 0,
+                QWidget* = nullptr);
 private:
     QGroupBox *gbNuoto;
     WidgetNuoto *wNuoto;
 protected:
     void setLabelTitolo() override;
+    void compilazioneFormModifica();
 public slots:
     void inserimentoAllenamento();
 };

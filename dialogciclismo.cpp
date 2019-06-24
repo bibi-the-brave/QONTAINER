@@ -4,8 +4,10 @@
 
 DialogCiclismo::DialogCiclismo(Contenitore<std::shared_ptr<Persona>>& cp_,
                                Contenitore<DeepPtr<Allenamento>>& ca_,
+                               bool modifica,
+                               int rigaMod,
                                QWidget* parent)
-    : DialogAllenamento(cp_,ca_,parent)
+    : DialogAllenamento(cp_,ca_,modifica, rigaMod,parent)
 {
     wCiclismo = new WidgetCiclismo();
     layoutPrincipale->addWidget(wCiclismo);
@@ -15,11 +17,28 @@ DialogCiclismo::DialogCiclismo(Contenitore<std::shared_ptr<Persona>>& cp_,
 
     connect(bReset, SIGNAL(clicked()), wCiclismo, SLOT(reset()));
     connect(bReset, SIGNAL(clicked()), this, SLOT(reset()));
-    connect(bConferma, SIGNAL(clicked()), this, SLOT(inserimentoAllenamento()));
+    if(!modifica)
+        connect(bConferma, SIGNAL(clicked()), this, SLOT(inserimentoAllenamento()));
+    else {
+        compilazioneFormModifica();
+    }
 }
 
 void DialogCiclismo::setLabelTitolo() {
-    lblTitolo->setText("ALLENAMENTO CICLISMO");
+    if(modifica)
+        lblTitolo->setText("NUOVO ALLENAMENTO CICLISMO");
+    else
+        lblTitolo->setText("MODIFICA ALLENAMENTO CICLISMO");
+}
+
+void DialogCiclismo::compilazioneFormModifica() {
+    Ciclismo* a = dynamic_cast<Ciclismo*>(ca.At(rigaMod).get());
+    if(!a)
+        return;
+
+    wCiclismo->setKmSalita(static_cast<int>(a->getKmSalita()));
+    wCiclismo->setKmDiscesa(static_cast<int>(a->getKmDiscesa()));
+    wCiclismo->setKmPianura(static_cast<int>(a->getKmPianura()));
 }
 
 void DialogCiclismo::inserimentoAllenamento() {

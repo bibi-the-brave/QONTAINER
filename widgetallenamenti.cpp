@@ -4,6 +4,11 @@
 #include "corsa.h"
 #include "ciclismo.h"
 #include "triathlon.h"
+#include "dialogallenamento.h"
+#include "dialognuoto.h"
+#include "dialogciclismo.h"
+#include "dialogcorsa.h"
+#include "dialogtriathlon.h"
 
 #include <QStringList>
 #include <QStandardItemModel>
@@ -68,6 +73,23 @@ void WidgetAllenamenti::ricevutaNotificaEliminazioneRiga(int riga) {
 }
 
 void WidgetAllenamenti::avviaDialogModifica(int riga) {
-    //Allenamento* a = ca.At(riga);
-    //*ca.At(riga);
+    Allenamento* a = ca.At(riga).get();
+    DialogAllenamento* da;
+
+    if(dynamic_cast<Nuoto*>(a)) {
+        da = new DialogNuoto(catleti, ca, true,riga);
+    } else if(dynamic_cast<Ciclismo*>(a)) {
+        da = new DialogCiclismo(catleti, ca, true,riga);
+    } else if(dynamic_cast<Corsa*>(a)) {
+        da = new DialogCorsa(catleti, ca, true,riga);
+    } else if(dynamic_cast<Triathlon*>(a)) {
+        da = new DialogTriathlon(catleti, ca, true,riga);
+    } else {
+        return;
+    }
+
+    da->exec();
+    delete da;
+    // nessuna delete su 'a' perché get ritorna un puntatore grezzo, non copia profonda
+    // corrispondente a quello contenuto in DeepPtr<Allenamento>
 }

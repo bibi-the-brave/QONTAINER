@@ -22,10 +22,14 @@ class DialogAllenamento : public QDialog {
 public:
     explicit DialogAllenamento(Contenitore<std::shared_ptr<Persona>>&,
                                         Contenitore<DeepPtr<Allenamento>>&,
+                                        bool mod = false,
+                                        int rMod = 0, //se mod == 0 non uso rigaMod
                                         QWidget* = nullptr);
 protected:
     Contenitore<std::shared_ptr<Persona>>& cp;
     Contenitore<DeepPtr<Allenamento>>& ca;
+    bool modifica;
+    int rigaMod;
     QPushButton *bConferma, *bReset;
     QVBoxLayout *layoutPrincipale;
     QHBoxLayout *lBottoni;
@@ -40,8 +44,10 @@ protected:
     void dialogErroreForm() const;
     void controlloForm(bool& controllo) const;
     void dialogErroreDoppione() const;
+    void compilazioneFormModifica();
 public slots:
     void reset();
+    //void slotModificaAllenamento(bool);
 signals:
     void aggiungereAllenamento();
 };

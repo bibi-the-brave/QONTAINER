@@ -24,6 +24,7 @@ public:
     bool operator==(const DeepPtr&);
     T* operator->() const;
     T& operator*() const;
+    T* get() const;
 };
 
 template <typename T>
@@ -64,6 +65,11 @@ T* DeepPtr<T>::operator->() const {
 template <typename T>
 T& DeepPtr<T>::operator*() const {
     return *ptr;
+}
+
+template <typename T>
+T* DeepPtr<T>::get() const {
+    return  ptr;
 }
 
 #endif // DEEPPTR_H
