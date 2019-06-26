@@ -28,6 +28,7 @@ WidgetNuovoSport::WidgetNuovoSport(Contenitore<std::shared_ptr<Persona>>& cp_,
     layout->addWidget(lblCreazione);
     layout->setAlignment(lblCreazione, Qt::AlignHCenter);
     layout->addLayout(layoutBottoni);
+    layoutBottoni->setAlignment(Qt::AlignCenter);
     setLayout(layout);
 }
 

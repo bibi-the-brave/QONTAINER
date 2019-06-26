@@ -22,14 +22,14 @@ int main(int argc, char *argv[])
     Contenitore<std::shared_ptr<Persona>> cp;
     Contenitore<DeepPtr<Allenamento>> ca;
 
-    //fittizie da togliere
+    /*/fittizie da togliere
     auto sp1 = std::make_shared<Persona>("Tullio", "Vardanega", 0);
     auto sp2 = std::make_shared<Persona>("Francescopaolo", "Montefalcone", 0);
     auto sp3 = std::make_shared<Persona>("Francesco", "Ranzato", 0);
     cp.pushBack(sp1); cp.pushBack(sp3); cp.pushBack(sp2);
     DeepPtr<Allenamento> a1(new Ciclismo(sp1, 52, Data("01/01/2019"),12.0, 15,20,6));
     DeepPtr<Allenamento> a2(new Nuoto(sp1, 55, Data("01/01/2019"), 12.0, 35,50,29));
-    ca.pushBack(a1); ca.pushBack(a2);
+    ca.pushBack(a1); ca.pushBack(a2);*/
 
     QApplication a(argc, argv);
     a.setWindowIcon(QIcon(":/immagini/logo.svg"));

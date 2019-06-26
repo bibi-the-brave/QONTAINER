@@ -9,13 +9,13 @@
 #include <QRadioButton>
 #include <QLabel>
 #include <QComboBox>
-#include <QLineEdit>
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QGridLayout>
 #include <QFormLayout>
 #include <QTableView>
+#include <QDateEdit>
 #include "widgetnuoto.h"
 #include "widgetciclismo.h"
 #include "widgetcorsa.h"
@@ -37,12 +37,13 @@ private:
     QPushButton *btnRicerca;
     QRadioButton *rbNuoto, *rbCorsa, *rbCiclismo, *rbTriathlon, *rbAtleta;
 
-    // ricerca persona
-    QLabel *lblNome, *lblCognome, *lblSesso;
-    QLineEdit *leNome, *leCognome;
-    QGroupBox *boxSesso;
-    QHBoxLayout *lSesso;
+    // ricerca atleta
+    QLabel *lblAtleti, *lblSesso, *lblMAgnesio, *lblDataInizio, *lblDataFine;
+    QComboBox* cmbAtleti;
+    QGroupBox* boxSesso;
+    QHBoxLayout* lSesso;
     QRadioButton *rbUomo, *rbDonna;
+    QDateEdit *deDataInizio, *deDatFine;
 
     WidgetNuoto* wNuoto;
     WidgetCorsa* wCorsa;

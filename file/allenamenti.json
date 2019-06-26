@@ -1,6 +1,6 @@
 {
   
-	"nuoto" : {
+	"nuoto" : [{
 		"atleta" : {
 			"nome" : "Andrea",
 			"cognome" : "Favero",
@@ -18,13 +18,31 @@
 		"dorso": 20
 	},
 
-	"nuoto" : {
+	{
+		"atleta" : {
+			"nome" : "Andrea",
+			"cognome" : "Favero",
+			"sesso" : false
+		},
+		"durata" : 45,
+		"data": {
+			"d": 5,
+			"m": 6,
+			"y": 2019
+		},
+		"magnesio": 10,
+		"stile": 50,
+		"rana": 2,
+		"dorso": 20
+	},
+
+	{
 		"atleta" : {
 			"nome" : "Margherita",
 			"cognome" : "Panziera",
 			"sesso" : true
 		},
-		"durata" : "240",
+		"durata" : 240,
 		"data": {
 			"d": 1,
 			"m": 1,
@@ -34,27 +52,27 @@
 		"stile": 2,
 		"rana": 0,
 		"dorso": 450
-	},
+	}],
 
-	"ciclismo" : {
+	"ciclismo" : [{
 		"atleta" : {
 			"nome" : "Vincenzo",
 			"cognome" : "Nibali",
 			"sesso" : false
 		},
-		"durata" : "360",
+		"durata" : 360,
 		"data": {
 			"d": 1,
 			"m": 1,
 			"y": 2020
 		},
-		"magnesio": "30",
-		"salita": "40",
-		"discesa": "20",
-		"pianura": "10"
-	},
+		"magnesio": 0,
+		"salita": 40,
+		"discesa": 20,
+		"pianura": 10
+	}],
 
-	"corsa" : {
+	"corsa" : [{
 		"atleta" : {
 			"nome" : "Filippo",
 			"cognome" : "Tortu",
@@ -69,9 +87,9 @@
 		"magnesio": 30,
 		"sterrato": 5,
 		"strada": 8
-	},
+	}],
 
-	"triathlon" : {
+	"triathlon" : [{
 		"atleta" : {
 			"nome" : "Laurence",
 			"cognome" : "Quinto",
@@ -92,5 +110,5 @@
 		"pianura": 10,
 		"sterrato": 5,
 		"strada": 8
-	}
+	}]
 }

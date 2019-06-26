@@ -21,23 +21,23 @@ CaricatoreContenitori::CaricatoreContenitori(Contenitore<std::shared_ptr<Persona
 void CaricatoreContenitori::leggiFile() {
     QFile fAtleti(":/file/atleti.json");
     QFile fAllenamenti(":/file/allenamenti.json");
-    qDebug() << "Sto per leggere gli atleti";
+    ///////////////////////////////////////////////////////////////
     // LETTURA ATLETI
     ///////////////////////////////////////////////////////////////
-    if(fAtleti.open(QIODevice::ReadOnly)) {qDebug() << "yooooo";
+    if(fAtleti.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QJsonDocument docjson;
-        docjson.fromJson(fAtleti.readAll());
+        QString val = fAtleti.readAll();
+        docjson = QJsonDocument::fromJson(val.toUtf8());
         QJsonObject json = docjson.object();
-
         QJsonArray valori = json["atleta"].toArray();
-        foreach(const QJsonValue& v , valori) {qDebug() << "ehi, sexy ladyy";
+
+        foreach(const QJsonValue& v , valori) {
             QJsonObject valore = v.toObject();
 
             //VALORI DELL'ATLETA
-            QJsonObject atleta = valore["atleta"].toObject();
-            QString nome = atleta["nome"].toString();
-            QString cognome = atleta["cognome"].toString();
-            bool sesso = atleta["sesso"].toBool();
+            QString nome = valore["nome"].toString();
+            QString cognome = valore["cognome"].toString();
+            bool sesso = valore["sesso"].toBool();
 
             auto sp = std::make_shared<Persona>(nome.toStdString(), cognome.toStdString(), sesso);
             if( !atl.elementoPresente(sp) )
@@ -51,21 +51,21 @@ void CaricatoreContenitori::leggiFile() {
     ////////////////////////////////////////////////////////////////////
     if(fAllenamenti.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QJsonDocument docjson;
-        docjson.fromJson(fAllenamenti.readAll());
+        QString val = fAllenamenti.readAll();
+        docjson = QJsonDocument::fromJson(val.toUtf8());
         QJsonObject json = docjson.object();
 
         /////////////////////////////////////////////////
         // Nuoto
         /////////////////////////////////////////////////
         QJsonArray valori = json.value("nuoto").toArray();
-        foreach(const QJsonValue& v , valori){
+        foreach(const QJsonValue& v , valori) {
             QJsonObject valore = v.toObject();
 
-            //VALORI DELL'ATLETA
             QJsonObject atleta = valore["atleta"].toObject();
             QString nome = atleta["nome"].toString();
-            QString cognome= atleta["cognome"].toString();
-            bool sesso= atleta["sesso"].toBool();
+            QString cognome = atleta["cognome"].toString();
+            bool sesso = atleta["sesso"].toBool();
 
             int durata = valore["durata"].toInt();
 
@@ -104,21 +104,24 @@ void CaricatoreContenitori::leggiFile() {
             }
 
         }
-
+/*
         /////////////////////////////////////////////////
         // Ciclismo
         /////////////////////////////////////////////////
-        valori = json.value("nuoto").toArray();
-        foreach(const QJsonValue& v , valori){
+        val = fAllenamenti.readAll();
+        //docjson = QJsonDocument::fromJson(val.toUtf8());
+        //json = docjson.object();
+        valori = json.value("nuoto").toArray();qDebug() << valori.size();
+        foreach(const QJsonValue& v , valori) {qDebug() << "prova ingresso";
             QJsonObject valore = v.toObject();
 
             //VALORI DELL'ATLETA
             QJsonObject atleta = valore["atleta"].toObject();
-            QString nome = atleta["nome"].toString();
-            QString cognome= atleta["cognome"].toString();
+            QString nome = atleta["nome"].toString(); qDebug() << nome;
+            QString cognome= atleta["cognome"].toString(); qDebug() << cognome;
             bool sesso= atleta["sesso"].toBool();
 
-            int durata = valore["durata"].toInt();
+            int durata = valore["durata"].toInt(); qDebug() << durata;
 
             //valori data
             QJsonObject data = valore["data"].toObject();
@@ -155,7 +158,7 @@ void CaricatoreContenitori::leggiFile() {
             }
 
         }
-
+/*
         /////////////////////////////////////////////////
         // Corsa
         /////////////////////////////////////////////////
@@ -269,7 +272,7 @@ void CaricatoreContenitori::leggiFile() {
             }
 
         }
-
+*/
         fAllenamenti.close();
     }
 

@@ -41,7 +41,7 @@ DialogAllenamento::DialogAllenamento(
 
     lblDurata = new QLabel("Durata (in min.):");
     spinDurata = new QSpinBox();
-    spinDurata->setRange(0, 24);
+    spinDurata->setRange(0, 1440);
     lFormAllenamento->addRow(lblDurata, spinDurata);
 
     lblMagnesio =  new QLabel("Mg magnesio assunti:");
@@ -93,6 +93,7 @@ void DialogAllenamento::compilazioneFormModifica() {
 
 void DialogAllenamento::reset() {
     cmbAtleti->setCurrentIndex(0);
+    deData->setDate(QDate::currentDate());
     spinDurata->setValue(0);
     spinMagnesio->setValue(0);
 }

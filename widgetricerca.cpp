@@ -5,19 +5,24 @@
 #include <QGroupBox>
 #include <QRadioButton>
 #include <QLabel>
-#include <QLineEdit>
+#include <QHBoxLayout>
+#include <QString>
+#include <QStringList>
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QGridLayout>
 #include <QFormLayout>
 #include <QSpinBox>
+#include <QHBoxLayout>
+#include <QHeaderView>
 #include "widgetnuoto.h"
 #include "widgetciclismo.h"
 #include "widgetcorsa.h"
+#include "deepptr.h"
+#include "contenitore.h"
 #include "modeltabellaallenamenti.h"
 #include "delegatebottone.h"
-#include <QHeaderView>
 
 WidgetRicerca::WidgetRicerca(Contenitore<DeepPtr<Allenamento>>& ca_, QWidget* parent)
     : QWidget (parent), ca(ca_)
@@ -83,12 +88,17 @@ WidgetRicerca::WidgetRicerca(Contenitore<DeepPtr<Allenamento>>& ca_, QWidget* pa
 QGroupBox* WidgetRicerca::costruzioneFormPersona() {
     boxPersona = new QGroupBox("PERSONA");
     lPersona = new QFormLayout;
-    lblNome = new QLabel("Nome");
-    leNome = new QLineEdit;
-    lPersona->addRow(lblNome, leNome);
-    lblCognome = new QLabel("Cognome");
-    leCognome = new QLineEdit;
-    lPersona->addRow(lblCognome, leCognome);
+    lblAtleti = new QLabel("Atleta");
+    cmbAtleti = new QComboBox;
+    QStringList atletiDup/*potrebbe contenere duplicati*/, atleti;
+    Contenitore<DeepPtr<Allenamento>>::iterator it = ca.begin();
+    for(; it != ca.end(); it++)
+        atletiDup << QString::fromStdString((*it)->getAtleta().getNome()) + " " +
+                  QString::fromStdString((*it)->getAtleta().getCognome());
+    atleti = atletiDup.toSet().toList();
+    cmbAtleti->addItems(atleti);
+    lPersona->addRow(lblAtleti, cmbAtleti);
+    QHBoxLayout *lDataInizio = new QHBoxLayout, *lDataFine = new QHBoxLayout;
     lblSesso = new QLabel("Sesso");
     lSesso = new QHBoxLayout;
     rbUomo = new QRadioButton("Uomo");
