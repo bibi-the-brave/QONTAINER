@@ -23,6 +23,8 @@ DialogTriathlon::DialogTriathlon(Contenitore<std::shared_ptr<Persona>>& cp_,
     setWindowTitle("TRIATHLON");
     setLabelTitolo();
 
+    layoutPrincipale->setSizeConstraint( QLayout::SetFixedSize );
+
     connect(bReset, SIGNAL(clicked()), wNuoto, SLOT(reset()));
     connect(bReset, SIGNAL(clicked()), wCorsa, SLOT(reset()));
     connect(bReset, SIGNAL(clicked()), wCiclismo, SLOT(reset()));

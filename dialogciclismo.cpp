@@ -16,6 +16,8 @@ DialogCiclismo::DialogCiclismo(Contenitore<std::shared_ptr<Persona>>& cp_,
     setWindowTitle("CICLISMO");
     setLabelTitolo();
 
+    layoutPrincipale->setSizeConstraint( QLayout::SetFixedSize );
+
     connect(bReset, SIGNAL(clicked()), wCiclismo, SLOT(reset()));
     connect(bReset, SIGNAL(clicked()), this, SLOT(reset()));
     if(!modifica)

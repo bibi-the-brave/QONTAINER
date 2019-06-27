@@ -33,27 +33,37 @@ private:
     QHBoxLayout* layoutRadioSport; // layout per i radiobutton per selezionare lo sport
     QGridLayout* layoutBoxFormRicerca; // layout che contiene i form relativi agli sport
     QFormLayout *lPersona;
-    QGroupBox *boxRicerca, *boxPersona;
+    QHBoxLayout *lNuoto, *lCiclismo, *lCorsa;
+    QGroupBox *boxRicerca, *boxPersona, *boxNuoto, *boxCiclismo, *boxCorsa;
     QPushButton *btnRicerca;
     QRadioButton *rbNuoto, *rbCorsa, *rbCiclismo, *rbTriathlon, *rbAtleta;
 
     // ricerca atleta
-    QLabel *lblAtleti, *lblSesso, *lblMAgnesio, *lblDataInizio, *lblDataFine;
     QComboBox* cmbAtleti;
-    QGroupBox* boxSesso;
-    QHBoxLayout* lSesso;
-    QRadioButton *rbUomo, *rbDonna;
-    QDateEdit *deDataInizio, *deDatFine;
+    QHBoxLayout *lDate, *lMagnesio, *lDurata;
+    QDateEdit *deDataInizio, *deDataFine;
+    QSpinBox *spinMinMagnesio, *spinMaxMagnesio, *spinMinDurata, *spinMaxDurata;
 
-    WidgetNuoto* wNuoto;
-    WidgetCorsa* wCorsa;
-    WidgetCiclismo* wCiclismo;
+    // ricerca nuoto
+    QSpinBox *spinMinStile, *spinMaxStile, *spinMinRana, *spinMaxRana, *spinMinDorso, *spinMaxDorso;
+    // ricerca ciclismo
+    QSpinBox *spinMinSalita, *spinMaxSalita, *spinMinDiscesa, *spinMaxDiscesa, *spinMinPianura, *spinMaxPianura;
+    // ricerca corsa
+    QSpinBox *spinMinStrada, *spinMaxStrada, *spinMinSterrato, *spinMaxSterrato;
 
     QTableView* tabellaRicerca;
     ModelTabellaAllenamenti* modello;
     DelegateEliminazione* delegato;
 
     QGroupBox* costruzioneFormPersona();
+    QGroupBox* costruzioneFormNuoto();
+    QGroupBox* costruzioneFormCiclismo();
+    QGroupBox* costruzioneFormCorsa();
+public slots:
+    void selezioneGroupBox();
+    void gestioneSpinBoxOverflowMin(int);
+    void gestioneSpinBoxUnderflowMax(int);
+    void gestioneDate(const QDate &date);
 };
 
 #endif // WIDGETRICERCA_H

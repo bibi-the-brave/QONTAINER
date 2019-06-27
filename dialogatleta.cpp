@@ -60,8 +60,8 @@ DialogAtleta::DialogAtleta(Contenitore<std::shared_ptr<Persona>>& a,
     leNome->setValidator(validator);
     leCognome->setValidator(validator);
 
-    //this->setFixedSize(QSize(this->width(),this->height()));
     setWindowTitle("ATLETA");
+    layoutPrincipale->setSizeConstraint( QLayout::SetFixedSize );
 
     if(modifica) {
         compilazioneFormModifica();

@@ -16,6 +16,8 @@ DialogCorsa::DialogCorsa(Contenitore<std::shared_ptr<Persona>>& cp_,
     setWindowTitle("CORSA");
     setLabelTitolo();
 
+    layoutPrincipale->setSizeConstraint( QLayout::SetFixedSize );
+
     connect(bReset, SIGNAL(clicked()), wCorsa, SLOT(reset()));
     connect(bReset, SIGNAL(clicked()), this, SLOT(reset()));
     if(!modifica)

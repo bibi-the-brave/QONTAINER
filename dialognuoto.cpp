@@ -18,6 +18,8 @@ DialogNuoto::DialogNuoto(
     setWindowTitle("NUOTO");
     setLabelTitolo();
 
+    layoutPrincipale->setSizeConstraint( QLayout::SetFixedSize );
+
     connect(bReset, SIGNAL(clicked()), wNuoto, SLOT(reset()));
     connect(bReset, SIGNAL(clicked()), this, SLOT(reset()));
     if(!modifica)
