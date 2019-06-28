@@ -27,12 +27,12 @@ unsigned int Ciclismo::calorie() const {
     return (400 * kmTot * kmTot) / getDurata() + 30 * kmSalita + 10 * kmPianura;
 }
 
-double Ciclismo::grassoPerso() const {
+unsigned int Ciclismo::grassoPerso() const {
     return (calorie() / 7500) + (110 * kmSalita)/7500
             + (45 * kmDiscesa)/7500 + (90 * kmPianura)/7500;
 }
 
-double Ciclismo::saliMinerali() const {
+unsigned int Ciclismo::saliMinerali() const {
     return 110.0 * kmSalita + 90 * kmPianura;
 }
 

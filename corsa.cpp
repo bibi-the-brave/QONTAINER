@@ -27,12 +27,12 @@ unsigned int Corsa::calorie() const {
     return(800 * kmTot * kmTot) / getDurata() + kmSterrato / 2;
 }
 
-double Corsa::grassoPerso() const {
+unsigned int Corsa::grassoPerso() const {
     return (calorie() / 7500) + ((90 * kmStrada) / 7500)
             + ((110 * kmSterrato)/7500);
 }
 
-double Corsa::saliMinerali() const {
+unsigned int Corsa::saliMinerali() const {
     return 90.0 * kmStrada + 95.0 * kmSterrato;
 }
 

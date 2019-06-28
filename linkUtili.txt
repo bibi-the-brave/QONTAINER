@@ -1,9 +1,0 @@
-https://doc.qt.io/qt-5/qtwidgets-itemviews-addressbook-example.html
-
-
-https://doc.qt.io/qt-5/overviews-main.html
-https://doc.qt.io/qt-5/topics-ui.html
-https://doc.qt.io/qt-5/qtexamplesandtutorials.html
-
-https://doc.qt.io/qt-5/qdockwidget.html
-https://doc.qt.io/qt-5/layout.html

@@ -36,11 +36,11 @@ unsigned int Triathlon::calorie() const {
         Corsa::calorie();
 }
 
-double Triathlon::grassoPerso() const {
+unsigned int Triathlon::grassoPerso() const {
     return Nuoto::grassoPerso() + Ciclismo::grassoPerso() + Corsa::grassoPerso();
 }
 
-double Triathlon::saliMinerali() const {
+unsigned int Triathlon::saliMinerali() const {
     return Nuoto::saliMinerali() + Ciclismo::saliMinerali() + Corsa::saliMinerali();
 }
 

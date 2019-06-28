@@ -27,13 +27,13 @@ unsigned int Nuoto::calorie() const {
     return 50 * vascheStileLibero + 25 * vascheRana + 40 * vascheDorso;
 }
 
-double Nuoto::grassoPerso() const {
-    return (calorie() / 7500) + 0.5 * vascheStileLibero + 0.5 * vascheRana
-            + 0.25 * vascheDorso;
+unsigned int Nuoto::grassoPerso() const {
+    return static_cast<unsigned int>( (calorie() / 7500) + 0.5 * vascheStileLibero + 0.5 * vascheRana
+            + 0.25 * vascheDorso );
 }
 
-double Nuoto::saliMinerali() const {
-    return 25.0 * vascheStileLibero + 10.0* vascheDorso + 15.0 *vascheRana;
+unsigned int Nuoto::saliMinerali() const {
+    return static_cast<unsigned int>( 25 * vascheStileLibero + 10 * vascheDorso + 15 * vascheRana);
 }
 
 bool Nuoto::operator==(const Allenamento& al) const {

@@ -1,7 +1,9 @@
 #include "widgetricerca.h"
+#include "deepptr.h"
+#include "contenitore.h"
+#include "delegatebottone.h"
 #include "contenitore.h"
 #include "allenamento.h"
-#include "deepptr.h"
 #include <QGroupBox>
 #include <QRadioButton>
 #include <QLabel>
@@ -16,20 +18,12 @@
 #include <QSpinBox>
 #include <QHBoxLayout>
 #include <QHeaderView>
-#include "widgetnuoto.h"
-#include "widgetciclismo.h"
-#include "widgetcorsa.h"
-#include "deepptr.h"
-#include "contenitore.h"
-#include "modeltabellaallenamenti.h"
-#include "delegatebottone.h"
 
 WidgetRicerca::WidgetRicerca(Contenitore<DeepPtr<Allenamento>>& ca_, QWidget* parent)
     : QWidget (parent), ca(ca_)
 {
     layoutPrincipale = new QVBoxLayout;
 
-    // box relativo alla ricerca
     boxRicerca = new QGroupBox("RICERCA");
     layoutComponentiRicerca = new QVBoxLayout;
 
@@ -48,7 +42,6 @@ WidgetRicerca::WidgetRicerca(Contenitore<DeepPtr<Allenamento>>& ca_, QWidget* pa
     rbAtleta->setChecked(true);
     layoutComponentiRicerca->addLayout(layoutRadioSport);
 
-
     layoutBoxFormRicerca = new QGridLayout;
     layoutBoxFormRicerca->addWidget(costruzioneFormPersona(),0,0);
     layoutBoxFormRicerca->addWidget(costruzioneFormNuoto(),0,1);
@@ -60,7 +53,7 @@ WidgetRicerca::WidgetRicerca(Contenitore<DeepPtr<Allenamento>>& ca_, QWidget* pa
     layoutBoxFormRicerca->setRowStretch(1,1);
     layoutComponentiRicerca->addLayout(layoutBoxFormRicerca);
 
-    // di default è selezionato il radiobutton atleta quindi li disabilito
+    // di default è selezionato il radiobutton atleta quindi disabilito i groupBox relativi agli sport
     boxNuoto->setEnabled(false);
     boxCorsa->setEnabled(false);
     boxCiclismo->setEnabled(false);
@@ -350,5 +343,3 @@ void WidgetRicerca::gestioneDate(const QDate &date) {
     else if(sender == deDataFine && deDataInizio->date() > deDataFine->date())
         deDataInizio->setDate(deDataFine->date());
 }
-
-//dateChanged(const QDate &date)

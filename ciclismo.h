@@ -13,8 +13,8 @@ public:
     Ciclismo* clone() const override;
     std::string tipo() const override;
     unsigned int calorie() const override;
-    virtual double grassoPerso() const override;
-    double saliMinerali() const override;
+    unsigned int grassoPerso() const override;
+    unsigned int saliMinerali() const override;
     bool operator==(const Allenamento&) const override;
 
     unsigned int getKmSalita() const;

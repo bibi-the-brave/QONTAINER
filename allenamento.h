@@ -21,8 +21,8 @@ public:
     virtual std::string tipo() const = 0;
     virtual Allenamento* clone() const = 0;
     virtual unsigned int calorie() const = 0; // #calorie consumate
-    virtual double grassoPerso() const = 0;// in grammi
-    virtual double saliMinerali() const = 0; // mg di sali minerali consumati, >= 0
+    virtual unsigned int grassoPerso() const = 0;// in grammi
+    virtual unsigned int saliMinerali() const = 0; // mg di sali minerali consumati, >= 0
     virtual bool operator==(const Allenamento&) const;
 
     Persona getAtleta() const;

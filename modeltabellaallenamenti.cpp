@@ -40,7 +40,7 @@ QVariant ModelTabellaAllenamenti::data(const QModelIndex &index, int role) const
             return QString::fromStdString( std::to_string( dati.At(riga)->getMgMagnesioAssunti() ) )
                     + " mg";
         case 5:
-            return QString::fromStdString( std::to_string( dati.At(riga)->calorie() ));
+            return QString::fromStdString( std::to_string( dati.At(riga)->calorie() )) + " cal";
         case 6:
             return QString::fromStdString( std::to_string( dati.At(riga)->grassoPerso() )) + " g";
         case 7:
