@@ -78,7 +78,7 @@ void CaricatoreContenitori::leggiFile() {
 }
 
 Allenamento* CaricatoreContenitori::letturaAllenamento(QString allenamento) {
-    Allenamento *a;
+    Allenamento *a = nullptr;
     lxml.readNextStartElement();
     if(lxml.isStartElement()) {
         Persona p("prova","prova",false);
@@ -235,4 +235,14 @@ qDebug() << "stile " + QString::fromStdString(std::to_string(stile)) +
 
 void CaricatoreContenitori::scriviFile() {
 
+}
+
+void CaricatoreContenitori::scritturaFileAtleti() {
+    /*QFile file("atleti.xml");
+    file.open(QIODevice::WriteOnly);
+
+    sxml.
+    QXmlStreamWriter xmlWriter(&file);
+    xmlWriter.setAutoFormatting(true);
+    xmlWriter.writeStartDocument();*/
 }

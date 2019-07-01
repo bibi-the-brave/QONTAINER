@@ -21,6 +21,7 @@ public:
                           Contenitore<DeepPtr<Allenamento>>&);
     void leggiFile();
     void scriviFile();
+    void scritturaFileAtleti();
 private:
     Contenitore<std::shared_ptr<Persona>>& atl;
     Contenitore<DeepPtr<Allenamento>>& all;
