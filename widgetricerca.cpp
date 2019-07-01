@@ -121,7 +121,8 @@ QGroupBox* WidgetRicerca::costruzioneFormPersona() {
     Contenitore<DeepPtr<Allenamento>>::iterator it = ca.begin();
     for(; it != ca.end(); it++)
         atletiDup << QString::fromStdString((*it)->getAtleta().getNome()) + " " +
-                  QString::fromStdString((*it)->getAtleta().getCognome());
+                  QString::fromStdString((*it)->getAtleta().getCognome()) + " " +
+                     QString::fromStdString((*it)->getAtleta().getSessoCarUtf8());
     atleti = atletiDup.toSet().toList();
     cmbAtleti->addItems(atleti);
     lPersona->addRow("Atleta:", cmbAtleti);

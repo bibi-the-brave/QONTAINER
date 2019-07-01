@@ -16,6 +16,8 @@ public:
     std::string getNomeCognome() const;
     bool getSesso() const;
     std::string getSessoStr() const;
+    std::string getSessoStrUtf8() const;
+    std::string getSessoCarUtf8() const;
     void setNome(std::string);
     void setCognome(std::string);
     void setSesso(bool);

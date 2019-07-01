@@ -28,8 +28,13 @@ QVariant ModelTabellaAllenamenti::data(const QModelIndex &index, int role) const
     case Qt::DisplayRole:
         switch (colonna) {
         case 0:
-            return QString::fromStdString( dati.At(riga)->getAtleta().getNome())
-                + " " + QString::fromStdString( dati.At(riga)->getAtleta().getCognome() );
+            if( !dati.At(riga)->getAtleta().getSesso() ) {
+                return QString::fromStdString( dati.At(riga)->getAtleta().getNome())
+                    + " " + QString::fromStdString( dati.At(riga)->getAtleta().getCognome()) + " " + QString::fromUtf8("\u2642");
+            } else {
+                return QString::fromStdString( dati.At(riga)->getAtleta().getNome())
+                    + " " + QString::fromStdString( dati.At(riga)->getAtleta().getCognome()) + " " + QString::fromUtf8("\u2640");
+            }
         case 1:
             return QString::fromStdString( dati.At(riga)->getData().toString());
         case 2:

@@ -53,6 +53,18 @@ std::string Persona::getSessoStr() const {
     return std::string("Donna");
 }
 
+std::string Persona::getSessoStrUtf8() const {
+    if(!sesso)
+        return  std::string("uomo \u2642");
+    return  std::string("donna \u2640");
+}
+
+std::string Persona::getSessoCarUtf8() const {
+    if(!sesso)
+        return  std::string("\u2642");
+    return  std::string("\u2640");
+}
+
 void Persona::setNome(std::string n) {
     if(!(n.find_first_not_of(' ') != std::string::npos))
         throw ErrPersona();

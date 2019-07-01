@@ -30,7 +30,8 @@ DialogAllenamento::DialogAllenamento(
     Contenitore<std::shared_ptr<Persona>>::iterator it = cp.begin();
     for(; it != cp.end(); it++)
         atleti << QString::fromStdString((*it)->getNome()) + " " +
-                  QString::fromStdString((*it)->getCognome());
+                  QString::fromStdString((*it)->getCognome()) + " " +
+                  QString::fromStdString((*it)->getSessoCarUtf8());
     cmbAtleti->addItems(atleti);
     lFormAllenamento->addRow(lblAtleta, cmbAtleti);
 
@@ -41,7 +42,7 @@ DialogAllenamento::DialogAllenamento(
 
     lblDurata = new QLabel("Durata (in min.):");
     spinDurata = new QSpinBox();
-    spinDurata->setRange(0, 1440);
+    spinDurata->setRange(1, 1440);
     lFormAllenamento->addRow(lblDurata, spinDurata);
 
     lblMagnesio =  new QLabel("Mg magnesio assunti:");
@@ -79,7 +80,8 @@ void DialogAllenamento::compilazioneFormModifica() {
     Allenamento* a = ca.At(rigaMod).get();
     int i = cmbAtleti->findText(
                 QString::fromStdString(a->getAtleta().getNome() + " "
-                                       + a->getAtleta().getCognome())
+                                       + a->getAtleta().getCognome() + " "
+                                       + a->getAtleta().getSessoCarUtf8())
     );
     cmbAtleti->setCurrentIndex(i);
     cmbAtleti->setEnabled(false);//non lascio modificare gli atleti ma solo i loro campi dati

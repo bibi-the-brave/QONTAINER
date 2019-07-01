@@ -28,7 +28,7 @@ QVariant ModelTabellaAtleti::data(const QModelIndex &index, int role) const {
         case 1:
             return QString::fromStdString( dati.At(riga)->getCognome() );
         case 2:
-            return QString::fromStdString( dati.At(riga)->getSessoStr() );
+            return QString::fromStdString( dati.At(riga)->getSessoStrUtf8());
         }
     }
     return QVariant();

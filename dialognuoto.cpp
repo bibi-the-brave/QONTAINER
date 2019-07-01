@@ -65,7 +65,7 @@ void DialogNuoto::inserimentoAllenamento() {
     Allenamento* al = new Nuoto(cp.At(cmbAtleti->currentIndex()),
                                 static_cast<unsigned int>(spinDurata->value()),
                                 Data(strData),
-                                spinMagnesio->value(),
+                                static_cast<unsigned int>(spinMagnesio->value()),
                                 static_cast<unsigned int>(wNuoto->vascheLibero()),
                                 static_cast<unsigned int>(wNuoto->vascheRana()),
                                 static_cast<unsigned int>(wNuoto->vascheDorso()));
