@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<atleti>
+	<atleta>
+		<nome>Andrea</nome>
+		<cognome>Favero</cognome>
+		<sesso>false</sesso>
+	</atleta>
+	<atleta>
+		<nome>Margherita</nome>
+		<cognome>Panziera</cognome>
+		<sesso>true</sesso>
+	</atleta>
+	<atleta>
+		<nome>Vincenzo</nome>
+		<cognome>Nibali</cognome>
+		<sesso>false</sesso>
+	</atleta>
+	<atleta>
+		<nome>Filippo</nome>
+		<cognome>Tortu</cognome>
+		<sesso>false</sesso>
+	</atleta>
+	<atleta>
+		<nome>Laurence</nome>
+		<cognome>Quinto</cognome>
+		<sesso>false</sesso>
+	</atleta>
+</atleti>

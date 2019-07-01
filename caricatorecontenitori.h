@@ -12,6 +12,8 @@
 #include "deepptr.h"
 #include <QFile>
 #include <QJsonDocument>
+#include <QXmlStreamReader>
+#include <QXmlStreamWriter>
 
 class CaricatoreContenitori {
 public:
@@ -22,6 +24,13 @@ public:
 private:
     Contenitore<std::shared_ptr<Persona>>& atl;
     Contenitore<DeepPtr<Allenamento>>& all;
+
+    QXmlStreamReader lxml;
+    QXmlStreamWriter sxml;
+
+    Allenamento* letturaAllenamento(QString);
+    Data letturaData();
+    Persona letturaAtleta();
 };
 
 #endif // CARICATORECONTENITORI_H

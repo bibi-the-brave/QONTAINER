@@ -9,7 +9,7 @@
         <file>immagini/palestra.svg</file>
         <file>immagini/triathlon.svg</file>
         <file>immagini/logo.svg</file>
-        <file>file/atleti.json</file>
-        <file>file/allenamenti.json</file>
+        <file>file/atleti.xml</file>
+        <file>file/allenamenti.xml</file>
     </qresource>
 </RCC>
