@@ -22,6 +22,7 @@ public:
     void leggiFile();
     void scriviFile();
     void scritturaFileAtleti();
+    void scritturaFileAllenamenti();
 private:
     Contenitore<std::shared_ptr<Persona>>& atl;
     Contenitore<DeepPtr<Allenamento>>& all;
@@ -32,6 +33,16 @@ private:
     Allenamento* letturaAllenamento(QString);
     Data letturaData();
     Persona letturaAtleta();
+
+    void scritturaData(int y, int m, int d);
+    void scritturaAttributiNuoto(int, int, int);
+    void scritturaAttributiCiclismo(int, int, int);
+    void scritturaAttributiCorsa(int, int);
+    void scritturaAtleta(QString, QString, QString);
+    void scritturaNuoto(Allenamento*);
+    void scritturaCiclismo(Allenamento*);
+    void scritturaCorsa(Allenamento*);
+    void scritturaTriathlon(Allenamento*);
 };
 
 #endif // CARICATORECONTENITORI_H

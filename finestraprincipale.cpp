@@ -37,3 +37,8 @@ FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento>>& a,
             wa->getModello(), SLOT(eliminazioneAllenamenti(std::shared_ptr<Persona>)));
 }
 
+FinestraPrincipale::~FinestraPrincipale() {
+    CaricatoreContenitori salvataggio(cp,ca);
+    salvataggio.scritturaFileAtleti();
+    salvataggio.scritturaFileAllenamenti();
+}

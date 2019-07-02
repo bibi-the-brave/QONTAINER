@@ -24,6 +24,7 @@ public:
 
     FinestraPrincipale(const FinestraPrincipale&) = delete;
     FinestraPrincipale& operator=(const FinestraPrincipale&) = delete;
+    ~FinestraPrincipale();
 private:
     QWidget* centrale;
     QTabWidget* tabFunzionalita;
