@@ -64,6 +64,12 @@ public slots:
     void gestioneSpinBoxOverflowMin(int);
     void gestioneSpinBoxUnderflowMax(int);
     void gestioneDate(const QDate &date);
+    void aggiornamentoMinAllenamento(Allenamento*);
+    void aggiornamentoMaxAllenamento(Allenamento*);
+    void avvioRicerca();
+signals:
+    void allenamentoMin(Allenamento*);
+    void allenamentoMAx(Allenamento*);
 };
 
 #endif // WIDGETRICERCA_H
