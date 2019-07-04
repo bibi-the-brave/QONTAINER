@@ -18,6 +18,9 @@ protected:
 
 private:
     Contenitore<DeepPtr<Allenamento>>& ca;
+    enum {tutti, nuoto, ciclismo, corsa, triathlon};
+    Allenamento* minore;
+    Allenamento* maggiore;
 };
 
 #endif // SORTFILTERPROXYMODELALLENAMENTI_H
