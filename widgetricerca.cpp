@@ -358,5 +358,5 @@ void WidgetRicerca::aggiornamentoMaxAllenamento(Allenamento*) {
 
 #include <QtDebug>
 void WidgetRicerca::avvioRicerca() {
-    qDebug() << "prova";
+
 }
