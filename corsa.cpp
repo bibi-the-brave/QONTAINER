@@ -33,7 +33,7 @@ unsigned int Corsa::grassoPerso() const {
 }
 
 unsigned int Corsa::saliMinerali() const {
-    return 90.0 * kmStrada + 95.0 * kmSterrato;
+    return 90 * kmStrada + 95 * kmSterrato;
 }
 
 bool Corsa::operator==(const Allenamento& al) const {

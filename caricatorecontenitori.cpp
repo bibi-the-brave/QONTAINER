@@ -197,11 +197,11 @@ Allenamento* CaricatoreContenitori::letturaAllenamento(QString allenamento) {
 Data CaricatoreContenitori::letturaData() {
     int d,m,y;
     lxml.readNextStartElement();
-    d = lxml.readElementText().toInt();
+    y = lxml.readElementText().toInt();
     lxml.readNextStartElement();
     m = lxml.readElementText().toInt();
     lxml.readNextStartElement();
-    y = lxml.readElementText().toInt();
+    d = lxml.readElementText().toInt();
     lxml.readNext();
     return Data(y,m,d);
 }
@@ -235,7 +235,7 @@ void CaricatoreContenitori::scritturaFileAtleti() {
         for (;it != atl.end(); ++it) {
             scritturaAtleta(QString::fromStdString((*it)->getNome()),
                             QString::fromStdString((*it)->getCognome()),
-                            QString((*it)->getSessoStr() == "uomo" ? "false" : "true"));
+                            QString((*it)->getSessoStr() == "Uomo" ? "false" : "true"));
         }
         sxml.writeEndElement(); // atleti
 
@@ -316,7 +316,7 @@ void CaricatoreContenitori::scritturaAtleta(QString nome, QString cognome, QStri
 void CaricatoreContenitori::scritturaNuoto(Allenamento* a) {
     scritturaAtleta(QString::fromStdString(a->getAtleta().getNome()),
                     QString::fromStdString(a->getAtleta().getCognome()),
-                    QString(a->getAtleta().getSessoStr() == "uomo" ? "false" : "true"));
+                    QString(a->getAtleta().getSessoStr() == "Uomo" ? "false" : "true"));
     sxml.writeTextElement("durata",
                           QString::fromStdString(std::to_string((a->getDurata()))));
     scritturaData(a->getData().getY(),
@@ -333,7 +333,7 @@ void CaricatoreContenitori::scritturaNuoto(Allenamento* a) {
 void CaricatoreContenitori::scritturaCiclismo(Allenamento* a) {
     scritturaAtleta(QString::fromStdString(a->getAtleta().getNome()),
                     QString::fromStdString(a->getAtleta().getCognome()),
-                    QString(a->getAtleta().getSessoStr() == "uomo" ? "false" : "true"));
+                    QString(a->getAtleta().getSessoStr() == "Uomo" ? "false" : "true"));
     sxml.writeTextElement("durata",
                           QString::fromStdString(std::to_string((a->getDurata()))));
     scritturaData(a->getData().getY(),
@@ -350,7 +350,7 @@ void CaricatoreContenitori::scritturaCiclismo(Allenamento* a) {
 void CaricatoreContenitori::scritturaCorsa(Allenamento* a) {
     scritturaAtleta(QString::fromStdString(a->getAtleta().getNome()),
                     QString::fromStdString(a->getAtleta().getCognome()),
-                    QString(a->getAtleta().getSessoStr() == "uomo" ? "false" : "true"));
+                    QString(a->getAtleta().getSessoStr() == "Uomo" ? "false" : "true"));
     sxml.writeTextElement("durata",
                           QString::fromStdString(std::to_string((a->getDurata()))));
     scritturaData(a->getData().getY(),
@@ -366,7 +366,7 @@ void CaricatoreContenitori::scritturaCorsa(Allenamento* a) {
 void CaricatoreContenitori::scritturaTriathlon(Allenamento* a) {
     scritturaAtleta(QString::fromStdString(a->getAtleta().getNome()),
                     QString::fromStdString(a->getAtleta().getCognome()),
-                    QString(a->getAtleta().getSessoStr() == "uomo" ? "false" : "true"));
+                    QString(a->getAtleta().getSessoStr() == "Uomo" ? "false" : "true"));
     sxml.writeTextElement("durata",
                           QString::fromStdString(std::to_string((a->getDurata()))));
     scritturaData(a->getData().getY(),

@@ -8,9 +8,9 @@
 		</atleta>
 		<durata>45</durata>
 		<data>
+			<y>2020</y>			
 			<d>1</d>
-			<m>1</m>
-			<y>2020</y>
+			<m>1</m>			
 		</data>
 		<magnesio>10</magnesio>
 		<stile>50</stile>
@@ -25,9 +25,9 @@
 		</atleta>
 		<durata>45</durata>
 		<data>
-			<d>5</d>
-			<m>6</m>
 			<y>2019</y>
+			<m>6</m>
+			<d>5</d>
 		</data>
 		<magnesio>10</magnesio>
 		<stile>100</stile>
@@ -42,9 +42,9 @@
 		</atleta>
 		<durata>360</durata>
 		<data>
-			<d>5</d>
-			<m>6</m>
 			<y>2019</y>
+			<m>6</m>
+			<d>5</d>
 		</data>
 		<magnesio>10</magnesio>
 		<stile>2</stile>
@@ -59,9 +59,9 @@
 		</atleta>
 		<durata>360</durata>
 		<data>
-			<d>5</d>
-			<m>6</m>
 			<y>2019</y>
+			<m>6</m>
+			<d>5</d>
 		</data>
 		<magnesio>10</magnesio>
 		<salita>40</salita>
@@ -76,9 +76,9 @@
 		</atleta>
 		<durata>360</durata>
 		<data>
-			<d>1</d>
-			<m>2</m>
 			<y>2018</y>
+			<m>1</m>
+			<d>2</d>
 		</data>
 		<magnesio>30</magnesio>
 		<sterrato>5</sterrato>
@@ -92,9 +92,9 @@
 		</atleta>
 		<durata>360</durata>
 		<data>
-			<d>1</d>
-			<m>2</m>
 			<y>2021</y>
+			<m>2</m>
+			<d>1</d>
 		</data>
 		<magnesio>10</magnesio>
 		<stile>50</stile>

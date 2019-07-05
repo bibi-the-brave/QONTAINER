@@ -13,7 +13,7 @@ public:
               unsigned int, unsigned int, unsigned int, unsigned int,
               unsigned int, unsigned int, unsigned int, unsigned int);
     Triathlon* clone() const override;
-    virtual std::string tipo() const override;
+    std::string tipo() const override;
     unsigned int calorie() const override;
     unsigned int grassoPerso() const override;
     unsigned int saliMinerali() const override;

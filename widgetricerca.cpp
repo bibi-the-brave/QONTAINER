@@ -348,15 +348,19 @@ void WidgetRicerca::gestioneDate(const QDate &date) {
         deDataInizio->setDate(deDataFine->date());
 }
 
-void WidgetRicerca::aggiornamentoMinAllenamento(Allenamento*) {
-
-}
-
-void WidgetRicerca::aggiornamentoMaxAllenamento(Allenamento*) {
-
-}
-
-#include <QtDebug>
 void WidgetRicerca::avvioRicerca() {
+    Allenamento *alMin = nullptr, *alMax = nullptr;
+
+    if(rbAtleta->isChecked()) {
+
+    } else if(rbNuoto->isChecked()) {
+
+    } else if(rbCorsa->isChecked()) {
+
+    } else if(rbCiclismo->isChecked()) {
+
+    } else if(rbTriathlon->isChecked()) {
+
+    }
 
 }

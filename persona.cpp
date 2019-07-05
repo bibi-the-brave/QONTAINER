@@ -55,8 +55,8 @@ std::string Persona::getSessoStr() const {
 
 std::string Persona::getSessoStrUtf8() const {
     if(!sesso)
-        return  std::string("uomo \u2642");
-    return  std::string("donna \u2640");
+        return  std::string("Uomo \u2642");
+    return  std::string("Donna \u2640");
 }
 
 std::string Persona::getSessoCarUtf8() const {
