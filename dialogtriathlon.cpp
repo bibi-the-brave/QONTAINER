@@ -50,7 +50,8 @@ void DialogTriathlon::compilazioneFormModifica() {
         return;
     int i = cmbAtleti->findText(
                 QString::fromStdString(a->getAtleta().getNome() + " "
-                                       + a->getAtleta().getCognome())
+                                       + a->getAtleta().getCognome() + " "
+                                       + a->getAtleta().getSessoCarUtf8())
     );
     cmbAtleti->setCurrentIndex(i);
 
