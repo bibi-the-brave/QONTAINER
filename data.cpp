@@ -55,7 +55,33 @@ bool Data::controlloValidita(int y, int m, int d) {
 }
 
 bool Data::operator==(const Data& d_) const {
+    if( !valida || !d_.valida )
+        return false;
     return  d == d_.d && m == d_.m && y == d_.y;
+}
+
+bool Data::operator>=(const Data& d) const {
+    if( !valida || !d.valida )
+        return false;
+    if(y >= d.y)
+        return  true;
+    if(y == d.y && m >= d.m)
+        return true;
+    if(y == d.y && m == d.m && d >= d)
+        return true;
+    return false;
+}
+
+bool Data::operator<=(const Data& d) const {
+    if( !valida || !d.valida )
+        return false;
+    if(y <= d.y)
+        return  true;
+    if(y == d.y && m <= d.m)
+        return true;
+    if(y == d.y && m == d.m && d <= d)
+        return true;
+    return false;
 }
 
 std::string Data::toString() const {

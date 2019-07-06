@@ -24,14 +24,17 @@ public:
     virtual unsigned int grassoPerso() const = 0;// in grammi
     virtual unsigned int saliMinerali() const = 0; // mg di sali minerali consumati, >= 0
     virtual bool operator==(const Allenamento&) const;
+    virtual bool operator>=(const Allenamento&) const;
+    virtual bool operator<=(const Allenamento&) const;
 
     Persona getAtleta() const;
+    std::shared_ptr<Persona> getSharedAtleta() const;
     unsigned int getMgMagnesioAssunti() const;
     unsigned int getDurata() const;
     Data getData() const;
     void setAtleta(std::shared_ptr<Persona>);
     void setData(const Data&);
-    void setMgMagnesio(double);
+    void setMgMagnesio(unsigned int);
     void setDurata(unsigned int);
 };
 

@@ -38,6 +38,7 @@ DialogAllenamento::DialogAllenamento(
     lblData = new QLabel("Data:");
     deData = new QDateEdit(QDate::currentDate());
     deData->setCalendarPopup(true);
+    deData->setMaximumDate(QDate::currentDate());
     lFormAllenamento->addRow(lblData, deData);
 
     lblDurata = new QLabel("Durata (in min.):");

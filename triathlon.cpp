@@ -53,4 +53,21 @@ bool Triathlon::operator==(const Allenamento& al) const {
     }
 }
 
+bool Triathlon::operator>=(const Allenamento& al) const {
+    try {
+        const Triathlon& t = dynamic_cast<const Triathlon&>(al);
+        return Nuoto::operator>=(al) && Corsa::operator>=(al) && Ciclismo::operator>=(al);
+    } catch (std::bad_cast e) {
+        return false;
+    }
+}
+
+bool Triathlon::operator<=(const Allenamento& al) const {
+    try {
+        const Triathlon& t = dynamic_cast<const Triathlon&>(al);
+        return Nuoto::operator<=(al) && Corsa::operator<=(al) && Ciclismo::operator<=(al);
+    } catch (std::bad_cast e) {
+        return false;
+    }
+}
 

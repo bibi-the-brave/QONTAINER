@@ -60,6 +60,10 @@ ModelTabellaAllenamenti* WidgetAllenamenti::getModello() const {
     return modello;
 }
 
+DelegateEliminazione* WidgetAllenamenti::getDelEl() const {
+    return  delegatoEl;
+}
+
 void WidgetAllenamenti::ricevutaNotificaEliminazioneRiga(int riga) {
     QMessageBox boxConfermaEliminazione;
     boxConfermaEliminazione.setIcon(QMessageBox::Question);

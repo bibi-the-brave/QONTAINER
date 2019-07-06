@@ -65,6 +65,14 @@ std::string Persona::getSessoCarUtf8() const {
     return  std::string("\u2640");
 }
 
+std::string Persona::toStringUtf8() const {
+    return nome + " " + cognome + " " + getSessoStrUtf8();
+}
+
+std::string Persona::toStringUtf8CarSesso() const {
+    return nome + " " + cognome + " " + getSessoCarUtf8();
+}
+
 void Persona::setNome(std::string n) {
     if(!(n.find_first_not_of(' ') != std::string::npos))
         throw ErrPersona();

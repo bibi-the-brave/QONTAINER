@@ -18,6 +18,8 @@ public:
     std::string getSessoStr() const;
     std::string getSessoStrUtf8() const;
     std::string getSessoCarUtf8() const;
+    std::string toStringUtf8() const;
+    std::string toStringUtf8CarSesso() const;
     void setNome(std::string);
     void setCognome(std::string);
     void setSesso(bool);

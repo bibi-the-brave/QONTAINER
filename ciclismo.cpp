@@ -49,6 +49,30 @@ bool Ciclismo::operator==(const Allenamento& al) const {
 
 }
 
+bool Ciclismo::operator>=(const Allenamento& al) const {
+    try {
+        const Ciclismo& t = dynamic_cast<const Ciclismo&>(al); //se ok non viene lanciata eccezione
+        return Allenamento::operator>=(al) &&
+                kmSalita >= (dynamic_cast<const Ciclismo&>(al)).kmSalita &&
+                kmDiscesa >= (dynamic_cast<const Ciclismo&>(al)).kmDiscesa &&
+                kmPianura >= (dynamic_cast<const Ciclismo&>(al)).kmPianura;
+    } catch (std::bad_cast e) {
+        return false;
+    }
+}
+
+bool Ciclismo::operator<=(const Allenamento& al) const {
+    try {
+        const Ciclismo& t = dynamic_cast<const Ciclismo&>(al); //se ok non viene lanciata eccezione
+        return Allenamento::operator<=(al) &&
+                kmSalita <= (dynamic_cast<const Ciclismo&>(al)).kmSalita &&
+                kmDiscesa <= (dynamic_cast<const Ciclismo&>(al)).kmDiscesa &&
+                kmPianura <= (dynamic_cast<const Ciclismo&>(al)).kmPianura;
+    } catch (std::bad_cast e) {
+        return false;
+    }
+}
+
 unsigned int Ciclismo::getKmSalita() const {
     return kmSalita;
 }

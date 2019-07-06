@@ -62,7 +62,7 @@ void DialogCorsa::inserimentoAllenamento() {
     Allenamento* al = new Corsa(cp.At(cmbAtleti->currentIndex()),
                                 static_cast<unsigned int>(spinDurata->value()),
                                 Data(strData),
-                                spinMagnesio->value(),
+                                static_cast<unsigned int>(spinMagnesio->value()),
                                 static_cast<unsigned int>(wCorsa->kmSterrato()),
                                 static_cast<unsigned int>(wCorsa->kmStrada()));
 

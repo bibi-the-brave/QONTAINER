@@ -12,15 +12,19 @@ class SortFilterProxyModelAllenamenti : public QSortFilterProxyModel
     Q_OBJECT
 public:
     SortFilterProxyModelAllenamenti(Contenitore<DeepPtr<Allenamento>>& ca,QObject* = nullptr);
+    ~SortFilterProxyModelAllenamenti() override;
 protected:
     bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const override;
-    bool lessThan(const QModelIndex &left, const QModelIndex &right) const override;
 
 private:
     Contenitore<DeepPtr<Allenamento>>& ca;
-    enum {tutti, nuoto, ciclismo, corsa, triathlon};
     Allenamento* minore;
     Allenamento* maggiore;
+    int tipoRicerca;
+public slots:
+    void setTipoSort(int);
+    void setAllenamentoMinore(Allenamento*);
+    void setAllenamentoMaggiore(Allenamento*);
 };
 
 #endif // SORTFILTERPROXYMODELALLENAMENTI_H

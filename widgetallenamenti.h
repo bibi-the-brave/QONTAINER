@@ -23,6 +23,7 @@ public:
     explicit WidgetAllenamenti(Contenitore<std::shared_ptr<Persona>>&,
                                Contenitore<DeepPtr<Allenamento>>&, QWidget* = nullptr);
     ModelTabellaAllenamenti* getModello() const;
+    DelegateEliminazione* getDelEl() const;
 private:
     QVBoxLayout* layout;
     QLabel* lblTitolo;

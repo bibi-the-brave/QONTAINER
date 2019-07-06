@@ -2,8 +2,20 @@
 #include "deepptr.h"
 #include "contenitore.h"
 #include "delegatebottone.h"
+#include "delegatemodifica.h"
 #include "contenitore.h"
 #include "allenamento.h"
+#include "nuoto.h"
+#include "ciclismo.h"
+#include "corsa.h"
+#include "triathlon.h"
+#include "dialogallenamento.h"
+#include "dialognuoto.h"
+#include "dialogciclismo.h"
+#include "dialogcorsa.h"
+#include "dialogtriathlon.h"
+#include "modeltabellaallenamenti.h"
+#include "sortfilterproxymodelallenamenti.h"
 #include <QGroupBox>
 #include <QRadioButton>
 #include <QLabel>
@@ -18,9 +30,12 @@
 #include <QSpinBox>
 #include <QHBoxLayout>
 #include <QHeaderView>
+#include <QMessageBox>
 
-WidgetRicerca::WidgetRicerca(Contenitore<DeepPtr<Allenamento>>& ca_, QWidget* parent)
-    : QWidget (parent), ca(ca_)
+WidgetRicerca::WidgetRicerca(Contenitore<std::shared_ptr<Persona>>& cp_,
+                             Contenitore<DeepPtr<Allenamento>>& ca_,
+                             QWidget* parent)
+    : QWidget (parent), cp(cp_), ca(ca_)
 {
     layoutPrincipale = new QVBoxLayout;
 
@@ -71,9 +86,13 @@ WidgetRicerca::WidgetRicerca(Contenitore<DeepPtr<Allenamento>>& ca_, QWidget* pa
     setLayout(layoutPrincipale);
 
     modello = new ModelTabellaAllenamenti(ca);
-    tabellaRicerca->setModel(modello);
-    delegato = new DelegateEliminazione;
-    tabellaRicerca->setItemDelegateForColumn(8, delegato);
+    proxy = new SortFilterProxyModelAllenamenti(ca);
+    proxy->setSourceModel(modello);
+    tabellaRicerca->setModel(proxy);
+    delegatoEl = new DelegateEliminazione;
+    delegatoMod = new DelegateModifica;
+    tabellaRicerca->setItemDelegateForColumn(8, delegatoEl);
+    tabellaRicerca->setItemDelegateForColumn(9, delegatoMod);
     tabellaRicerca->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     // segnali e slot relativi ai radioButton (gestione visualizzazione box allenamenti)
@@ -112,8 +131,33 @@ WidgetRicerca::WidgetRicerca(Contenitore<DeepPtr<Allenamento>>& ca_, QWidget* pa
 
     // segnali e slot relativi alla ricera degli allenamenti
     connect(btnRicerca, SIGNAL(clicked()), this, SLOT(avvioRicerca()));
+    connect(this, SIGNAL(allenamentoMin(Allenamento*)),
+            proxy, SLOT(setAllenamentoMinore(Allenamento*)));
+    connect(this, SIGNAL(allenamentoMax(Allenamento*)),
+            proxy, SLOT(setAllenamentoMaggiore(Allenamento*)));
+    connect(this, SIGNAL(selezioneTipo(int)), proxy, SLOT(setTipoSort(int)));
+
+    // segnali e slot relativi alla modifica e all'eliminazione
+    // di un elemento dalla tabella dei risulati
+
+    // il delegate avverte che l'utente ha cliccato un bottone e vuole eliminare una riga
+    connect(delegatoEl, SIGNAL(avvisoEliminazione(int)), this, SLOT(ricevutaNotificaEliminazioneRiga(int)));
+    // se l'utente conferma l'eliminazione viene avertito il delegate
+    connect(this, SIGNAL(rimuovereRiga(int)), delegatoEl, SLOT(slotEliminazione(int)));
+    // il delegate avverte il model di rimuovere la riga desiderata
+    connect(delegatoEl, SIGNAL(eliminaRiga(int)), modello, SLOT(eliminazioneAllenamento(int)));
+
+    // 'Eventi' relativi alla modifica di un allenamento
+    connect(delegatoMod, SIGNAL(avvisoModifica(int)), this, SLOT(avviaDialogModifica(int)));
 }
 
+ModelTabellaAllenamenti* WidgetRicerca::getModello() const {
+    return modello;
+}
+
+SortFilterProxyModelAllenamenti* WidgetRicerca::getProxy() const {
+    return proxy;
+}
 
 QGroupBox* WidgetRicerca::costruzioneFormPersona() {
     boxPersona = new QGroupBox("PERSONA");
@@ -131,7 +175,7 @@ QGroupBox* WidgetRicerca::costruzioneFormPersona() {
     lPersona->addRow("Atleta:", cmbAtleti);
 
     QFormLayout *lDataInizio = new QFormLayout, *lDataFine = new QFormLayout;
-    deDataInizio = new QDateEdit(QDate::currentDate());
+    deDataInizio = new QDateEdit(QDate(1990,1,1));
     deDataInizio->setCalendarPopup(true);
     lDataInizio->addRow("Dal:", deDataInizio);
     deDataFine = new QDateEdit(QDate::currentDate());
@@ -146,6 +190,7 @@ QGroupBox* WidgetRicerca::costruzioneFormPersona() {
     spinMinDurata->setRange(1, 1440);
     spinMaxDurata = new QSpinBox();
     spinMaxDurata->setRange(1, 1440);
+    spinMaxDurata->setValue(1440);
     lDurata = new QHBoxLayout;
     QFormLayout *lMinDurata = new QFormLayout, *lMaxDurata = new QFormLayout;
     lMinDurata->addRow("Durata min:", spinMinDurata);
@@ -159,6 +204,7 @@ QGroupBox* WidgetRicerca::costruzioneFormPersona() {
     spinMaxMagnesio = new QSpinBox();
     spinMinMagnesio->setRange(0, 350);
     spinMaxMagnesio->setRange(0, 350);
+    spinMaxMagnesio->setValue(350);
     QFormLayout *lMinMgnesio = new QFormLayout, *lMaxMgnesio = new QFormLayout;
     lMinMgnesio->addRow("Min magnesio:", spinMinMagnesio);
     lMaxMgnesio->addRow("Max magnesio:", spinMaxMagnesio);
@@ -176,18 +222,27 @@ QGroupBox* WidgetRicerca::costruzioneFormNuoto() {
 
     QFormLayout *lMin = new QFormLayout, *lMax = new QFormLayout;
     spinMinStile = new QSpinBox;
+    spinMinStile->setRange(0, 400);
     lMin->addRow("Vasche Stile (min):", spinMinStile);
     spinMinRana = new QSpinBox;
+    spinMinRana->setRange(0, 400);
     lMin->addRow("Vasche Rana (min):", spinMinRana);
     spinMinDorso = new QSpinBox;
+    spinMinDorso->setRange(0, 400);
     lMin->addRow("Vasche Dorso (min):", spinMinDorso);
     lNuoto->addLayout(lMin);
 
     spinMaxStile = new QSpinBox;
+    spinMaxStile->setRange(0, 400);
+    spinMaxStile->setValue(400);
     lMax->addRow("Vasche Stile (max):", spinMaxStile);
     spinMaxRana = new QSpinBox;
+    spinMaxRana->setRange(0, 400);
+    spinMaxRana->setValue(400);
     lMax->addRow("Vasche Rana (max):", spinMaxRana);
     spinMaxDorso = new QSpinBox;
+    spinMaxDorso->setRange(0, 400);
+    spinMaxDorso->setValue(400);
     lMax->addRow("Vasche Dorso (max):", spinMaxDorso);
     lNuoto->addLayout(lMax);
 
@@ -201,18 +256,27 @@ QGroupBox* WidgetRicerca::costruzioneFormCiclismo() {
 
     QFormLayout *lMin = new QFormLayout, *lMax = new QFormLayout;
     spinMinSalita = new QSpinBox;
+    spinMinSalita->setRange(0, 400);
     lMin->addRow("Km salita (min):", spinMinSalita);
     spinMinDiscesa = new QSpinBox;
+    spinMinDiscesa->setRange(0, 400);
     lMin->addRow("Km discesa (min):", spinMinDiscesa);
     spinMinPianura = new QSpinBox;
+    spinMinPianura->setRange(0, 400);
     lMin->addRow("Km pianura (min):", spinMinPianura);
     lCiclismo->addLayout(lMin);
 
     spinMaxSalita = new QSpinBox;
+    spinMaxSalita->setRange(0, 400);
+    spinMaxSalita->setValue(400);
     lMax->addRow("Km salita (max):", spinMaxSalita);
     spinMaxDiscesa = new QSpinBox;
+    spinMaxDiscesa->setRange(0, 400);
+    spinMaxDiscesa->setValue(400);
     lMax->addRow("Km discesa (max):", spinMaxDiscesa);
     spinMaxPianura = new QSpinBox;
+    spinMaxPianura->setRange(0, 400);
+    spinMaxPianura->setValue(400);
     lMax->addRow("Km pianura (max):", spinMaxPianura);
     lCiclismo->addLayout(lMax);
 
@@ -226,20 +290,81 @@ QGroupBox* WidgetRicerca::costruzioneFormCorsa() {
 
     QFormLayout *lMin = new QFormLayout, *lMax = new QFormLayout;
     spinMinStrada = new QSpinBox;
+    spinMinStrada->setRange(0, 400);
     lMin->addRow("Km strada (min):", spinMinStrada);
     spinMinSterrato = new QSpinBox;
+    spinMinSterrato->setRange(0, 400);
     lMin->addRow("Km sterrato (min):", spinMinSterrato);
     lCorsa->addLayout(lMin);
 
     spinMaxStrada = new QSpinBox;
+    spinMaxStrada->setRange(0, 400);
+    spinMaxStrada->setValue(400);
     lMax->addRow("Km strada (max):", spinMaxStrada);
     spinMaxSterrato = new QSpinBox;
+    spinMaxSterrato->setRange(0, 400);
+    spinMaxSterrato->setValue(400);
     lMax->addRow("Km sterrato (max):", spinMaxSterrato);
     lCorsa->addLayout(lMax);
 
     boxCorsa->setLayout(lCorsa);
     return boxCorsa;
 }
+
+void WidgetRicerca::stampaMessaggioErrore(QString messaggio) const {
+    QMessageBox mes;
+    mes.setIcon(QMessageBox::Information);
+    mes.setText("Errore!");
+    mes.setInformativeText(messaggio);
+    mes.setStandardButtons(QMessageBox::Ok);
+    mes.exec();
+}
+
+bool WidgetRicerca::verificaNuoto() const {
+    if(spinMinRana->value() + spinMinStile->value() + spinMinDorso->value() == 0) {
+        stampaMessaggioErrore(
+                    QString("Ogni atleta deve aver portato a compimento almeno una vasca ") +
+                    QString("in un qualsiasi stile."));
+        return false;
+    }
+    return true;
+}
+
+bool WidgetRicerca::verificaCiclismo() const {
+    if(spinMinSalita->value() + spinMinPianura->value() + spinMinDiscesa->value() == 0) {
+        stampaMessaggioErrore(
+                    QString("Ogni atleta deve aver portato a compimento almeno 1 km ") +
+                    QString("in salita o in discesa oppure in pianura."));
+        return false;
+    }
+    return true;
+}
+
+bool WidgetRicerca::verificaCorsa() const {
+    if(spinMinSterrato->value() + spinMinStrada->value() == 0) {
+        stampaMessaggioErrore(
+                    QString("Ogni atleta deve aver portato a compimento almeno 1 km ") +
+                    QString("su strada o sullo sterrato."));
+        return false;
+    }
+    return true;
+}
+
+bool WidgetRicerca::verificaTriathlon() const {
+    if( !verificaNuoto() )
+        return  false;
+    if( ! verificaCiclismo() )
+        return false;
+    if( !verificaCorsa() )
+        return false;
+    return  true;
+}
+/*
+bool verificaMaxNuoto() const;
+bool verificaMaxCiclismo() const;
+bool verificaMaxCorsa() const;
+bool verificaMaxTriathlon() const
+*/
 
 void WidgetRicerca::selezioneGroupBox() {
     QObject *sender = QObject::sender();
@@ -314,7 +439,7 @@ void WidgetRicerca::gestioneSpinBoxUnderflowMax(int) {
             spinMinDurata->setValue(spinMaxDurata->value());
     } else if(sender == spinMaxStile) {
         if(spinMinStile->value() > spinMaxStile->value())
-            spinMaxStile->setValue(spinMaxStile->value());
+            spinMinStile->setValue(spinMaxStile->value());
     } else if(sender == spinMaxRana) {
         if(spinMinRana->value() > spinMaxRana->value())
             spinMinRana->setValue(spinMaxRana->value());
@@ -348,19 +473,212 @@ void WidgetRicerca::gestioneDate(const QDate &date) {
         deDataInizio->setDate(deDataFine->date());
 }
 
+
+/*
+ * Non necessita di fare alcuna delete. Ci pensano i metodi dell'oggetto
+ * proxy a deallocare la memoria dei puntatori che la funzione
+ * gli passa come come parametri.
+ */
 void WidgetRicerca::avvioRicerca() {
     Allenamento *alMin = nullptr, *alMax = nullptr;
 
-    if(rbAtleta->isChecked()) {
-
-    } else if(rbNuoto->isChecked()) {
-
-    } else if(rbCorsa->isChecked()) {
-
-    } else if(rbCiclismo->isChecked()) {
-
-    } else if(rbTriathlon->isChecked()) {
-
+    bool trovato = false;
+    Contenitore<DeepPtr<Allenamento>>::iterator it = ca.begin();
+    Persona* p;
+    for(int i = 0; it != ca.end() && !trovato;  ++i) {
+        if( (*it)->getAtleta().toStringUtf8CarSesso() == cmbAtleti->currentText().toStdString() ) {
+            p = new Persona((*it)->getAtleta().getNome(),
+                            (*it)->getAtleta().getCognome(),
+                            (*it)->getAtleta().getSesso());
+            trovato = true;
+        } else
+            ++it;
     }
 
+    if(!trovato)
+        return;
+
+    if(rbAtleta->isChecked()) {
+        emit selezioneTipo(0);
+        /*
+         * Se l'utente ha selezionato il radiobutton rbAtleta
+         * vuole ricercare tutti i tipi di allenamento relativi ad un qualsiasi
+         * atleta. Posso passare un qualsiasi oggetto che abbia un tipo dinamico
+         * che è sottotipo di Allenamento*, la funzione filterAcceptsRow() del
+         * proxy userà solamente i metodi Allenamento::operator>=() e
+         * Allenamento::operator<=(). Adesso viene passato un oggetto che ha
+         * TD == Corsa* ma per ciò che è appena stato detto potrebbero andare
+         * bene anche i tipi dinamici Nuoto*, Ciclismo*, Triathlon* ...
+         */
+        alMin = new Corsa((*it)->getSharedAtleta(),
+                          static_cast<unsigned int>(spinMinDurata->value()),
+                          Data(deDataInizio->date().year(),
+                               deDataInizio->date().month(),
+                               deDataInizio->date().day()),
+                          static_cast<unsigned int>(spinMinMagnesio->value()),
+                          static_cast<unsigned int>(1), // arbitrario
+                          static_cast<unsigned int>(1));// arbitrario
+        emit allenamentoMin(alMin);
+
+        alMax = new Corsa((*it)->getSharedAtleta(),
+                          static_cast<unsigned int>(spinMaxDurata->value()),
+                          Data(deDataFine->date().year(),
+                               deDataFine->date().month(),
+                               deDataFine->date().day()),
+                          static_cast<unsigned int>(spinMaxMagnesio->value()),
+                          static_cast<unsigned int>(1),// arbitrario
+                          static_cast<unsigned int>(1));// arbitrario
+        emit allenamentoMax(alMax);
+    } else if(rbNuoto->isChecked()) {
+        if( !verificaNuoto())
+            return;
+        emit selezioneTipo(1);
+        alMin = new Nuoto((*it)->getSharedAtleta(),
+                          static_cast<unsigned int>(spinMinDurata->value()),
+                          Data(deDataInizio->date().year(),
+                               deDataInizio->date().month(),
+                               deDataInizio->date().day()),
+                          static_cast<unsigned int>(spinMinMagnesio->value()),
+                          static_cast<unsigned int>(spinMinStile->value()),
+                          static_cast<unsigned int>(spinMinRana->value()),
+                          static_cast<unsigned int>(spinMinDorso->value()));
+        emit allenamentoMin(alMin);
+
+        alMax = new Nuoto((*it)->getSharedAtleta(),
+                          static_cast<unsigned int>(spinMaxDurata->value()),
+                          Data(deDataFine->date().year(),
+                               deDataFine->date().month(),
+                               deDataFine->date().day()),
+                          static_cast<unsigned int>(spinMaxMagnesio->value()),
+                          static_cast<unsigned int>(spinMaxStile->value()),
+                          static_cast<unsigned int>(spinMaxRana->value()),
+                          static_cast<unsigned int>(spinMaxDorso->value()));
+        emit allenamentoMax(alMax);
+
+    } else if(rbCiclismo->isChecked()) {
+        if(!verificaCiclismo())
+            return;
+        emit selezioneTipo(2);
+        alMin = new Ciclismo((*it)->getSharedAtleta(),
+                          static_cast<unsigned int>(spinMinDurata->value()),
+                          Data(deDataInizio->date().year(),
+                               deDataInizio->date().month(),
+                               deDataInizio->date().day()),
+                          static_cast<unsigned int>(spinMinMagnesio->value()),
+                          static_cast<unsigned int>(spinMinSalita->value()),
+                          static_cast<unsigned int>(spinMinPianura->value()),
+                          static_cast<unsigned int>(spinMinDiscesa->value()));
+        emit allenamentoMin(alMin);
+
+        alMax = new Ciclismo((*it)->getSharedAtleta(),
+                          static_cast<unsigned int>(spinMaxDurata->value()),
+                          Data(deDataFine->date().year(),
+                               deDataFine->date().month(),
+                               deDataFine->date().day()),
+                          static_cast<unsigned int>(spinMaxMagnesio->value()),
+                          static_cast<unsigned int>(spinMaxSalita->value()),
+                          static_cast<unsigned int>(spinMaxPianura->value()),
+                          static_cast<unsigned int>(spinMaxDiscesa->value()));
+        emit allenamentoMax(alMax);
+    } else if(rbCorsa->isChecked()) {
+        if(!verificaCorsa())
+            return;
+        emit selezioneTipo(3);
+        alMin = new Corsa((*it)->getSharedAtleta(),
+                          static_cast<unsigned int>(spinMinDurata->value()),
+                          Data(deDataInizio->date().year(),
+                               deDataInizio->date().month(),
+                               deDataInizio->date().day()),
+                          static_cast<unsigned int>(spinMinMagnesio->value()),
+                          static_cast<unsigned int>(spinMinSterrato->value()),
+                          static_cast<unsigned int>(spinMinStrada->value()));
+        emit allenamentoMin(alMin);
+
+        alMax = new Corsa((*it)->getSharedAtleta(),
+                          static_cast<unsigned int>(spinMaxDurata->value()),
+                          Data(deDataFine->date().year(),
+                               deDataFine->date().month(),
+                               deDataFine->date().day()),
+                          static_cast<unsigned int>(spinMaxMagnesio->value()),
+                          static_cast<unsigned int>(spinMaxSterrato->value()),
+                          static_cast<unsigned int>(spinMaxStrada->value()));
+        emit allenamentoMax(alMax);
+    } else if(rbTriathlon->isChecked()) {
+        if( !verificaTriathlon() )
+            return;
+        emit selezioneTipo(4);
+        alMin = new Triathlon((*it)->getSharedAtleta(),
+                              static_cast<unsigned int>(spinMinDurata->value()),
+                              Data(deDataInizio->date().year(),
+                                   deDataInizio->date().month(),
+                                   deDataInizio->date().day()),
+                              static_cast<unsigned int>(spinMinMagnesio->value()),
+                              static_cast<unsigned int>(spinMinStile->value()),
+                              static_cast<unsigned int>(spinMinRana->value()),
+                              static_cast<unsigned int>(spinMinDorso->value()),
+                              static_cast<unsigned int>(spinMinSalita->value()),
+                              static_cast<unsigned int>(spinMinPianura->value()),
+                              static_cast<unsigned int>(spinMinDiscesa->value()),
+                              static_cast<unsigned int>(spinMinSterrato->value()),
+                              static_cast<unsigned int>(spinMinStrada->value()));
+        emit allenamentoMin(alMin);
+
+        alMax = new Triathlon((*it)->getSharedAtleta(),
+                          static_cast<unsigned int>(spinMaxDurata->value()),
+                          Data(deDataFine->date().year(),
+                               deDataFine->date().month(),
+                               deDataFine->date().day()),
+                          static_cast<unsigned int>(spinMaxMagnesio->value()),
+                          static_cast<unsigned int>(spinMaxStile->value()),
+                          static_cast<unsigned int>(spinMaxRana->value()),
+                          static_cast<unsigned int>(spinMaxDorso->value()),
+                          static_cast<unsigned int>(spinMaxSalita->value()),
+                          static_cast<unsigned int>(spinMaxPianura->value()),
+                          static_cast<unsigned int>(spinMaxDiscesa->value()),
+                          static_cast<unsigned int>(spinMaxSterrato->value()),
+                          static_cast<unsigned int>(spinMaxStrada->value()));
+        emit allenamentoMax(alMax);
+    }
+
+    proxy->invalidate();
+}
+#include <QDebug>
+void WidgetRicerca::ricevutaNotificaEliminazioneRiga(int riga) {qDebug() << riga;
+    QMessageBox boxConfermaEliminazione;
+    boxConfermaEliminazione.setIcon(QMessageBox::Question);
+    boxConfermaEliminazione.setText("ATTENZIONE:");
+    boxConfermaEliminazione.setInformativeText("Vuoi davvero eliminare l'allenamento? L'operazione è definitiva");
+    boxConfermaEliminazione.addButton("No", QMessageBox::NoRole);
+    boxConfermaEliminazione.addButton("Sì", QMessageBox::YesRole);
+    int scelta = boxConfermaEliminazione.exec();
+    if(scelta)
+        emit rimuovereRiga(riga);
+}
+
+void WidgetRicerca::avviaDialogModifica(int riga) {
+    Allenamento* a = ca.At(riga).get();
+    DialogAllenamento* da;
+
+    if(dynamic_cast<Triathlon*>(a)) {
+        da = new DialogTriathlon(cp, ca, true,riga);
+    } else if(dynamic_cast<Nuoto*>(a)) {
+        da = new DialogNuoto(cp, ca, true,riga);
+    } else if(dynamic_cast<Ciclismo*>(a)) {
+        da = new DialogCiclismo(cp, ca, true,riga);
+    } else if(dynamic_cast<Corsa*>(a)) {
+        da = new DialogCorsa(cp, ca, true,riga);
+    } else {
+        return;
+    }
+
+    da->exec();
+    delete da;
+    // nessuna delete su 'a' perché get ritorna un puntatore grezzo, non copia profonda
+    // corrispondente a quello contenuto in DeepPtr<Allenamento>
+}
+
+
+void WidgetRicerca::rimozioneRigaEliminataModel(int p) {qDebug() << "sofia cucci troia puttana bastarda";
+    Q_UNUSED(p);
+    proxy->invalidate();
 }

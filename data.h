@@ -13,6 +13,8 @@ public:
     Data(std::string);
     static bool controlloValidita(int, int, int);
     bool operator==(const Data&) const;
+    bool operator>=(const Data&) const;
+    bool operator<=(const Data&) const;
     std::string toString() const;
     void setY(int);
     void setM(int);

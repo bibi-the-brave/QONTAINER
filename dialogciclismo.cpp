@@ -63,7 +63,7 @@ void DialogCiclismo::inserimentoAllenamento() {
     Allenamento* al = new Ciclismo(cp.At(cmbAtleti->currentIndex()),
                                 static_cast<unsigned int>(spinDurata->value()),
                                 Data(strData),
-                                spinMagnesio->value(),
+                                static_cast<unsigned int>(spinMagnesio->value()),
                                 static_cast<unsigned int>(wCiclismo->kmSalita()),
                                 static_cast<unsigned int>(wCiclismo->kmPianura()),
                                 static_cast<unsigned int>(wCiclismo->kmDiscesa()));

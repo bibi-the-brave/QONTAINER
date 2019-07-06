@@ -9,7 +9,7 @@ Allenamento::Allenamento(std::shared_ptr<Persona> atl,
                          unsigned int mgMagnesio)
 try: atleta(atl), durata(dur), data(d), mgMagnesioAssunti(mgMagnesio)
 {
-   if(mgMagnesio < 0 || durata == 0)
+   if(durata == 0)
        throw ErrAllenamento();
 } catch(ErrPersona) {
     throw;
@@ -22,8 +22,26 @@ bool Allenamento::operator==(const Allenamento& allenamento) const {
            mgMagnesioAssunti == allenamento.mgMagnesioAssunti;
 }
 
+bool Allenamento::operator>=(const Allenamento& al) const {
+    return atleta->getPersona() == al.getAtleta() &&
+            durata >= al.durata &&
+            data >= al.data &&
+            mgMagnesioAssunti >= al.mgMagnesioAssunti;
+}
+
+bool Allenamento::operator<=(const Allenamento& al) const {
+    return atleta->getPersona() == al.getAtleta() &&
+            durata <= al.durata &&
+            data <= al.data &&
+            mgMagnesioAssunti <= al.mgMagnesioAssunti;
+}
+
 Persona Allenamento::getAtleta() const {
     return atleta->getPersona();
+}
+
+std::shared_ptr<Persona> Allenamento::getSharedAtleta() const {
+    return atleta;
 }
 
 unsigned int Allenamento::getMgMagnesioAssunti() const {
@@ -46,7 +64,7 @@ void Allenamento::setData(const Data& d) {
     data = d;
 }
 
-void Allenamento::setMgMagnesio(double mgM) {
+void Allenamento::setMgMagnesio(unsigned int mgM) {
     mgMagnesioAssunti = mgM;
 }
 

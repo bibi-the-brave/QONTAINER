@@ -17,6 +17,8 @@ public:
     unsigned int grassoPerso() const override;
     unsigned int saliMinerali() const override;
     bool operator==(const Allenamento&) const override;
+    bool operator>=(const Allenamento&) const override;
+    bool operator<=(const Allenamento&) const override;
 
     unsigned int getKmSterrato() const;
     unsigned int getKmStrada() const;

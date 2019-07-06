@@ -49,6 +49,30 @@ bool Nuoto::operator==(const Allenamento& al) const {
 
 }
 
+bool Nuoto::operator>=(const Allenamento& al) const {
+    try {
+        const Nuoto& t = dynamic_cast<const Nuoto&>(al); //se ok non viene lanciata eccezione
+        return Allenamento::operator>=(al) &&
+                vascheRana >= (dynamic_cast<const Nuoto&>(al)).vascheRana &&
+                vascheStileLibero >= (dynamic_cast<const Nuoto&>(al)).vascheStileLibero &&
+                vascheDorso >= (dynamic_cast<const Nuoto&>(al)).vascheDorso;
+    } catch (std::bad_cast e) {
+        return false;
+    }
+}
+
+bool Nuoto::operator<=(const Allenamento& al) const {
+    try {
+        const Nuoto& t = dynamic_cast<const Nuoto&>(al); //se ok non viene lanciata eccezione
+        return Allenamento::operator<=(al) &&
+                vascheRana <= (dynamic_cast<const Nuoto&>(al)).vascheRana &&
+                vascheStileLibero <= (dynamic_cast<const Nuoto&>(al)).vascheStileLibero &&
+                vascheDorso <= (dynamic_cast<const Nuoto&>(al)).vascheDorso;
+    } catch (std::bad_cast e) {
+        return false;
+    }
+}
+
 unsigned int Nuoto::getVascheStileLibero() const {
     return vascheStileLibero;
 }
