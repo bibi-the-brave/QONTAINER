@@ -11,11 +11,15 @@ class WidgetIntroduttivo : public QWidget {
     Q_OBJECT
 public:
     explicit  WidgetIntroduttivo(QWidget* = nullptr);
+    QPushButton* getBtnAtleti() const;
+    QPushButton* getBtnAllenamenti() const;
+    QPushButton* getBtnRicerca() const;
 private:
     QVBoxLayout *layout;
-    QPushButton *btnNuovoAtleta;
-    QLabel *lblTitolo;
-public slots:
+    QFormLayout *lBottoniDescrizione;
+    QPushButton *btnAtleti, *btnAllenamenti, *btnRicerca;
+    QLabel *lblTitolo, *lblDescrizione, *lblAtleti, *lblAllenamenti, *lblRicerca;
+
 };
 
 #endif // WIDGETINTRODUTTIVO_H

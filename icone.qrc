@@ -11,5 +11,7 @@
         <file>immagini/logo.svg</file>
         <file>file/atleti.xml</file>
         <file>file/allenamenti.xml</file>
+        <file>immagini/atleta.svg</file>
+        <file>immagini/banner.svg</file>
     </qresource>
 </RCC>

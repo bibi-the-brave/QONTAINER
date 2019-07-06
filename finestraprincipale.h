@@ -11,6 +11,7 @@
 #include "persona.h"
 #include "allenamento.h"
 #include "deepptr.h"
+#include "widgetintroduttivo.h"
 #include "widgetatleti.h"
 #include "widgetallenamenti.h"
 #include "widgetricerca.h"
@@ -28,12 +29,15 @@ public:
 private:
     QWidget* centrale;
     QTabWidget* tabFunzionalita;
+    WidgetIntroduttivo *wi;
     WidgetAtleti* fa;
     WidgetAllenamenti* wa;
     WidgetRicerca* wr;
 
     Contenitore<DeepPtr<Allenamento>>& ca;
     Contenitore<std::shared_ptr<Persona>>& cp;
+public slots:
+    void impostaTab();
 };
 
 #endif // FINESTRAPRINCIPALE_H

@@ -1,6 +1,7 @@
 #include "finestraprincipale.h"
 #include <QtGlobal>
 #include <QDesktopWidget>
+#include "widgetintroduttivo.h"
 #include "widgetnuovosport.h"
 #include "widgetatleti.h"
 #include "widgetallenamenti.h"
@@ -16,6 +17,9 @@ FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento>>& a,
 
     CaricatoreContenitori caricatore(cp,ca);
     caricatore.leggiFile(); // carica cp e ca con gli atleti e gli allenamenti salvati su file
+
+    wi = new WidgetIntroduttivo();
+    tabFunzionalita->addTab(wi, "Introduzione");
 
     fa = new WidgetAtleti(cp);
     tabFunzionalita->addTab(fa, "Atleti");
@@ -38,10 +42,27 @@ FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento>>& a,
 
     //eliminazione di una riga visualizzata dal proxy
     connect(wa->getDelEl(), SIGNAL(eliminaRiga(int)), wr, SLOT(rimozioneRigaEliminataModel(int)));
+
+    // segnali e slot relativi alla selezione della tab con i bottoni
+    //del widget introduttivo
+    connect(wi->getBtnAtleti(), SIGNAL(clicked()), this, SLOT(impostaTab()));
+    connect(wi->getBtnAllenamenti(), SIGNAL(clicked()), this, SLOT(impostaTab()));
+    connect(wi->getBtnRicerca(), SIGNAL(clicked()), this, SLOT(impostaTab()));
 }
 
 FinestraPrincipale::~FinestraPrincipale() {
     CaricatoreContenitori salvataggio(cp,ca);
     salvataggio.scritturaFileAtleti();
     salvataggio.scritturaFileAllenamenti();
+}
+
+void FinestraPrincipale::impostaTab() {
+    QObject *sender = QObject::sender();
+    if(sender == wi->getBtnAtleti()) {
+        tabFunzionalita->setCurrentIndex(1);
+    } else if(sender == wi->getBtnAllenamenti()) {
+        tabFunzionalita->setCurrentIndex(2);
+    } else if (sender == wi->getBtnRicerca()) {
+        tabFunzionalita->setCurrentIndex(3);
+    }
 }
