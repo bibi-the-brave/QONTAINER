@@ -6,7 +6,7 @@
 #include "widgetatleti.h"
 #include "widgetallenamenti.h"
 #include "widgetricerca.h"
-#include "caricatorecontenitori.h"
+#include "gestorefile.h"
 
 FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento>>& a,
                                        Contenitore<std::shared_ptr<Persona>>& p,
@@ -15,7 +15,7 @@ FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento>>& a,
 {
     tabFunzionalita = new QTabWidget();
 
-    CaricatoreContenitori caricatore(cp,ca);
+    GestoreFile caricatore(cp,ca);
     caricatore.leggiFile(); // carica cp e ca con gli atleti e gli allenamenti salvati su file
 
     wi = new WidgetIntroduttivo();
@@ -51,7 +51,7 @@ FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento>>& a,
 }
 
 FinestraPrincipale::~FinestraPrincipale() {
-    CaricatoreContenitori salvataggio(cp,ca);
+    GestoreFile salvataggio(cp,ca);
     salvataggio.scritturaFileAtleti();
     salvataggio.scritturaFileAllenamenti();
 }

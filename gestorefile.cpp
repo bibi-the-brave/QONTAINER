@@ -1,4 +1,4 @@
-#include "caricatorecontenitori.h"
+#include "gestorefile.h"
 #include <QFile>
 #include <QString>
 #include <memory>
@@ -14,11 +14,11 @@
 #include "deepptr.h"
 #include <string>
 
-CaricatoreContenitori::CaricatoreContenitori(Contenitore<std::shared_ptr<Persona>>& atl_,
+GestoreFile::GestoreFile(Contenitore<std::shared_ptr<Persona>>& atl_,
                                              Contenitore<DeepPtr<Allenamento>>& all_)
     : atl(atl_), all(all_) {}
 
-void CaricatoreContenitori::leggiFile() {
+void GestoreFile::leggiFile() {
     QFile fileAtleti("atleti.xml");
     if (fileAtleti.open(QIODevice::ReadOnly | QIODevice::Text)) {
         lxml.setDevice(&fileAtleti);
@@ -74,7 +74,7 @@ void CaricatoreContenitori::leggiFile() {
     }
 }
 
-Allenamento* CaricatoreContenitori::letturaAllenamento(QString allenamento) {
+Allenamento* GestoreFile::letturaAllenamento(QString allenamento) {
     Allenamento *a = nullptr;
     lxml.readNextStartElement();
     if(lxml.isStartElement()) {
@@ -194,7 +194,7 @@ Allenamento* CaricatoreContenitori::letturaAllenamento(QString allenamento) {
     return a;
 }
 
-Data CaricatoreContenitori::letturaData() {
+Data GestoreFile::letturaData() {
     int d,m,y;
     lxml.readNextStartElement();
     y = lxml.readElementText().toInt();
@@ -206,7 +206,7 @@ Data CaricatoreContenitori::letturaData() {
     return Data(y,m,d);
 }
 
-Persona CaricatoreContenitori::letturaAtleta() {
+Persona GestoreFile::letturaAtleta() {
     std::string nome, cognome;
     bool sesso;
     lxml.readNextStartElement();
@@ -219,11 +219,7 @@ Persona CaricatoreContenitori::letturaAtleta() {
     return Persona(nome, cognome, sesso);
 }
 
-void CaricatoreContenitori::scriviFile() {
-
-}
-
-void CaricatoreContenitori::scritturaFileAtleti() {
+void GestoreFile::scritturaFileAtleti() {
     QFile file("atleti.xml");
     if (file.open(QIODevice::WriteOnly)) {
         sxml.setDevice(&file);
@@ -244,7 +240,7 @@ void CaricatoreContenitori::scritturaFileAtleti() {
     file.close();
 }
 
-void CaricatoreContenitori::scritturaFileAllenamenti() {
+void GestoreFile::scritturaFileAllenamenti() {
     QFile file("allenamenti.xml");
     if (file.open(QIODevice::WriteOnly)) {
         sxml.setDevice(&file);
@@ -280,7 +276,18 @@ void CaricatoreContenitori::scritturaFileAllenamenti() {
     file.close();
 }
 
-void CaricatoreContenitori::scritturaData(int y, int m, int d) {
+bool GestoreFile::filePresente(QString file) const {
+    bool trovato;
+    QFile fileDaAprire("file");
+    if (fileDaAprire.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        fileDaAprire.close();
+        return true;
+    }
+    return false;
+
+}
+
+void GestoreFile::scritturaData(int y, int m, int d) {
     sxml.writeStartElement("data");
     sxml.writeTextElement("y", QString::fromStdString(std::to_string(y)));
     sxml.writeTextElement("m", QString::fromStdString(std::to_string((m))));
@@ -288,24 +295,24 @@ void CaricatoreContenitori::scritturaData(int y, int m, int d) {
     sxml.writeEndElement();
 }
 
-void CaricatoreContenitori::scritturaAttributiNuoto(int stile, int rana, int dorso) {
+void GestoreFile::scritturaAttributiNuoto(int stile, int rana, int dorso) {
     sxml.writeTextElement("stile", QString::fromStdString(std::to_string((stile))));
     sxml.writeTextElement("rana", QString::fromStdString(std::to_string((rana))));
     sxml.writeTextElement("dorso", QString::fromStdString(std::to_string((dorso))));
 }
 
-void CaricatoreContenitori::scritturaAttributiCiclismo(int salita, int discesa, int pianura) {
+void GestoreFile::scritturaAttributiCiclismo(int salita, int discesa, int pianura) {
     sxml.writeTextElement("salita", QString::fromStdString(std::to_string((salita))));
     sxml.writeTextElement("discesa", QString::fromStdString(std::to_string((discesa))));
     sxml.writeTextElement("pianura", QString::fromStdString(std::to_string((pianura))));
 }
 
-void CaricatoreContenitori::scritturaAttributiCorsa(int sterrato, int strada) {
+void GestoreFile::scritturaAttributiCorsa(int sterrato, int strada) {
     sxml.writeTextElement("sterrato", QString::fromStdString(std::to_string((sterrato))));
     sxml.writeTextElement("strada", QString::fromStdString(std::to_string((strada))));
 }
 
-void CaricatoreContenitori::scritturaAtleta(QString nome, QString cognome, QString sesso) {
+void GestoreFile::scritturaAtleta(QString nome, QString cognome, QString sesso) {
     sxml.writeStartElement("atleta");
     sxml.writeTextElement("nome", nome);
     sxml.writeTextElement("cognome", cognome);
@@ -313,7 +320,7 @@ void CaricatoreContenitori::scritturaAtleta(QString nome, QString cognome, QStri
     sxml.writeEndElement();
 }
 
-void CaricatoreContenitori::scritturaNuoto(Allenamento* a) {
+void GestoreFile::scritturaNuoto(Allenamento* a) {
     scritturaAtleta(QString::fromStdString(a->getAtleta().getNome()),
                     QString::fromStdString(a->getAtleta().getCognome()),
                     QString(a->getAtleta().getSessoStr() == "Uomo" ? "false" : "true"));
@@ -330,7 +337,7 @@ void CaricatoreContenitori::scritturaNuoto(Allenamento* a) {
                             static_cast<int>(n->getVascheDorso()));
 }
 
-void CaricatoreContenitori::scritturaCiclismo(Allenamento* a) {
+void GestoreFile::scritturaCiclismo(Allenamento* a) {
     scritturaAtleta(QString::fromStdString(a->getAtleta().getNome()),
                     QString::fromStdString(a->getAtleta().getCognome()),
                     QString(a->getAtleta().getSessoStr() == "Uomo" ? "false" : "true"));
@@ -347,7 +354,7 @@ void CaricatoreContenitori::scritturaCiclismo(Allenamento* a) {
                                static_cast<int>(c->getKmPianura()));
 }
 
-void CaricatoreContenitori::scritturaCorsa(Allenamento* a) {
+void GestoreFile::scritturaCorsa(Allenamento* a) {
     scritturaAtleta(QString::fromStdString(a->getAtleta().getNome()),
                     QString::fromStdString(a->getAtleta().getCognome()),
                     QString(a->getAtleta().getSessoStr() == "Uomo" ? "false" : "true"));
@@ -363,7 +370,7 @@ void CaricatoreContenitori::scritturaCorsa(Allenamento* a) {
                             static_cast<int>(c->getKmStrada()));
 }
 
-void CaricatoreContenitori::scritturaTriathlon(Allenamento* a) {
+void GestoreFile::scritturaTriathlon(Allenamento* a) {
     scritturaAtleta(QString::fromStdString(a->getAtleta().getNome()),
                     QString::fromStdString(a->getAtleta().getCognome()),
                     QString(a->getAtleta().getSessoStr() == "Uomo" ? "false" : "true"));

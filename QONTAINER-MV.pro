@@ -27,7 +27,6 @@ CONFIG += c++11
 QMAKE_CXXFLAGS += -std=c++0x
 
 SOURCES += \
-    caricatorecontenitori.cpp \
     data.cpp \
     delegatebottone.cpp \
     delegateeliminazione.cpp \
@@ -38,6 +37,7 @@ SOURCES += \
     dialogcorsa.cpp \
     dialognuoto.cpp \
     dialogtriathlon.cpp \
+    gestorefile.cpp \
         main.cpp \
     finestraprincipale.cpp \
     modeltabellaallenamenti.cpp \
@@ -59,7 +59,6 @@ SOURCES += \
     widgetricerca.cpp
 
 HEADERS += \
-    caricatorecontenitori.h \
     contenitore.h \
     data.h \
     delegatebottone.h \
@@ -73,6 +72,7 @@ HEADERS += \
     dialogtriathlon.h \
     errori.h \
     finestraprincipale.h \
+    gestorefile.h \
     modeltabellaallenamenti.h \
     modeltabellaatleti.h \
     allenamento.h \

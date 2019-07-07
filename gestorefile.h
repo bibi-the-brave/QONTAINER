@@ -15,14 +15,14 @@
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 
-class CaricatoreContenitori {
+class GestoreFile {
 public:
-    CaricatoreContenitori(Contenitore<std::shared_ptr<Persona>>&,
+    GestoreFile(Contenitore<std::shared_ptr<Persona>>&,
                           Contenitore<DeepPtr<Allenamento>>&);
     void leggiFile();
-    void scriviFile();
     void scritturaFileAtleti();
     void scritturaFileAllenamenti();
+    bool filePresente(QString) const;
 private:
     Contenitore<std::shared_ptr<Persona>>& atl;
     Contenitore<DeepPtr<Allenamento>>& all;
