@@ -54,6 +54,10 @@ FinestraPrincipale::FinestraPrincipale(Contenitore<DeepPtr<Allenamento>>& a,
     connect(wi->getBtnAtleti(), SIGNAL(clicked()), this, SLOT(impostaTab()));
     connect(wi->getBtnAllenamenti(), SIGNAL(clicked()), this, SLOT(impostaTab()));
     connect(wi->getBtnRicerca(), SIGNAL(clicked()), this, SLOT(impostaTab()));
+
+    // avvisa il widget ricerca che deve aggiornare la sua combobox perché è stato inserito un
+    // nuovo atleta
+    connect(fa, SIGNAL(avvisoWidgetRicercaInseritoNuovoAtl()), wr, SLOT(aggiuntaAtletaAppenaInseritoCombo()));
 }
 
 FinestraPrincipale::~FinestraPrincipale() {

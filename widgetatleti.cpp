@@ -63,6 +63,8 @@ void WidgetAtleti::avviaDialogInserimento(bool cliccato) {
     Q_UNUSED(cliccato);
     DialogAtleta da(atleti);
     connect(&da, SIGNAL(reset()), modello, SLOT(inserimentoNuovoAtletaEsterno()));
+    //avviso il widget ricerca che deve aggiornare la sua combobox
+    connect(&da, SIGNAL(reset()), this, SIGNAL(avvisoWidgetRicercaInseritoNuovoAtl()));
     da.exec();
     da.disconnect();
 }

@@ -698,3 +698,15 @@ void WidgetRicerca::rimozioneRigheEliminateModel(std::shared_ptr<Persona> p) {
     Q_UNUSED(p);
     proxy->invalidate();
 }
+#include <QDebug>
+// viene chiamato per aggiornare la combobox quando un nuovo atleta viene aggiunto
+void WidgetRicerca::aggiuntaAtletaAppenaInseritoCombo() {
+    qDebug() << "ciauzzone";
+    std::shared_ptr<Persona> p = cp.At(cp.Size()-1);
+    qDebug() << QString::fromStdString(p->getNome()) + " " +
+                QString::fromStdString(p->getCognome()) + " " +
+                QString::fromStdString(p->getSessoCarUtf8());
+    cmbAtleti->addItem(QString::fromStdString(p->getNome()) + " " +
+                       QString::fromStdString(p->getCognome()) + " " +
+                       QString::fromStdString(p->getSessoCarUtf8()));
+}

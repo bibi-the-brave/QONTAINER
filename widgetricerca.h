@@ -88,6 +88,7 @@ public slots:
     void rimozioneRigaEliminataModel(int); // fa sparire una riga i cui el. sono stati cancellati dal modello
     void aggiornamentoComboBoxAtleti(int);
     void rimozioneRigheEliminateModel(std::shared_ptr<Persona>);
+    void aggiuntaAtletaAppenaInseritoCombo();
 signals:
     void allenamentoMin(Allenamento*);
     void allenamentoMax(Allenamento*);

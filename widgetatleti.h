@@ -37,6 +37,7 @@ public slots:
     void avviaDialogModifica(int);
 signals:
     void rimuovereRiga(int);
+    void avvisoWidgetRicercaInseritoNuovoAtl();
 };
 
 #endif // FINESTRAATLETI_H
