@@ -27,13 +27,13 @@ Triathlon* Triathlon::clone() const {
 unsigned int Triathlon::calorie() const {
     return
         // calorie nuoto
-        Nuoto::calorie()
+        Nuoto::calorie() / 2
         +
         // calorie ciclismo
-        Ciclismo::calorie()
+        Ciclismo::calorie() / 2
         +
         // calorie corsa
-        Corsa::calorie();
+        Corsa::calorie() / 2;
 }
 
 unsigned int Triathlon::grassoPerso() const {

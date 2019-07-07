@@ -24,12 +24,12 @@ Corsa* Corsa::clone() const {
 
 unsigned int Corsa::calorie() const {
     unsigned int kmTot = kmSterrato + kmStrada;
-    return(800 * kmTot * kmTot) / getDurata() + kmSterrato / 2;
+    return(900 * kmTot) / getDurata() + kmSterrato / 2;
 }
 
 unsigned int Corsa::grassoPerso() const {
-    return (calorie() / 7500) + ((90 * kmStrada) / 7500)
-            + ((110 * kmSterrato)/7500);
+    return (calorie() / 1000) + ((90 * kmStrada) / 1000)
+            + ((110 * kmSterrato)/1000);
 }
 
 unsigned int Corsa::saliMinerali() const {

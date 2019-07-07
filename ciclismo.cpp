@@ -24,12 +24,12 @@ Ciclismo* Ciclismo::clone() const {
 
 unsigned int Ciclismo::calorie() const {
     unsigned int kmTot = kmSalita + kmDiscesa + kmPianura;
-    return (400 * kmTot * kmTot) / getDurata() + 30 * kmSalita + 10 * kmPianura;
+    return (400 * kmTot) + 2000;
 }
 
 unsigned int Ciclismo::grassoPerso() const {
-    return (calorie() / 7500) + (110 * kmSalita)/7500
-            + (45 * kmDiscesa)/7500 + (90 * kmPianura)/7500;
+    return (calorie() / 200) + (110 * kmSalita)/2500
+            + (45 * kmDiscesa)/3500 + (90 * kmPianura)/2500;
 }
 
 unsigned int Ciclismo::saliMinerali() const {

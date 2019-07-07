@@ -24,7 +24,7 @@ Nuoto* Nuoto::clone() const {
 }
 
 unsigned int Nuoto::calorie() const {
-    return 50 * vascheStileLibero + 25 * vascheRana + 40 * vascheDorso;
+    return 200 * (50 * vascheStileLibero + 25 * vascheRana + 40 * vascheDorso);
 }
 
 unsigned int Nuoto::grassoPerso() const {
