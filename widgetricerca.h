@@ -85,8 +85,9 @@ public slots:
     void avvioRicerca();
     void ricevutaNotificaEliminazioneRiga(int);
     void avviaDialogModifica(int);
-    // fa sparire una riga i cui elementi sono stati cancellati dal modello
-    void rimozioneRigaEliminataModel(int);
+    void rimozioneRigaEliminataModel(int); // fa sparire una riga i cui el. sono stati cancellati dal modello
+    void aggiornamentoComboBoxAtleti(int);
+    void rimozioneRigheEliminateModel(std::shared_ptr<Persona>);
 signals:
     void allenamentoMin(Allenamento*);
     void allenamentoMax(Allenamento*);

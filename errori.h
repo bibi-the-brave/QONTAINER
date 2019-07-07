@@ -8,8 +8,5 @@ class ErrAllenamento {};
 class ErrCiclismo{};
 class ErrCorsa{};
 class ErrNuoto{};
-class ErrPallavolo{};
-class ErrPalestra{};
 class ErrTriathlon{};
-class ErrCalcio{};
 #endif // ERRORI_H

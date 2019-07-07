@@ -20,6 +20,7 @@ class WidgetAtleti : public QWidget {
 public:
     explicit WidgetAtleti(Contenitore<std::shared_ptr<Persona>>&,QWidget* = nullptr);
     ModelTabellaAtleti* getModello() const;
+    DelegateEliminazione* getDelegatoEl() const;
 private:
     QVBoxLayout *layout;
     QPushButton *btnNuovoAtleta;

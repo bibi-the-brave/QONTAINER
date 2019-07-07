@@ -65,11 +65,11 @@ bool Nuoto::operator>=(const Allenamento& al) const {
 
 bool Nuoto::operator<=(const Allenamento& al) const {
     try {
-        if(typeid(al) == typeid(const Nuoto&))
+        if(typeid(al) == typeid(const Nuoto&)){
             return Allenamento::operator<=(al) &&
                 vascheRana <= (dynamic_cast<const Nuoto&>(al)).vascheRana &&
                 vascheStileLibero <= (dynamic_cast<const Nuoto&>(al)).vascheStileLibero &&
-                vascheDorso <= (dynamic_cast<const Nuoto&>(al)).vascheDorso;
+                vascheDorso <= (dynamic_cast<const Nuoto&>(al)).vascheDorso;}
         return false;
     } catch (std::bad_cast e) {
         return false;

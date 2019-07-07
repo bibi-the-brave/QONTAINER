@@ -19,7 +19,7 @@ class GestoreFile {
 public:
     GestoreFile(Contenitore<std::shared_ptr<Persona>>&,
                           Contenitore<DeepPtr<Allenamento>>&);
-    void leggiFile();
+    void letturaFile(QString, QString);
     void scritturaFileAtleti();
     void scritturaFileAllenamenti();
     bool filePresente(QString) const;
@@ -43,6 +43,7 @@ private:
     void scritturaCiclismo(Allenamento*);
     void scritturaCorsa(Allenamento*);
     void scritturaTriathlon(Allenamento*);
+    void viasualizzaDialogErrore() const;
 };
 
 #endif // CARICATORECONTENITORI_H

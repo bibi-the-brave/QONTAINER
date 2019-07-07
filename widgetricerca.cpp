@@ -169,8 +169,8 @@ QGroupBox* WidgetRicerca::costruzioneFormPersona() {
     Contenitore<std::shared_ptr<Persona>>::iterator it = cp.begin();
     for(; it != cp.end(); it++)
         atleti << QString::fromStdString((*it)->getNome()) + " " +
-                    QString::fromStdString((*it)->getCognome()) + " " +
-                    QString::fromStdString((*it)->getSessoCarUtf8());
+                  QString::fromStdString((*it)->getCognome()) + " " +
+                  QString::fromStdString((*it)->getSessoCarUtf8());
     cmbAtleti->addItems(atleti);
     lPersona->addRow("Atleta:", cmbAtleti);
 
@@ -487,8 +487,13 @@ void WidgetRicerca::avvioRicerca() {
             ++it;
     }
 
-    if(!trovato)
+    if(!trovato) {
+        emit selezioneTipo(0);
+        emit allenamentoMax(nullptr);
+        emit allenamentoMin(nullptr);
+        proxy->invalidate();
         return;
+    }
 
     if(rbAtleta->isChecked()) {
         emit selezioneTipo(0);
@@ -508,7 +513,7 @@ void WidgetRicerca::avvioRicerca() {
                                deDataInizio->date().month(),
                                deDataInizio->date().day()),
                           static_cast<unsigned int>(spinMinMagnesio->value()),
-                          static_cast<unsigned int>(1), // arbitrario
+                          static_cast<unsigned int>(1), // è di corsa, in questo caso è arbitrario
                           static_cast<unsigned int>(1));// arbitrario
         emit allenamentoMin(alMin);
 
@@ -552,25 +557,25 @@ void WidgetRicerca::avvioRicerca() {
             return;
         emit selezioneTipo(2);
         alMin = new Ciclismo(p,
-                          static_cast<unsigned int>(spinMinDurata->value()),
-                          Data(deDataInizio->date().year(),
-                               deDataInizio->date().month(),
-                               deDataInizio->date().day()),
-                          static_cast<unsigned int>(spinMinMagnesio->value()),
-                          static_cast<unsigned int>(spinMinSalita->value()),
-                          static_cast<unsigned int>(spinMinPianura->value()),
-                          static_cast<unsigned int>(spinMinDiscesa->value()));
+                             static_cast<unsigned int>(spinMinDurata->value()),
+                             Data(deDataInizio->date().year(),
+                                  deDataInizio->date().month(),
+                                  deDataInizio->date().day()),
+                             static_cast<unsigned int>(spinMinMagnesio->value()),
+                             static_cast<unsigned int>(spinMinSalita->value()),
+                             static_cast<unsigned int>(spinMinPianura->value()),
+                             static_cast<unsigned int>(spinMinDiscesa->value()));
         emit allenamentoMin(alMin);
 
         alMax = new Ciclismo(p,
-                          static_cast<unsigned int>(spinMaxDurata->value()),
-                          Data(deDataFine->date().year(),
-                               deDataFine->date().month(),
-                               deDataFine->date().day()),
-                          static_cast<unsigned int>(spinMaxMagnesio->value()),
-                          static_cast<unsigned int>(spinMaxSalita->value()),
-                          static_cast<unsigned int>(spinMaxPianura->value()),
-                          static_cast<unsigned int>(spinMaxDiscesa->value()));
+                             static_cast<unsigned int>(spinMaxDurata->value()),
+                             Data(deDataFine->date().year(),
+                                  deDataFine->date().month(),
+                                  deDataFine->date().day()),
+                             static_cast<unsigned int>(spinMaxMagnesio->value()),
+                             static_cast<unsigned int>(spinMaxSalita->value()),
+                             static_cast<unsigned int>(spinMaxPianura->value()),
+                             static_cast<unsigned int>(spinMaxDiscesa->value()));
         emit allenamentoMax(alMax);
     } else if(rbCorsa->isChecked()) {
         if(!verificaCorsa())
@@ -616,19 +621,19 @@ void WidgetRicerca::avvioRicerca() {
         emit allenamentoMin(alMin);
 
         alMax = new Triathlon(p,
-                          static_cast<unsigned int>(spinMaxDurata->value()),
-                          Data(deDataFine->date().year(),
-                               deDataFine->date().month(),
-                               deDataFine->date().day()),
-                          static_cast<unsigned int>(spinMaxMagnesio->value()),
-                          static_cast<unsigned int>(spinMaxStile->value()),
-                          static_cast<unsigned int>(spinMaxRana->value()),
-                          static_cast<unsigned int>(spinMaxDorso->value()),
-                          static_cast<unsigned int>(spinMaxSalita->value()),
-                          static_cast<unsigned int>(spinMaxPianura->value()),
-                          static_cast<unsigned int>(spinMaxDiscesa->value()),
-                          static_cast<unsigned int>(spinMaxSterrato->value()),
-                          static_cast<unsigned int>(spinMaxStrada->value()));
+                              static_cast<unsigned int>(spinMaxDurata->value()),
+                              Data(deDataFine->date().year(),
+                                   deDataFine->date().month(),
+                                   deDataFine->date().day()),
+                              static_cast<unsigned int>(spinMaxMagnesio->value()),
+                              static_cast<unsigned int>(spinMaxStile->value()),
+                              static_cast<unsigned int>(spinMaxRana->value()),
+                              static_cast<unsigned int>(spinMaxDorso->value()),
+                              static_cast<unsigned int>(spinMaxSalita->value()),
+                              static_cast<unsigned int>(spinMaxPianura->value()),
+                              static_cast<unsigned int>(spinMaxDiscesa->value()),
+                              static_cast<unsigned int>(spinMaxSterrato->value()),
+                              static_cast<unsigned int>(spinMaxStrada->value()));
         emit allenamentoMax(alMax);
     }
 
@@ -681,6 +686,15 @@ void WidgetRicerca::avviaDialogModifica(int riga) {
 
 
 void WidgetRicerca::rimozioneRigaEliminataModel(int p) {
+    Q_UNUSED(p);
+    proxy->invalidate();
+}
+
+void WidgetRicerca::aggiornamentoComboBoxAtleti(int riga) {
+    cmbAtleti->removeItem(riga);
+}
+
+void WidgetRicerca::rimozioneRigheEliminateModel(std::shared_ptr<Persona> p) {
     Q_UNUSED(p);
     proxy->invalidate();
 }

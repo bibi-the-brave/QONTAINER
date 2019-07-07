@@ -55,6 +55,10 @@ ModelTabellaAtleti* WidgetAtleti::getModello() const {
     return modello;
 }
 
+DelegateEliminazione* WidgetAtleti::getDelegatoEl() const {
+    return delegatoEl;
+}
+
 void WidgetAtleti::avviaDialogInserimento(bool cliccato) {
     Q_UNUSED(cliccato);
     DialogAtleta da(atleti);

@@ -36,6 +36,9 @@ private:
 
     Contenitore<DeepPtr<Allenamento>>& ca;
     Contenitore<std::shared_ptr<Persona>>& cp;
+
+    bool richiestaUtilizzoFileDiDefault() const;
+    void caricamentoContenitori();
 public slots:
     void impostaTab();
 };

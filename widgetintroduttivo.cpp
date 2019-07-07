@@ -23,6 +23,7 @@ WidgetIntroduttivo::WidgetIntroduttivo(QWidget* parent) : QWidget (parent)
     btnAtleti->setToolTip("Premere per inserire, modificare ed eliminare atleti");
     lblAtleti = new QLabel;
     lblAtleti->setText("Gestire gli atleti.");
+    lblAtleti->setStyleSheet("font-weight: bold;");
     lBottoniDescrizione->addRow(btnAtleti, lblAtleti);
 
     btnAllenamenti = new QPushButton();
@@ -30,6 +31,7 @@ WidgetIntroduttivo::WidgetIntroduttivo(QWidget* parent) : QWidget (parent)
     btnAllenamenti->setIconSize(QSize(75,75));
     btnAllenamenti->setToolTip("Premere per inserire, modificare ed eliminare allenamenti");
     lblAllenamenti = new QLabel;
+    lblAllenamenti->setStyleSheet("font-weight: bold;");
     lblAllenamenti->setText("Gestire gli allenamenti.");
     lBottoniDescrizione->addRow(btnAllenamenti, lblAllenamenti);
 
@@ -38,6 +40,7 @@ WidgetIntroduttivo::WidgetIntroduttivo(QWidget* parent) : QWidget (parent)
     btnRicerca->setIconSize(QSize(75,75));
     btnRicerca->setToolTip("Premere per fare una ricerca sugli allenamenti");
     lblRicerca = new QLabel;
+    lblRicerca->setStyleSheet("font-weight: bold;");
     lblRicerca->setText("Effettuare una ricerca sugli allenamenti.");
     lBottoniDescrizione->addRow(btnRicerca, lblRicerca);
 

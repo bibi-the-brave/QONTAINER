@@ -13,47 +13,51 @@
 #include "triathlon.h"
 #include "deepptr.h"
 #include <string>
+#include <QMessageBox>
 
 GestoreFile::GestoreFile(Contenitore<std::shared_ptr<Persona>>& atl_,
-                                             Contenitore<DeepPtr<Allenamento>>& all_)
+                         Contenitore<DeepPtr<Allenamento>>& all_)
     : atl(atl_), all(all_) {}
 
-void GestoreFile::leggiFile() {
-    QFile fileAtleti("atleti.xml");
+void GestoreFile::letturaFile(QString atleti, QString allenamenti) {
+    QFile fileAtleti(atleti);
     if (fileAtleti.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        lxml.setDevice(&fileAtleti);
-        lxml.readNext();
-
-        while(!lxml.atEnd() && !lxml.hasError()) {
+        try {
+            lxml.setDevice(&fileAtleti);
             lxml.readNext();
-            if(lxml.isStartDocument())
-                continue;
-            if(lxml.isStartElement()) {
-                if(lxml.name() == "atleti")
-                    continue;
 
-                if(lxml.name() == "atleta") {
-                    Persona p = letturaAtleta();
-                    auto sp = std::make_shared<Persona>(p.getNome(), p.getCognome(), p.getSesso());
-                    if( !atl.elementoPresente(sp) )
-                        atl.pushBack(sp);
+            while(!lxml.atEnd() && !lxml.hasError()) {
+                lxml.readNext();
+                if(lxml.isStartDocument())
+                    continue;
+                if(lxml.isStartElement()) {
+                    if(lxml.name() == "atleti")
+                        continue;
+
+                    if(lxml.name() == "atleta") {
+                        Persona p = letturaAtleta();
+                        auto sp = std::make_shared<Persona>(p.getNome(), p.getCognome(), p.getSesso());
+                        if( !atl.elementoPresente(sp) )
+                            atl.pushBack(sp);
+                    }
                 }
             }
+            fileAtleti.close();
+        } catch(...) {
+            viasualizzaDialogErrore();
         }
-        fileAtleti.close();
     } else {
-        //qDebug() << "errore apertura file";
+        viasualizzaDialogErrore();
     }
 
     lxml.clear();
 
-    QFile fileAllenamenti("allenamenti.xml");
+    QFile fileAllenamenti(allenamenti);
     if (fileAllenamenti.open(QIODevice::ReadOnly | QIODevice::Text)) {
         lxml.setDevice(&fileAllenamenti);
         lxml.readNext();
         while(!lxml.atEnd() && !lxml.hasError()) {
             lxml.readNext();
-            //qDebug() << lxml.name() + " 1";
             if(lxml.isStartDocument())
                 continue;
             if(lxml.isStartElement()) {
@@ -70,7 +74,7 @@ void GestoreFile::leggiFile() {
 
         fileAllenamenti.close();
     } else {
-        //qDebug() << "errore apertura file";
+        //viasualizzaDialogErrore();
     }
 }
 
@@ -277,8 +281,7 @@ void GestoreFile::scritturaFileAllenamenti() {
 }
 
 bool GestoreFile::filePresente(QString file) const {
-    bool trovato;
-    QFile fileDaAprire("file");
+    QFile fileDaAprire(file);
     if (fileDaAprire.open(QIODevice::ReadOnly | QIODevice::Text)) {
         fileDaAprire.close();
         return true;
@@ -392,4 +395,13 @@ void GestoreFile::scritturaTriathlon(Allenamento* a) {
     Corsa* cr = dynamic_cast<Corsa*>(a);
     scritturaAttributiCorsa(static_cast<int>(cr->getKmSterrato()),
                             static_cast<int>(cr->getKmStrada()));
+}
+
+void GestoreFile::viasualizzaDialogErrore() const {
+    QMessageBox mes;
+    mes.setIcon(QMessageBox::Information);
+    mes.setText("Errore!");
+    mes.setInformativeText("Impossibile reperire le informazioni dell'applicazione");
+    mes.setStandardButtons(QMessageBox::Ok);
+    mes.exec();
 }

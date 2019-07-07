@@ -47,7 +47,15 @@ unsigned int Triathlon::saliMinerali() const {
 bool Triathlon::operator==(const Allenamento& al) const {
     try {
         if(typeid(al) == typeid(const Triathlon&))
-            return Nuoto::operator==(al) && Corsa::operator==(al) && Ciclismo::operator==(al);
+            return Allenamento::operator==(al) &&
+                getVascheRana() == (dynamic_cast<const Nuoto&>(al)).getVascheRana() &&
+                getVascheStileLibero() == (dynamic_cast<const Nuoto&>(al)).getVascheStileLibero() &&
+                getVascheDorso() == (dynamic_cast<const Nuoto&>(al)).getVascheDorso() &&
+                getKmSalita() == (dynamic_cast<const Ciclismo&>(al)).getKmSalita() &&
+                getKmDiscesa() == (dynamic_cast<const Ciclismo&>(al)).getKmDiscesa() &&
+                getKmPianura() == (dynamic_cast<const Ciclismo&>(al)).getKmPianura() &&
+                getKmStrada() == (dynamic_cast<const Corsa&>(al)).getKmStrada() &&
+                getKmSterrato() == (dynamic_cast<const Corsa&>(al)).getKmSterrato();
         return false;
     } catch (std::bad_cast e) {
         return false;
@@ -57,7 +65,15 @@ bool Triathlon::operator==(const Allenamento& al) const {
 bool Triathlon::operator>=(const Allenamento& al) const {
     try {
         if(typeid(al) == typeid(const Triathlon&))
-            return Nuoto::operator>=(al) && Corsa::operator>=(al) && Ciclismo::operator>=(al);
+            return Allenamento::operator>=(al) &&
+                getVascheRana() >= (dynamic_cast<const Nuoto&>(al)).getVascheRana() &&
+                getVascheStileLibero() >= (dynamic_cast<const Nuoto&>(al)).getVascheStileLibero() &&
+                getVascheDorso() >= (dynamic_cast<const Nuoto&>(al)).getVascheDorso() &&
+                getKmSalita() >= (dynamic_cast<const Ciclismo&>(al)).getKmSalita() &&
+                getKmDiscesa() >= (dynamic_cast<const Ciclismo&>(al)).getKmDiscesa() &&
+                getKmPianura() >= (dynamic_cast<const Ciclismo&>(al)).getKmPianura() &&
+                getKmStrada() >= (dynamic_cast<const Corsa&>(al)).getKmStrada() &&
+                getKmSterrato() >= (dynamic_cast<const Corsa&>(al)).getKmSterrato();
         return false;
     } catch (std::bad_cast e) {
         return false;
@@ -67,7 +83,15 @@ bool Triathlon::operator>=(const Allenamento& al) const {
 bool Triathlon::operator<=(const Allenamento& al) const {
     try {
         if(typeid(al) == typeid(const Triathlon&))
-            return Nuoto::operator<=(al) && Corsa::operator<=(al) && Ciclismo::operator<=(al);
+            return Allenamento::operator<=(al) &&
+                getVascheRana() <= (dynamic_cast<const Nuoto&>(al)).getVascheRana() &&
+                getVascheStileLibero() <= (dynamic_cast<const Nuoto&>(al)).getVascheStileLibero() &&
+                getVascheDorso() <= (dynamic_cast<const Nuoto&>(al)).getVascheDorso() &&
+                getKmSalita() <= (dynamic_cast<const Ciclismo&>(al)).getKmSalita() &&
+                getKmDiscesa() <= (dynamic_cast<const Ciclismo&>(al)).getKmDiscesa() &&
+                getKmPianura() <= (dynamic_cast<const Ciclismo&>(al)).getKmPianura() &&
+                getKmStrada() <= (dynamic_cast<const Corsa&>(al)).getKmStrada() &&
+                getKmSterrato() <= (dynamic_cast<const Corsa&>(al)).getKmSterrato();
         return false;
     } catch (std::bad_cast e) {
         return false;
