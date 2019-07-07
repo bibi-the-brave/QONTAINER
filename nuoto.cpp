@@ -38,11 +38,12 @@ unsigned int Nuoto::saliMinerali() const {
 
 bool Nuoto::operator==(const Allenamento& al) const {
     try {
-        const Nuoto& t = dynamic_cast<const Nuoto&>(al); //se ok non viene lanciata eccezione
-        return Allenamento::operator==(al) &&
+        if(typeid(al) == typeid(const Nuoto&))
+            return Allenamento::operator==(al) &&
                 vascheRana == (dynamic_cast<const Nuoto&>(al)).vascheRana &&
                 vascheStileLibero == (dynamic_cast<const Nuoto&>(al)).vascheStileLibero &&
                 vascheDorso == (dynamic_cast<const Nuoto&>(al)).vascheDorso;
+        return false;
     } catch (std::bad_cast e) {
         return false;
     }
@@ -51,11 +52,12 @@ bool Nuoto::operator==(const Allenamento& al) const {
 
 bool Nuoto::operator>=(const Allenamento& al) const {
     try {
-        const Nuoto& t = dynamic_cast<const Nuoto&>(al); //se ok non viene lanciata eccezione
-        return Allenamento::operator>=(al) &&
+        if(typeid(al) == typeid(const Nuoto&))
+            return Allenamento::operator>=(al) &&
                 vascheRana >= (dynamic_cast<const Nuoto&>(al)).vascheRana &&
                 vascheStileLibero >= (dynamic_cast<const Nuoto&>(al)).vascheStileLibero &&
                 vascheDorso >= (dynamic_cast<const Nuoto&>(al)).vascheDorso;
+        return false;
     } catch (std::bad_cast e) {
         return false;
     }
@@ -63,11 +65,12 @@ bool Nuoto::operator>=(const Allenamento& al) const {
 
 bool Nuoto::operator<=(const Allenamento& al) const {
     try {
-        const Nuoto& t = dynamic_cast<const Nuoto&>(al); //se ok non viene lanciata eccezione
-        return Allenamento::operator<=(al) &&
+        if(typeid(al) == typeid(const Nuoto&))
+            return Allenamento::operator<=(al) &&
                 vascheRana <= (dynamic_cast<const Nuoto&>(al)).vascheRana &&
                 vascheStileLibero <= (dynamic_cast<const Nuoto&>(al)).vascheStileLibero &&
                 vascheDorso <= (dynamic_cast<const Nuoto&>(al)).vascheDorso;
+        return false;
     } catch (std::bad_cast e) {
         return false;
     }

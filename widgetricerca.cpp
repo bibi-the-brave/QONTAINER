@@ -16,6 +16,7 @@
 #include "dialogtriathlon.h"
 #include "modeltabellaallenamenti.h"
 #include "sortfilterproxymodelallenamenti.h"
+#include <memory>
 #include <QGroupBox>
 #include <QRadioButton>
 #include <QLabel>
@@ -164,13 +165,12 @@ QGroupBox* WidgetRicerca::costruzioneFormPersona() {
     lPersona = new QFormLayout;
 
     cmbAtleti = new QComboBox;
-    QStringList atletiDup/*potrebbe contenere duplicati*/, atleti;
-    Contenitore<DeepPtr<Allenamento>>::iterator it = ca.begin();
-    for(; it != ca.end(); it++)
-        atletiDup << QString::fromStdString((*it)->getAtleta().getNome()) + " " +
-                  QString::fromStdString((*it)->getAtleta().getCognome()) + " " +
-                     QString::fromStdString((*it)->getAtleta().getSessoCarUtf8());
-    atleti = atletiDup.toSet().toList();
+    QStringList atleti;
+    Contenitore<std::shared_ptr<Persona>>::iterator it = cp.begin();
+    for(; it != cp.end(); it++)
+        atleti << QString::fromStdString((*it)->getNome()) + " " +
+                    QString::fromStdString((*it)->getCognome()) + " " +
+                    QString::fromStdString((*it)->getSessoCarUtf8());
     cmbAtleti->addItems(atleti);
     lPersona->addRow("Atleta:", cmbAtleti);
 
@@ -359,12 +359,6 @@ bool WidgetRicerca::verificaTriathlon() const {
         return false;
     return  true;
 }
-/*
-bool verificaMaxNuoto() const;
-bool verificaMaxCiclismo() const;
-bool verificaMaxCorsa() const;
-bool verificaMaxTriathlon() const
-*/
 
 void WidgetRicerca::selezioneGroupBox() {
     QObject *sender = QObject::sender();
@@ -484,12 +478,10 @@ void WidgetRicerca::avvioRicerca() {
 
     bool trovato = false;
     Contenitore<DeepPtr<Allenamento>>::iterator it = ca.begin();
-    Persona* p;
+    std::shared_ptr<Persona> p;
     for(int i = 0; it != ca.end() && !trovato;  ++i) {
         if( (*it)->getAtleta().toStringUtf8CarSesso() == cmbAtleti->currentText().toStdString() ) {
-            p = new Persona((*it)->getAtleta().getNome(),
-                            (*it)->getAtleta().getCognome(),
-                            (*it)->getAtleta().getSesso());
+            p = (*it)->getSharedAtleta();
             trovato = true;
         } else
             ++it;
@@ -510,7 +502,7 @@ void WidgetRicerca::avvioRicerca() {
          * TD == Corsa* ma per ciò che è appena stato detto potrebbero andare
          * bene anche i tipi dinamici Nuoto*, Ciclismo*, Triathlon* ...
          */
-        alMin = new Corsa((*it)->getSharedAtleta(),
+        alMin = new Corsa(p,
                           static_cast<unsigned int>(spinMinDurata->value()),
                           Data(deDataInizio->date().year(),
                                deDataInizio->date().month(),
@@ -520,7 +512,7 @@ void WidgetRicerca::avvioRicerca() {
                           static_cast<unsigned int>(1));// arbitrario
         emit allenamentoMin(alMin);
 
-        alMax = new Corsa((*it)->getSharedAtleta(),
+        alMax = new Corsa(p,
                           static_cast<unsigned int>(spinMaxDurata->value()),
                           Data(deDataFine->date().year(),
                                deDataFine->date().month(),
@@ -533,7 +525,7 @@ void WidgetRicerca::avvioRicerca() {
         if( !verificaNuoto())
             return;
         emit selezioneTipo(1);
-        alMin = new Nuoto((*it)->getSharedAtleta(),
+        alMin = new Nuoto(p,
                           static_cast<unsigned int>(spinMinDurata->value()),
                           Data(deDataInizio->date().year(),
                                deDataInizio->date().month(),
@@ -544,7 +536,7 @@ void WidgetRicerca::avvioRicerca() {
                           static_cast<unsigned int>(spinMinDorso->value()));
         emit allenamentoMin(alMin);
 
-        alMax = new Nuoto((*it)->getSharedAtleta(),
+        alMax = new Nuoto(p,
                           static_cast<unsigned int>(spinMaxDurata->value()),
                           Data(deDataFine->date().year(),
                                deDataFine->date().month(),
@@ -559,7 +551,7 @@ void WidgetRicerca::avvioRicerca() {
         if(!verificaCiclismo())
             return;
         emit selezioneTipo(2);
-        alMin = new Ciclismo((*it)->getSharedAtleta(),
+        alMin = new Ciclismo(p,
                           static_cast<unsigned int>(spinMinDurata->value()),
                           Data(deDataInizio->date().year(),
                                deDataInizio->date().month(),
@@ -570,7 +562,7 @@ void WidgetRicerca::avvioRicerca() {
                           static_cast<unsigned int>(spinMinDiscesa->value()));
         emit allenamentoMin(alMin);
 
-        alMax = new Ciclismo((*it)->getSharedAtleta(),
+        alMax = new Ciclismo(p,
                           static_cast<unsigned int>(spinMaxDurata->value()),
                           Data(deDataFine->date().year(),
                                deDataFine->date().month(),
@@ -584,7 +576,7 @@ void WidgetRicerca::avvioRicerca() {
         if(!verificaCorsa())
             return;
         emit selezioneTipo(3);
-        alMin = new Corsa((*it)->getSharedAtleta(),
+        alMin = new Corsa(p,
                           static_cast<unsigned int>(spinMinDurata->value()),
                           Data(deDataInizio->date().year(),
                                deDataInizio->date().month(),
@@ -594,7 +586,7 @@ void WidgetRicerca::avvioRicerca() {
                           static_cast<unsigned int>(spinMinStrada->value()));
         emit allenamentoMin(alMin);
 
-        alMax = new Corsa((*it)->getSharedAtleta(),
+        alMax = new Corsa(p,
                           static_cast<unsigned int>(spinMaxDurata->value()),
                           Data(deDataFine->date().year(),
                                deDataFine->date().month(),
@@ -607,7 +599,7 @@ void WidgetRicerca::avvioRicerca() {
         if( !verificaTriathlon() )
             return;
         emit selezioneTipo(4);
-        alMin = new Triathlon((*it)->getSharedAtleta(),
+        alMin = new Triathlon(p,
                               static_cast<unsigned int>(spinMinDurata->value()),
                               Data(deDataInizio->date().year(),
                                    deDataInizio->date().month(),
@@ -623,7 +615,7 @@ void WidgetRicerca::avvioRicerca() {
                               static_cast<unsigned int>(spinMinStrada->value()));
         emit allenamentoMin(alMin);
 
-        alMax = new Triathlon((*it)->getSharedAtleta(),
+        alMax = new Triathlon(p,
                           static_cast<unsigned int>(spinMaxDurata->value()),
                           Data(deDataFine->date().year(),
                                deDataFine->date().month(),
@@ -642,8 +634,8 @@ void WidgetRicerca::avvioRicerca() {
 
     proxy->invalidate();
 }
-#include <QDebug>
-void WidgetRicerca::ricevutaNotificaEliminazioneRiga(int riga) {qDebug() << riga;
+
+void WidgetRicerca::ricevutaNotificaEliminazioneRiga(int riga) {
     QMessageBox boxConfermaEliminazione;
     boxConfermaEliminazione.setIcon(QMessageBox::Question);
     boxConfermaEliminazione.setText("ATTENZIONE:");
@@ -651,13 +643,23 @@ void WidgetRicerca::ricevutaNotificaEliminazioneRiga(int riga) {qDebug() << riga
     boxConfermaEliminazione.addButton("No", QMessageBox::NoRole);
     boxConfermaEliminazione.addButton("Sì", QMessageBox::YesRole);
     int scelta = boxConfermaEliminazione.exec();
-    if(scelta)
+    if(scelta) {
+        // la riga che il delegate passa fa riferimento alla riga
+        // del proxy, è necessario quindi convertire la riga
+        // del proxy nella riga del modello sorgente
+        riga = proxy->mapToSource(proxy->index(riga,0)).row();
         emit rimuovereRiga(riga);
+    }
 }
 
 void WidgetRicerca::avviaDialogModifica(int riga) {
-    Allenamento* a = ca.At(riga).get();
     DialogAllenamento* da;
+
+    // la riga che il delegate passa fa riferimento alla riga
+    // del proxy, è necessario quindi convertire la riga
+    // del proxy nella riga del modello sorgente
+    riga = proxy->mapToSource(proxy->index(riga,0)).row();
+    Allenamento* a = ca.At(riga).get();
 
     if(dynamic_cast<Triathlon*>(a)) {
         da = new DialogTriathlon(cp, ca, true,riga);
@@ -678,7 +680,7 @@ void WidgetRicerca::avviaDialogModifica(int riga) {
 }
 
 
-void WidgetRicerca::rimozioneRigaEliminataModel(int p) {qDebug() << "sofia cucci troia puttana bastarda";
+void WidgetRicerca::rimozioneRigaEliminataModel(int p) {
     Q_UNUSED(p);
     proxy->invalidate();
 }

@@ -33,16 +33,17 @@ unsigned int Ciclismo::grassoPerso() const {
 }
 
 unsigned int Ciclismo::saliMinerali() const {
-    return 110.0 * kmSalita + 90 * kmPianura;
+    return 110 * kmSalita + 90 * kmPianura;
 }
 
 bool Ciclismo::operator==(const Allenamento& al) const {
     try {
-        const Ciclismo& t = dynamic_cast<const Ciclismo&>(al); //se ok non viene lanciata eccezione
-        return Allenamento::operator==(al) &&
+        if(typeid(al) == typeid(const Ciclismo&))
+            return Allenamento::operator==(al) &&
                 kmSalita == (dynamic_cast<const Ciclismo&>(al)).kmSalita &&
                 kmDiscesa == (dynamic_cast<const Ciclismo&>(al)).kmDiscesa &&
                 kmPianura == (dynamic_cast<const Ciclismo&>(al)).kmPianura;
+        return false;
     } catch (std::bad_cast e) {
         return false;
     }
@@ -51,11 +52,12 @@ bool Ciclismo::operator==(const Allenamento& al) const {
 
 bool Ciclismo::operator>=(const Allenamento& al) const {
     try {
-        const Ciclismo& t = dynamic_cast<const Ciclismo&>(al); //se ok non viene lanciata eccezione
-        return Allenamento::operator>=(al) &&
+        if(typeid(al) == typeid(const Ciclismo&))
+            return Allenamento::operator>=(al) &&
                 kmSalita >= (dynamic_cast<const Ciclismo&>(al)).kmSalita &&
                 kmDiscesa >= (dynamic_cast<const Ciclismo&>(al)).kmDiscesa &&
                 kmPianura >= (dynamic_cast<const Ciclismo&>(al)).kmPianura;
+        return false;
     } catch (std::bad_cast e) {
         return false;
     }
@@ -63,11 +65,12 @@ bool Ciclismo::operator>=(const Allenamento& al) const {
 
 bool Ciclismo::operator<=(const Allenamento& al) const {
     try {
-        const Ciclismo& t = dynamic_cast<const Ciclismo&>(al); //se ok non viene lanciata eccezione
-        return Allenamento::operator<=(al) &&
+        if(typeid(al) == typeid(const Ciclismo&))
+            return Allenamento::operator<=(al) &&
                 kmSalita <= (dynamic_cast<const Ciclismo&>(al)).kmSalita &&
                 kmDiscesa <= (dynamic_cast<const Ciclismo&>(al)).kmDiscesa &&
                 kmPianura <= (dynamic_cast<const Ciclismo&>(al)).kmPianura;
+        return false;
     } catch (std::bad_cast e) {
         return false;
     }

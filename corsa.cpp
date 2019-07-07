@@ -38,10 +38,11 @@ unsigned int Corsa::saliMinerali() const {
 
 bool Corsa::operator==(const Allenamento& al) const {
     try {
-        const Corsa& t = dynamic_cast<const Corsa&>(al); //se ok non viene lanciata eccezione
-        return Allenamento::operator==(al) &&
+        if(typeid(al) == typeid(const Corsa&))
+            return Allenamento::operator==(al) &&
                 kmStrada == (dynamic_cast<const Corsa&>(al)).kmStrada &&
                 kmSterrato == (dynamic_cast<const Corsa&>(al)).kmSterrato;
+        return false;
     } catch (std::bad_cast e) {
         return false;
     }
@@ -50,10 +51,11 @@ bool Corsa::operator==(const Allenamento& al) const {
 
 bool Corsa::operator>=(const Allenamento& al) const {
     try {
-        const Corsa& t = dynamic_cast<const Corsa&>(al); //se ok non viene lanciata eccezione
-        return Allenamento::operator>=(al) &&
+        if(typeid(al) == typeid(const Corsa&))
+            return Allenamento::operator>=(al) &&
                 kmStrada >= (dynamic_cast<const Corsa&>(al)).kmStrada &&
                 kmSterrato >= (dynamic_cast<const Corsa&>(al)).kmSterrato;
+        return false;
     } catch (std::bad_cast e) {
         return false;
     }
@@ -61,10 +63,11 @@ bool Corsa::operator>=(const Allenamento& al) const {
 
 bool Corsa::operator<=(const Allenamento& al) const {
     try {
-        const Corsa& t = dynamic_cast<const Corsa&>(al); //se ok non viene lanciata eccezione
-        return Allenamento::operator<=(al) &&
+        if(typeid(al) == typeid(const Corsa&))
+            return Allenamento::operator<=(al) &&
                 kmStrada <= (dynamic_cast<const Corsa&>(al)).kmStrada &&
                 kmSterrato <= (dynamic_cast<const Corsa&>(al)).kmSterrato;
+        return false;
     } catch (std::bad_cast e) {
         return false;
     }

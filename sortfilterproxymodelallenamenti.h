@@ -13,6 +13,7 @@ class SortFilterProxyModelAllenamenti : public QSortFilterProxyModel
 public:
     SortFilterProxyModelAllenamenti(Contenitore<DeepPtr<Allenamento>>& ca,QObject* = nullptr);
     ~SortFilterProxyModelAllenamenti() override;
+    bool removeRows(int, int, const QModelIndex &) override;
 protected:
     bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const override;
 

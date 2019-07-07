@@ -22,7 +22,7 @@ bool SortFilterProxyModelAllenamenti::filterAcceptsRow(int sourceRow,
 {
     Q_UNUSED(sourceParent);
     if(!minore || !maggiore)
-        return true;
+        return false;
 
     Allenamento *a = ca.At(sourceRow).get();
     if(!tipoRicerca) {
@@ -30,6 +30,15 @@ bool SortFilterProxyModelAllenamenti::filterAcceptsRow(int sourceRow,
     } else {
         return *a >= *minore && *a <= *maggiore;
     }
+}
+
+bool SortFilterProxyModelAllenamenti::removeRows(int position, int rows, const QModelIndex &parent)
+{
+    Q_UNUSED(parent);
+    beginRemoveRows(QModelIndex(), position, position+rows-1);
+    // elimina righe dai dati sottostanti
+    endRemoveRows();
+    return true;
 }
 
 void SortFilterProxyModelAllenamenti::setTipoSort(int tr) {
