@@ -53,7 +53,8 @@ protected:
     void visualizzaMessaggioAllenamentoNonModificato() const;
 public slots:
     void reset();
-    //void slotModificaAllenamento(bool);
+    virtual void inserimentoAllenamento() = 0;
+    virtual void modificaAllenamento() = 0;
 signals:
     void aggiungereAllenamento();
 };
