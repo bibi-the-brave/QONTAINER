@@ -5,7 +5,7 @@
  *
  * Simile ad unique_ptr della stl
  *
- * PRECONDIZIONE: T* ptr non deve essere inizializzato ad un puntatore nullo
+ * PRECONDIZIONE: T* ptr non deve essere un puntatore nullo
  */
 
 #ifndef DEEPPTR_H

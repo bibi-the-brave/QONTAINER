@@ -1,3 +1,8 @@
+/*
+ * Andrea Favero
+ * 1125545
+ * andrea.favero.8@studenti.unipd.it
+ */
 #include "delegateeliminazione.h"
 
 DelegateEliminazione::DelegateEliminazione(QString strBottone, QObject* parent)

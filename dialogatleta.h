@@ -1,3 +1,8 @@
+/*
+ * Andrea Favero
+ * 1125545
+ * andrea.favero.8@studenti.unipd.it
+ */
 #ifndef DIALOGINSERIMENTOATLETA_H
 #define DIALOGINSERIMENTOATLETA_H
 

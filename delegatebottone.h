@@ -1,3 +1,8 @@
+/*
+ * Andrea Favero
+ * 1125545
+ * andrea.favero.8@studenti.unipd.it
+ */
 #ifndef DELEGATEBOTTONE_H
 #define DELEGATEBOTTONE_H
 #include <QItemDelegate>
@@ -15,16 +20,14 @@ public:
     void paint(QPainter*, const QStyleOptionViewItem&, const QModelIndex&) const override;
     bool editorEvent(QEvent*, QAbstractItemModel*,
                      const QStyleOptionViewItem &, const QModelIndex &) override;
-    virtual ~DelegateBottone() override; //non servirebbe marcarlo virtuale, lo è già quello di QObject
+    ~DelegateBottone() override;
 private:
     QString titoloBottone;
 protected:
-    void visualizzaMessaggio(const QString&);
     typedef QMap<QModelIndex, QStyleOptionButton*> bottoniEliminazione; // per risparmiare anni di vita
     bottoniEliminazione btnEl;
 signals:
     void avvisoPressioneBottone(int);
-
 };
 
 #endif // DELEGATEBOTTONE_H

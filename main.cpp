@@ -1,3 +1,8 @@
+/*
+ * Andrea Favero
+ * 1125545
+ * andrea.favero.8@studenti.unipd.it
+ */
 #include <QApplication>
 #include <QIcon>
 #include <QStyle>
@@ -22,8 +27,3 @@ int main(int argc, char *argv[])
     return a.exec();
 }
 
-/*
-    Contenitore<std::shared_ptr<Persona>>::iterator it = atleti.begin();
-    for(; it != atleti.end(); it++)
-        qDebug() << QString::fromStdString((*it)->getNome());
-*/
