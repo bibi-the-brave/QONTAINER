@@ -6,7 +6,6 @@
 #include "ciclismo.h"
 #include "errori.h"
 #include <typeinfo>
-
 Ciclismo::Ciclismo(std::shared_ptr<Persona> atleta, unsigned int durata,
                    Data data, unsigned int mgMagnesio, unsigned int salita,
                    unsigned int pianura, unsigned int discesa)

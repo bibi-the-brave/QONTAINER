@@ -46,8 +46,8 @@ void DialogCiclismo::compilazioneFormModifica() {
         return;
 
     wCiclismo->setKmSalita(static_cast<int>(a->getKmSalita()));
-    wCiclismo->setKmDiscesa(static_cast<int>(a->getKmDiscesa()));
     wCiclismo->setKmPianura(static_cast<int>(a->getKmPianura()));
+    wCiclismo->setKmDiscesa(static_cast<int>(a->getKmDiscesa()));
 }
 
 void DialogCiclismo::inserimentoAllenamento() {

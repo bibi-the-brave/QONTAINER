@@ -71,8 +71,8 @@ void DialogTriathlon::compilazioneFormModifica() {
     wNuoto->setVascheRana(static_cast<int>(a->getVascheRana()));
     //ciclismo
     wCiclismo->setKmSalita(static_cast<int>(a->getKmSalita()));
-    wCiclismo->setKmDiscesa(static_cast<int>(a->getKmDiscesa()));
     wCiclismo->setKmPianura(static_cast<int>(a->getKmPianura()));
+    wCiclismo->setKmDiscesa(static_cast<int>(a->getKmDiscesa()));
     //corsa
     wCorsa->setKmStrada(static_cast<int>(a->getKmStrada()));
     wCorsa->setKmSterrato(static_cast<int>(a->getKmSterrato()));

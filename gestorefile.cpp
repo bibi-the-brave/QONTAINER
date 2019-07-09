@@ -151,17 +151,17 @@ Allenamento* GestoreFile::letturaAllenamento(QString allenamento) {
             lxml.readNextStartElement();
             salita = lxml.readElementText().toInt();
             lxml.readNextStartElement();
-            discesa = lxml.readElementText().toInt();
-            lxml.readNextStartElement();
             pianura = lxml.readElementText().toInt();
+            lxml.readNextStartElement();
+            discesa = lxml.readElementText().toInt();
             if(trovato) {
                 a = new Ciclismo(pr,
                                  static_cast<unsigned int>(durata),
                                  data,
                                  static_cast<unsigned int>(magnesio),
                                  static_cast<unsigned int>(salita),
-                                 static_cast<unsigned int>(discesa),
-                                 static_cast<unsigned int>(pianura));
+                                 static_cast<unsigned int>(pianura),
+                                 static_cast<unsigned int>(discesa));
             }
         } else if(allenamento == "triathlon") {
             int stile, rana, dorso;
@@ -171,18 +171,18 @@ Allenamento* GestoreFile::letturaAllenamento(QString allenamento) {
             rana = lxml.readElementText().toInt();
             lxml.readNextStartElement();
             dorso = lxml.readElementText().toInt();
-            int salita, discesa, pianura;
-            lxml.readNextStartElement();
-            salita = lxml.readElementText().toInt();
-            lxml.readNextStartElement();
-            discesa = lxml.readElementText().toInt();
-            lxml.readNextStartElement();
-            pianura = lxml.readElementText().toInt();
             int sterrato, strada;
             lxml.readNextStartElement();
             sterrato = lxml.readElementText().toInt();
             lxml.readNextStartElement();
             strada = lxml.readElementText().toInt();
+            int salita, pianura, discesa;
+            lxml.readNextStartElement();
+            salita = lxml.readElementText().toInt();
+            lxml.readNextStartElement();
+            pianura = lxml.readElementText().toInt();
+            lxml.readNextStartElement();
+            discesa = lxml.readElementText().toInt();
             if(trovato) {
                 a = new Triathlon(pr,
                                   static_cast<unsigned int>(durata),
@@ -191,11 +191,11 @@ Allenamento* GestoreFile::letturaAllenamento(QString allenamento) {
                                   static_cast<unsigned int>(stile),
                                   static_cast<unsigned int>(rana),
                                   static_cast<unsigned int>(dorso),
-                                  static_cast<unsigned int>(salita),
-                                  static_cast<unsigned int>(discesa),
-                                  static_cast<unsigned int>(pianura),
                                   static_cast<unsigned int>(sterrato),
-                                  static_cast<unsigned int>(strada));
+                                  static_cast<unsigned int>(strada),
+                                  static_cast<unsigned int>(salita),
+                                  static_cast<unsigned int>(pianura),
+                                  static_cast<unsigned int>(discesa));
             }
         }
         lxml.readNext();
@@ -309,10 +309,10 @@ void GestoreFile::scritturaAttributiNuoto(int stile, int rana, int dorso) {
     sxml.writeTextElement("dorso", QString::fromStdString(std::to_string((dorso))));
 }
 
-void GestoreFile::scritturaAttributiCiclismo(int salita, int discesa, int pianura) {
+void GestoreFile::scritturaAttributiCiclismo(int salita, int pianura, int discesa) {
     sxml.writeTextElement("salita", QString::fromStdString(std::to_string((salita))));
-    sxml.writeTextElement("discesa", QString::fromStdString(std::to_string((discesa))));
     sxml.writeTextElement("pianura", QString::fromStdString(std::to_string((pianura))));
+    sxml.writeTextElement("discesa", QString::fromStdString(std::to_string((discesa))));
 }
 
 void GestoreFile::scritturaAttributiCorsa(int sterrato, int strada) {
@@ -358,8 +358,8 @@ void GestoreFile::scritturaCiclismo(Allenamento* a) {
                           QString::fromStdString(std::to_string((a->getMgMagnesioAssunti()))));
     Ciclismo* c = dynamic_cast<Ciclismo*>(a);
     scritturaAttributiCiclismo(static_cast<int>(c->getKmSalita()),
-                               static_cast<int>(c->getKmDiscesa()),
-                               static_cast<int>(c->getKmPianura()));
+                               static_cast<int>(c->getKmPianura()),
+                               static_cast<int>(c->getKmDiscesa()));
 }
 
 void GestoreFile::scritturaCorsa(Allenamento* a) {
@@ -393,13 +393,13 @@ void GestoreFile::scritturaTriathlon(Allenamento* a) {
     scritturaAttributiNuoto(static_cast<int>(n->getVascheStileLibero()),
                             static_cast<int>(n->getVascheRana()),
                             static_cast<int>(n->getVascheDorso()));
-    Ciclismo* c = dynamic_cast<Ciclismo*>(a);
-    scritturaAttributiCiclismo(static_cast<int>(c->getKmSalita()),
-                               static_cast<int>(c->getKmDiscesa()),
-                               static_cast<int>(c->getKmPianura()));
     Corsa* cr = dynamic_cast<Corsa*>(a);
     scritturaAttributiCorsa(static_cast<int>(cr->getKmSterrato()),
                             static_cast<int>(cr->getKmStrada()));
+    Ciclismo* c = dynamic_cast<Ciclismo*>(a);
+    scritturaAttributiCiclismo(static_cast<int>(c->getKmSalita()),
+                               static_cast<int>(c->getKmPianura()),
+                               static_cast<int>(c->getKmDiscesa()));
 }
 
 void GestoreFile::viasualizzaDialogErrore() const {

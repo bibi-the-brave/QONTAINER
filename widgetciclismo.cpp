@@ -17,15 +17,15 @@ WidgetCiclismo::WidgetCiclismo()
     spinSalita->setRange(0, 400);
     layout->addRow(lblSalita, spinSalita);
 
-    lblDiscesa = new QLabel("Km in discesa:");
-    spinDiscesa = new QSpinBox();
-    spinDiscesa->setRange(0, 400);
-    layout->addRow(lblDiscesa, spinDiscesa);
-
     lblPianura = new QLabel("Km in pianura:");
     spinePianura = new QSpinBox();
     spinePianura ->setRange(0, 400);
     layout->addRow(lblPianura , spinePianura);
+
+    lblDiscesa = new QLabel("Km in discesa:");
+    spinDiscesa = new QSpinBox();
+    spinDiscesa->setRange(0, 400);
+    layout->addRow(lblDiscesa, spinDiscesa);
 
     gbCiclismo->setLayout(layout);
     layoutWidget->addWidget(gbCiclismo);

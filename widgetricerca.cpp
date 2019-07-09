@@ -618,11 +618,11 @@ void WidgetRicerca::avvioRicerca() {
                               static_cast<unsigned int>(spinMinStile->value()),
                               static_cast<unsigned int>(spinMinRana->value()),
                               static_cast<unsigned int>(spinMinDorso->value()),
+                              static_cast<unsigned int>(spinMinSterrato->value()),
+                              static_cast<unsigned int>(spinMinStrada->value()),
                               static_cast<unsigned int>(spinMinSalita->value()),
                               static_cast<unsigned int>(spinMinPianura->value()),
-                              static_cast<unsigned int>(spinMinDiscesa->value()),
-                              static_cast<unsigned int>(spinMinSterrato->value()),
-                              static_cast<unsigned int>(spinMinStrada->value()));
+                              static_cast<unsigned int>(spinMinDiscesa->value()));
         emit allenamentoMin(alMin);
 
         alMax = new Triathlon(p,
@@ -634,11 +634,11 @@ void WidgetRicerca::avvioRicerca() {
                               static_cast<unsigned int>(spinMaxStile->value()),
                               static_cast<unsigned int>(spinMaxRana->value()),
                               static_cast<unsigned int>(spinMaxDorso->value()),
+                              static_cast<unsigned int>(spinMaxSterrato->value()),
+                              static_cast<unsigned int>(spinMaxStrada->value()),
                               static_cast<unsigned int>(spinMaxSalita->value()),
                               static_cast<unsigned int>(spinMaxPianura->value()),
-                              static_cast<unsigned int>(spinMaxDiscesa->value()),
-                              static_cast<unsigned int>(spinMaxSterrato->value()),
-                              static_cast<unsigned int>(spinMaxStrada->value()));
+                              static_cast<unsigned int>(spinMaxDiscesa->value()));
         emit allenamentoMax(alMax);
     }
 
@@ -703,14 +703,10 @@ void WidgetRicerca::rimozioneRigheEliminateModel(std::shared_ptr<Persona> p) {
     Q_UNUSED(p);
     proxy->invalidate();
 }
-#include <QDebug>
+
 // viene chiamato per aggiornare la combobox quando un nuovo atleta viene aggiunto
 void WidgetRicerca::aggiuntaAtletaAppenaInseritoCombo() {
-    qDebug() << "ciauzzone";
     std::shared_ptr<Persona> p = cp.At(cp.Size()-1);
-    qDebug() << QString::fromStdString(p->getNome()) + " " +
-                QString::fromStdString(p->getCognome()) + " " +
-                QString::fromStdString(p->getSessoCarUtf8());
     cmbAtleti->addItem(QString::fromStdString(p->getNome()) + " " +
                        QString::fromStdString(p->getCognome()) + " " +
                        QString::fromStdString(p->getSessoCarUtf8()));
