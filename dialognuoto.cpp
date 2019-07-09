@@ -77,6 +77,7 @@ void DialogNuoto::inserimentoAllenamento() {
 
     if(ca.elementoPresente(al)) {
         dialogErroreDoppione();
+        delete al;
         return;
     }
 
@@ -115,6 +116,7 @@ void DialogNuoto::modificaAllenamento() {
 
     if(*allenamentoSelezionato == *al) {
         visualizzaMessaggioAllenamentoNonModificato();
+        delete al;
         this->close();
         return; //lo metto perché è capitato che prima di eseguire close venga eseguita
         //la parte in cui si controlla doppione. Penso perché close possa essere multithread
@@ -123,6 +125,7 @@ void DialogNuoto::modificaAllenamento() {
 
     if(ca.elementoPresente(al)) {
         dialogErroreDoppione();
+        delete al;
         return;
     } else { //modifico l'atleta. Il model e la view si aggiornano in automatico
         allenamentoSelezionato->setData(al->getData());
@@ -131,6 +134,7 @@ void DialogNuoto::modificaAllenamento() {
         allenamentoSelezionato->setVascheRana(dynamic_cast<Nuoto*>(al)->getVascheRana());
         allenamentoSelezionato->setVascheStileLibero(dynamic_cast<Nuoto*>(al)->getVascheStileLibero());
         allenamentoSelezionato->setVascheDorso(dynamic_cast<Nuoto*>(al)->getVascheDorso());
+        delete al;
         this->close();
     }
 
