@@ -10,14 +10,14 @@ Icone create da vari autori su https://www.flaticon.com \
 Per avere maggiori informazioni sui vincoli che il progetto deve rispettare leggere il file specificaProgettoAggiornata_2018-19.pdf
 
 Per avere maggiori informazioni sulle scelte implementative del progetto leggere il file
-'''console
+```console
 relazione/relazione.pdf
-'''console
-
+```
 Per compilare dare i comandi
-'''console
+
+```console
 qmake
 make
-'''console
+```
 
 Valutato ECCELLENTE dai correttori.
