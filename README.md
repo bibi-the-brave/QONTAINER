@@ -7,6 +7,17 @@ Progetto per il corso di Programmazione ad Oggetti (10 crediti Laurea in Informa
 Icone create da vari autori su https://www.flaticon.com \
 (Icons created by https://www.freepik.com/ authors on https://www.flaticon.com)
 
-Per avere maggiori informazioni leggere il file specificaProgettoAggiornata_2018-19.pdf
+Per avere maggiori informazioni sui vincoli che il progetto deve rispettare leggere il file specificaProgettoAggiornata_2018-19.pdf
 
-Valutato Eccellente.
+Per avere maggiori informazioni sulle scelte implementative del progetto leggere il file
+'''console
+relazione/relazione.pdf
+'''console
+
+Per compilare dare i comandi
+'''console
+qmake
+make
+'''console
+
+Valutato ECCELLENTE dai correttori.
